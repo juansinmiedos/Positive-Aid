@@ -8,7 +8,7 @@ export default function ProfileHeader() {
                     <div className="columns">
                         <div className="column is-half">
                             <figure className="image is-128x128">
-                                <img className="is-rounded" src="https://bulma.io/images/placeholders/128x128.png"/>
+                                <img className="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" alt="placeholder"/>
                             </figure>
                         </div>
                         <div className="column is-half">

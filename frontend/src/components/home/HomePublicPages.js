@@ -17,7 +17,7 @@ export default function HomePublicPages() {
                                         <div className="tile is-parent is-vertical">
                                             <div>
                                                 <figure className="image">
-                                                    <img src="./1920.jpg" />
+                                                    <img src="./1920.jpg" alt="publicImage" />
                                                 </figure>
                                             </div>
                                             <article className="tile is-child notification is-danger">
@@ -32,7 +32,7 @@ export default function HomePublicPages() {
                                         <div className="tile is-parent is-vertical">
                                             <div>
                                                 <figure className="image">
-                                                    <img src="./1920.jpg" />
+                                                    <img src="./1920.jpg" alt="publicImage" />
                                                 </figure>
                                             </div>
                                             <article className="tile is-child notification is-danger">
@@ -47,7 +47,7 @@ export default function HomePublicPages() {
                                         <div className="tile is-parent is-vertical">
                                             <div>
                                                 <figure className="image">
-                                                    <img src="./1920.jpg" />
+                                                    <img src="./1920.jpg" alt="publicImage" />
                                                 </figure>
                                             </div>
                                             <article className="tile is-child notification is-danger">
@@ -62,7 +62,7 @@ export default function HomePublicPages() {
                                         <div className="tile is-parent is-vertical">
                                             <div>
                                                 <figure className="image">
-                                                    <img src="./1920.jpg" />
+                                                    <img src="./1920.jpg" alt="publicImage" />
                                                 </figure>
                                             </div>
                                             <article className="tile is-child notification is-danger">
@@ -77,7 +77,7 @@ export default function HomePublicPages() {
                                         <div className="tile is-parent is-vertical">
                                             <div>
                                                 <figure className="image">
-                                                    <img src="./1920.jpg" />
+                                                    <img src="./1920.jpg" alt="publicImage" />
                                                 </figure>
                                             </div>
                                             <article className="tile is-child notification is-danger">
