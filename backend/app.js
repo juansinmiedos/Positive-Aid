@@ -15,9 +15,9 @@ const multer = require('./config/multer')
 const flash = require('connect-flash')
 
 mongoose
-  .connect('mongodb://localhost/moreaid', {useNewUrlParser: true})
+  .connect(process.env.DB, {useNewUrlParser: true})
   .then(x => {
-    console.log(`Connected to Mongo! Database name: "${'mongodb://localhost/moreaid'}"`)
+    console.log(`Connected to Mongo! Database name: "${process.env.DB}"`)
   })
   .catch(err => {
     console.error('Error connecting to mongo', err)
@@ -81,7 +81,7 @@ app.use(
 app.use(flash())
 
 const index = require('./routes/index');
-app.use('/', index);
+app.use('/api', index);
 
 
 module.exports = app;
