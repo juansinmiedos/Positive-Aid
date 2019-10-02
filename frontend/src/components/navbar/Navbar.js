@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import AUTH_SERVICE from '../../services/auth';
 
 export default class Navbar extends Component {
@@ -22,10 +22,10 @@ export default class Navbar extends Component {
         e.preventDefault();
         AUTH_SERVICE.login(this.state.user)
         .then((response) => {
-            console.log(response)
+            
             const strUser = JSON.stringify(response.data.user)
             localStorage.setItem('user', strUser)
-            return <Redirect to="/perfil" />
+            this.props.history.push('/perfil');
         })
         .catch((error) => {
             console.log(error);
