@@ -8,13 +8,17 @@ export default class Profile extends Component {
     state = {
         user: JSON.parse(localStorage.getItem('user'))
     }
+
+    componentDidMount(){
+        if(!JSON.parse(localStorage.getItem('user'))) return this.props.history.push('/iniciar-sesion')
+    }
     
     render() {
         return (
             <>
                 <Navbar />
                 <ProfileHero />
-                <ProfileHeader />
+                <ProfileHeader user={this.state.user} />
                 <Footer />
             </>
         )

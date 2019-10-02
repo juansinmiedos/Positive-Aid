@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import AUTH_SERVICE from '../../services/auth';
 
 export default class Navbar extends Component {
     state = {
-        user: {}
+        user: {
+            username: '',
+            password: ''
+        },
+        response: {}
     }
 
     handleInput = (e) => {
@@ -18,8 +22,10 @@ export default class Navbar extends Component {
         e.preventDefault();
         AUTH_SERVICE.login(this.state.user)
         .then((response) => {
-            this.context.logUser(response.data.user);
-            this.props.history.push('/perfil');
+            console.log(response)
+            const strUser = JSON.stringify(response.data.user)
+            localStorage.setItem('user', strUser)
+            return <Redirect to="/perfil" />
         })
         .catch((error) => {
             console.log(error);
@@ -64,12 +70,12 @@ export default class Navbar extends Component {
                         <div className="navbar-end">
                             <div className="navbar-item">
                                 <div className="buttons">
-                                    <form action="">
+                                    <form onSubmit={this.onSubmit}>
                                         <div className="field is-grouped">
                                             <div className="field-body">
                                                 <div className="field">
                                                     <div className="control has-icons-left">
-                                                        <input className="input" name="username" type="text" placeholder="Avatar" />
+                                                        <input className="input" onChange={this.handleInput} name="username" type="text" placeholder="Avatar" />
                                                         <span className="icon is-small is-left">
                                                             <i className="fas fa-user"></i>
                                                         </span>
@@ -77,7 +83,7 @@ export default class Navbar extends Component {
                                                 </div>
                                                 <div className="field">
                                                     <div className="control has-icons-left">
-                                                        <input className="input" name="password" type="password" placeholder="Contraseña" />
+                                                        <input className="input" onChange={this.handleInput} name="password" type="password" placeholder="Contraseña" />
                                                         <span className="icon is-small is-left">
                                                             <i className="fas fa-lock"></i>
                                                         </span>

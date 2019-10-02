@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AUTH_SERVICE from '../../services/auth';
+import {Link} from 'react-router-dom'
 
 export default class Login extends Component {
     state = {
@@ -21,7 +22,6 @@ export default class Login extends Component {
         e.preventDefault();
         AUTH_SERVICE.login(this.state.user)
         .then((response) => {
-            // this.context.logUser(response.data.user);
 
             const strUser = JSON.stringify(response.data.user)
             localStorage.setItem('user', strUser)
@@ -67,7 +67,7 @@ export default class Login extends Component {
                                                     <button className="button is-link">Iniciar sesión</button>
                                                 </div>
                                                 <div className="control">
-                                                    <button className="button is-text">Volver a inicio</button>
+                                                    <Link to="/"><button className="button is-text">Volver a inicio</button></Link>
                                                 </div>
                                             </div>
                                         </form>

@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 export default function HomeHero() {
     return (
@@ -8,6 +9,7 @@ export default function HomeHero() {
                     <div className="container">
                         <h1 className="title is-size-1">+aid</h1>
                         <h2 className="subtitle">Una plataforma para ayudarte a vivir mejor.</h2>
+                        <Link to="/crear-cuenta"><button className="button is-link">Crear una cuenta</button></Link>
                     </div>
                 </div>
                 <div className="hero-foot"></div>

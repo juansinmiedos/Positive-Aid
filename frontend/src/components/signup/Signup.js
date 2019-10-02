@@ -27,7 +27,7 @@ export default class Signup extends Component {
         AUTH_SERVICE.signup(this.state.user)
         .then((response) => {
             console.log(response.data);
-            this.props.history.push('/')
+            this.props.history.push('/iniciar-sesion')
         })
         .catch((error) => {
             console.log(error);
