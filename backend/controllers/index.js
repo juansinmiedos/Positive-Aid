@@ -5,7 +5,6 @@ const passport = require('passport')
 exports.toSignup = async(req, res) => {
     try{
         let user = await User.register(req.body, req.body.password)
-
         res.status(201).json({user})
     } catch (err){
         res.status(500).json({err})

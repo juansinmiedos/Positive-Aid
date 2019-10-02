@@ -10,7 +10,7 @@ export default class Profile extends Component {
     }
     
     render() {
-        if(this.state.user == null){
+        if(JSON.parse(localStorage.getItem('user')) == null){
             return <Redirect to='/iniciar-sesion' />
         } else {
             return (

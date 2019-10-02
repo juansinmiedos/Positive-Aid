@@ -43,6 +43,47 @@ export default class Navbar extends Component {
         }
     };
 
+    sessionChecker = () =>{
+        const sessionaux = JSON.parse(localStorage.getItem('user'))
+        if(sessionaux == null){
+            return(
+                <div className="buttons">
+                    <form onSubmit={this.onSubmit}>
+                        <div className="field is-grouped">
+                            <div className="field-body">
+                                <div className="field">
+                                    <div className="control has-icons-left">
+                                        <input className="input" onChange={this.handleInput} name="username" type="text" placeholder="Avatar" />
+                                        <span className="icon is-small is-left">
+                                            <i className="fas fa-user"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="field">
+                                    <div className="control has-icons-left">
+                                        <input className="input" onChange={this.handleInput} name="password" type="password" placeholder="Contraseña" />
+                                        <span className="icon is-small is-left">
+                                            <i className="fas fa-lock"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="control">
+                                        <button className="button is-link">Iniciar sesión</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            )
+        } else {
+            return(
+                <div className="buttons">
+                    <button onClick={this.toLogout} className="button is-link">Cerrar sesión</button>
+                </div>
+            )
+        }
+    }
+
     render(){
         return (
             <>
@@ -80,34 +121,7 @@ export default class Navbar extends Component {
                         </div>
                         <div className="navbar-end">
                             <div className="navbar-item">
-                                <div className="buttons">
-                                    <form onSubmit={this.onSubmit}>
-                                        <div className="field is-grouped">
-                                            <div className="field-body">
-                                                <div className="field">
-                                                    <div className="control has-icons-left">
-                                                        <input className="input" onChange={this.handleInput} name="username" type="text" placeholder="Avatar" />
-                                                        <span className="icon is-small is-left">
-                                                            <i className="fas fa-user"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <div className="control has-icons-left">
-                                                        <input className="input" onChange={this.handleInput} name="password" type="password" placeholder="Contraseña" />
-                                                        <span className="icon is-small is-left">
-                                                            <i className="fas fa-lock"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div className="control">
-                                                        <button className="button is-link">Iniciar sesión</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <button onClick={this.toLogout} className="button is-link">Cerrar sesión</button>
-                                </div>
+                                {this.sessionChecker()}
                             </div>
                         </div>
                     </div>
