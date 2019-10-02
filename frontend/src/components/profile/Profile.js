@@ -1,26 +1,25 @@
 import React, { Component } from 'react'
-import Navbar from '../navbar/Navbar'
 import Footer from '../footer/Footer';
 import ProfileHero from './ProfileHero';
 import ProfileHeader from './ProfileHeader';
+import {Redirect} from 'react-router-dom'
 
 export default class Profile extends Component {
     state = {
         user: JSON.parse(localStorage.getItem('user'))
     }
-
-    componentDidMount(){
-        if(!JSON.parse(localStorage.getItem('user'))) return this.props.history.push('/iniciar-sesion')
-    }
     
     render() {
-        return (
-            <>
-                <Navbar />
-                <ProfileHero />
-                <ProfileHeader user={this.state.user} />
-                <Footer />
-            </>
-        )
+        if(this.state.user == null){
+            return <Redirect to='/iniciar-sesion' />
+        } else {
+            return (
+                <>
+                    <ProfileHero />
+                    <ProfileHeader user={this.state.user} />
+                    <Footer />
+                </>
+            )
+        }
     }
 }

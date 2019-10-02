@@ -11,6 +11,10 @@ export default class Login extends Component {
         response: {}
     }
 
+    componentDidMount(){
+        console.log('acaso entra?')
+    }
+
     handleInput = (e) => {
         const { user } = this.state;
         const key = e.target.name;

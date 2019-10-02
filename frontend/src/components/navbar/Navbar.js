@@ -18,18 +18,29 @@ export default class Navbar extends Component {
         this.setState({ user });
     };
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        AUTH_SERVICE.login(this.state.user)
-        .then((response) => {
-            
+    onSubmit = async(e) => {
+        try{
+            e.preventDefault();
+            const response = await AUTH_SERVICE.login(this.state.user)
+
             const strUser = JSON.stringify(response.data.user)
             localStorage.setItem('user', strUser)
             this.props.history.push('/perfil');
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+        } catch(err){
+            console.log(err);
+        }
+    };
+
+    toLogout = async() => {
+        try{
+            const response = await AUTH_SERVICE.logout()
+
+            console.log(response)
+            localStorage.removeItem('user')
+            this.props.history.push('/');
+        } catch(err){
+            console.log(err);
+        }
     };
 
     render(){
@@ -95,6 +106,7 @@ export default class Navbar extends Component {
                                             </div>
                                         </div>
                                     </form>
+                                    <button onClick={this.toLogout} className="button is-link">Cerrar sesión</button>
                                 </div>
                             </div>
                         </div>

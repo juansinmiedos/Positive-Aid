@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function ProfileHeader({user}) {
-    console.log(user)
     return (
         <>
             <section className="section">
