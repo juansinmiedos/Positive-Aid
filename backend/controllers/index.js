@@ -26,3 +26,13 @@ exports.toProfile = (req, res) => {
     .then((user) => res.status(200).json({ user }))
     .catch((err) => res.status(500).json({ err }));
 }
+
+exports.toUpdate = async(req, res) => {
+    try{
+        console.log(req.body)
+        let user = await User.findByIdAndUpdate(req.user._id, req.body, { new: true })
+        res.status(201).json({user})
+    } catch (err){
+        res.status(500).json({err})
+    }
+}

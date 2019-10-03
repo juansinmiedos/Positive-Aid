@@ -13,6 +13,9 @@ const AUTH_SERVICE = {
   logout: async () => {
     return await SERVICE.get('/logout');
   },
+  update: async (user) => {
+    return await SERVICE.put('/update', user);
+  },
   capacits: async() => {
     return await SERVICE.get('/capacits')
   },

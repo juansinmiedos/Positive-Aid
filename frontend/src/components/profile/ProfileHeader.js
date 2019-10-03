@@ -1,84 +1,78 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 
-export default function ProfileHeader({user}) {
+export default function ProfileHeader({user, showEditForm, isOpen, submitEditForm, handleInput} ) {
     return (
         <>
             <section className="section">
-                <div className="container">
-                    <div className="columns">
-                        <div className="column is-half">
-                            <figure className="image is-128x128">
-                                <img className="is-rounded" src={user.profilePhoto} alt="placeholder"/>
-                            </figure>
-                        </div>
-                        <div className="column is-half">
-                            <h1 className="subtitle">{user.name} {user.lastname}</h1>
-                            <h1 className="title">{user.username}</h1>
-                            <p className="subtitle">Sexo<br/>Status</p>
-                            <button className="button is-danger">Editar perfil</button>
+                <div>
+                    <div className="columns is-centered">
+                    <div className="column is-three-quarters">
+                        <div className="columns is-vcentered">
+                            <div className="column is-one-quarter is-right">
+                                    <img src={user.profilePhoto} alt="placeholder"/>
+                            </div>
+                            <div className="column is-three-quarters">
+                                <h1 className="subtitle">{user.name} {user.lastname}</h1>
+                                <h1 className="title">@{user.username}</h1>
+                                <p className="subtitle">Sexo<br/>Status</p>
+                                <button onClick={() => showEditForm()} className="button is-danger">Editar perfil</button>
 
-
-                            <div className="modal is-active">
-                                <div className="modal-background"></div>
-                                <div className="modal-card">
-                                    <header className="modal-card-head">
-                                        <p className="modal-card-title"><b>Agregar medicación al esquema</b></p>
-                                        <button className="delete" aria-label="close"></button>
-                                    </header>
-                                    <section className="modal-card-body">
-
-                                    <form onSubmit="">
+                                <div className={isOpen ? "modal is-active" : "modal"} >
+                                    <div className="modal-background"></div>
+                                    <div className="modal-card">
+                                        <header className="modal-card-head">
+                                            <p className="modal-card-title"><b>Editar perfil</b></p>
+                                            <button onClick={() => showEditForm()} className="delete" aria-label="close"></button>
+                                        </header>
+                                        <section className="modal-card-body">
+                                            <form onSubmit={submitEditForm}>
                                                 <div className="field">
-                                                    <label className="label">Fecha de la muestra</label>
-                                                    <div className="control">
-                                                        <input onChange="" className="input" name="username" type="date" placeholder="LP-1992" required />
+                                                    <label className="label">Nombre<span className="help">No es obligatorio, compártelo sólo si lo deseas.</span></label>
+                                                </div>
+                                                <div className="field is-horizontal">
+                                                    <div className="field-body">
+                                                        <div className="field">
+                                                            <div className="control">
+                                                                <input onChange={handleInput} className="input" name="name" type="text" placeholder="Luis" value={user.name} />
+                                                            </div>
+                                                        </div>
+                                                        <div className="field">
+                                                            <div className="control">
+                                                                <input onChange={handleInput} className="input" name="lastname" type="text" placeholder="Pérez" value={user.lastname} />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="field">
-                                                    <label className="label">Conteo de cd4</label>
-                                                    <div className="control">
-                                                        <input onChange="" className="input" name="username" type="text" placeholder="LP-1992" required />
+                                                    <label className="label">Avatar</label>
+                                                    <div className="control has-icons-left has-icons-right">
+                                                        <input onChange={handleInput} className="input" name="username" type="text" placeholder="LP-1992" required value={user.username} />
+                                                        <span className="icon is-small is-left">
+                                                            <i className="fas fa-user"></i>
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div className="field">
-                                                    <label className="label">Carga viral</label>
-                                                    <div className="control">
-                                                        <input onChange="" className="input" name="username" type="text" placeholder="LP-1992" required />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label className="label">Triglicéridos</label>
-                                                    <div className="control">
-                                                        <input onChange="" className="input" name="username" type="text" placeholder="LP-1992" required />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label className="label">Fn. hepática</label>
-                                                    <div className="control">
-                                                        <input onChange="" className="input" name="username" type="text" placeholder="LP-1992" required />
-                                                    </div>
-                                                </div>
-                                                <div className="field">
-                                                    <label className="label">Fn. renal</label>
-                                                    <div className="control">
-                                                        <input onChange="" className="input" name="username" type="text" placeholder="LP-1992" required />
+                                                <div className="field is-hidden">
+                                                    <label className="label">ID</label>
+                                                    <div className="control has-icons-left has-icons-right">
+                                                        <input onChange={handleInput} className="input" name="_id" type="text" placeholder="LP-1992" required value={user._id} />
+                                                        <span className="icon is-small is-left">
+                                                            <i className="fas fa-user"></i>
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div className="field is-grouped">
                                                     <div className="control">
-                                                        <button className="button is-link">Guardar esquema</button>
+                                                        <button className="button is-link">Editar perfil</button>
                                                     </div>
                                                 </div>
                                             </form>
-                                    
-
-                                    </section>
+                                        </section>
+                                    </div>
                                 </div>
                             </div>
-
-
                         </div>
+                    </div>
                     </div>
                 </div>
             </section>

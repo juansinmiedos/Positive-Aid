@@ -25,7 +25,7 @@ const userSchema = new Schema(
         },
         profilePhoto: {
             type: String,
-            default: 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+            default: 'https://cdn11.bigcommerce.com/s-bda933q48z/images/stencil/1280x1280/products/119/477/Two-Color_Bloom_Handmade_Tile__28047.1496937781.png?c=2&imbypass=on'
         },
         cd4: [Number],
         cargaViral: [Number],
