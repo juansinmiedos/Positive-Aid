@@ -4,6 +4,7 @@ const User = require('../models/User')
 const passport = require('../config/passport')
 const {toLogin, toLogout, toProfile, toSignup} = require('../controllers/index')
 const {toCapacits} = require('../controllers/capacits')
+const {toMedicines} = require('../controllers/medicines')
 const isAuth = require('../middlewares/isAuth')
 
 // AUTHENTICATION ROUTES
@@ -14,5 +15,8 @@ router.get('/profile', isAuth, toProfile)
 
 // CAPACITS ROUTES
 router.get('/capacits', toCapacits)
+
+// MEDICINES ROUTES
+router.get('/medicines', toMedicines)
 
 module.exports = router;

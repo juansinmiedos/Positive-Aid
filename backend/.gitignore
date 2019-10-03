@@ -8,3 +8,4 @@ npm-debug.log
 .env
 
 bin/seeds.js
+bin/seeds2.js

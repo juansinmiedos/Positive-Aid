@@ -5,8 +5,14 @@ const medicineSchema = new Schema(
         name: String,
         commonName: String,
         description: String,
-        frequency: Number,
-        startHour: Number
+        typeOfMed: {
+            type: String,
+            enum: ['Coformulado en una tableta', 'No coformulado en una tableta']
+        },
+        statusOfRec: {
+            type: String,
+            enum: ['Preferente', 'Alternativo']
+        }
     },
     {
         timestamps: true,

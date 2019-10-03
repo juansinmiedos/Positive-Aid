@@ -15,6 +15,9 @@ const AUTH_SERVICE = {
   },
   capacits: async() => {
     return await SERVICE.get('/capacits')
+  },
+  medicines: async() => {
+    return await SERVICE.get('/medicines')
   }
 };
 

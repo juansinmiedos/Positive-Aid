@@ -8,7 +8,8 @@ const appointmentSchema = new Schema(
             type: String,
             enum: ['revision', 'analisis', 'otro']
         },
-        withWhom: String
+        withWhom: String,
+        date: String
     },
     {
         timestamps: true,
