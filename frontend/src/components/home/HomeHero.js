@@ -2,6 +2,16 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 export default function HomeHero() {
+
+    const sessionChecker = () => {
+        const sessionaux = JSON.parse(localStorage.getItem('user'))
+        if(sessionaux == null){
+            return(
+                <Link to="/crear-cuenta"><button className="button is-link">Crear una cuenta</button></Link>
+            )
+        }
+    }
+
     return (
         <>
             <section className="hero is-danger is-fullheight">
@@ -9,7 +19,7 @@ export default function HomeHero() {
                     <div className="container">
                         <h1 className="title is-size-1">+aid</h1>
                         <h2 className="subtitle">Una plataforma para ayudarte a vivir mejor.</h2>
-                        <Link to="/crear-cuenta"><button className="button is-link">Crear una cuenta</button></Link>
+                        {sessionChecker()}
                     </div>
                 </div>
                 <div className="hero-foot"></div>

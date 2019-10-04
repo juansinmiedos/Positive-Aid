@@ -14,7 +14,7 @@ export default function ProfileHeader({user, showEditForm, isOpen, submitEditFor
                             <div className="column is-three-quarters">
                                 <h1 className="subtitle">{user.name} {user.lastname}</h1>
                                 <h1 className="title">@{user.username}</h1>
-                                <p className="subtitle">Sexo<br/>Status</p>
+                                <p className="subtitle">Status actual: {user.status}</p>
                                 <button onClick={() => showEditForm()} className="button is-danger">Editar perfil</button>
 
                                 <div className={isOpen ? "modal is-active" : "modal"} >

@@ -16,6 +16,12 @@ const AUTH_SERVICE = {
   update: async (user) => {
     return await SERVICE.put('/update', user);
   },
+  addLabs: async (labs) => {
+    return await SERVICE.post('/labs', labs);
+  },
+  getLabs: async (userid) => {
+    return await SERVICE.get('/labs', userid)
+  },
   capacits: async() => {
     return await SERVICE.get('/capacits')
   },

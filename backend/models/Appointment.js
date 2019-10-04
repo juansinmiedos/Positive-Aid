@@ -9,7 +9,11 @@ const appointmentSchema = new Schema(
             enum: ['revision', 'analisis', 'otro']
         },
         withWhom: String,
-        date: String
+        date: String,
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
     },
     {
         timestamps: true,

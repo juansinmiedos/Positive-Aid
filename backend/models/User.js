@@ -15,31 +15,15 @@ const userSchema = new Schema(
             required: true,
             unique: true
         },
-        sex: {
-            type: String,
-            enum: ['male', 'female'],
-        },
         status: {
             type: String,
-            enum: ['Detectable', 'Indetectable', 'SIDA']
+            enum: ['Detectable', 'Indetectable', 'SIDA'],
+            default: 'Detectable'
         },
         profilePhoto: {
             type: String,
             default: 'https://cdn11.bigcommerce.com/s-bda933q48z/images/stencil/1280x1280/products/119/477/Two-Color_Bloom_Handmade_Tile__28047.1496937781.png?c=2&imbypass=on'
-        },
-        cd4: [Number],
-        cargaViral: [Number],
-        trigliceridos: [Number],
-        fnHepatica: [Number],
-        fnRenal: [Number],
-        appointments: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Appointment'
-        }],
-        medicine: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Medicine'
-        }]
+        }
     },
     {
         timestamps: true,

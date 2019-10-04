@@ -3,11 +3,15 @@ const {Schema, model} = require('mongoose')
 const medicationSchema = new Schema(
     {
         med: {
-            type: Schema.Types.ObjectId,
-            ref: 'Medicine'
+            type: String,
+            enum: ['yet to be defined']
         },
         frequency: Number,
-        startHour: Number
+        startHour: Number,
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
     },
     {
         timestamps: true,
