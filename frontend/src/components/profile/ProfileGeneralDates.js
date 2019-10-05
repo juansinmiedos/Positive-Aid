@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProfileGeneralDates() {
+export default function ProfileGeneralDates({showAppointmentsForm, appointmentsIsOpen}) {
     return (
         <>
             <section className="section">
@@ -8,8 +8,66 @@ export default function ProfileGeneralDates() {
                     <div className="columns is-centered">
                         <div className="column is-three-quarters">
                             <hr />
+                            <p className="subtitle">Calendario</p>
                             <h1 className="title">Tus citas</h1>
-                            <p className="subtitle">Agenda tus citas y revisiones para mantenerte en buen estado.</p>
+                            <p>Agenda tus citas y revisiones para mantenerte en buen estado.</p>
+                            <button onClick={() => showAppointmentsForm()} className="button is-danger">Agendar nueva cita</button>
+
+                            <div className={appointmentsIsOpen ? "modal is-active" : "modal"}>
+                                <div className="modal-background"></div>
+                                <div className="modal-card">
+                                    <header className="modal-card-head">
+                                        <p className="modal-card-title"><b>Nueva cita</b></p>
+                                        <button onClick={() => showAppointmentsForm()} className="delete" aria-label="close"></button>
+                                    </header>
+                                    <section className="modal-card-body">
+
+                                        <form onSubmit="">
+                                            <div className="field">
+                                                <label className="label">Tipo de cita</label>
+                                            </div>
+                                            <div className="field is-horizontal">
+                                                <div className="field-body">
+                                                    <div className="field">
+                                                        <div class="control">
+                                                            <div class="select">
+                                                                <select>
+                                                                    <option>Selecciona un tipo de cita</option>
+                                                                    <option>Cita de revisión médica</option>
+                                                                    <option>Cita de análisis</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="field">
+                                                <label className="label">¿Con quién?</label>
+                                                <div className="control">
+                                                    <input onChange="" className="input" name="username" type="text" placeholder="LP-1992" required />
+                                                </div>
+                                            </div>
+                                            <div className="field">
+                                                <label className="label">¿Cuándo?</label>
+                                                <div className="control">
+                                                    <input onChange="" className="input" name="username" type="date" placeholder="LP-1992" required />
+                                                </div>
+                                            </div>
+                                            <div className="field">
+                                                <label className="label">¿Dónde?</label>
+                                                <div className="control">
+                                                    <input onChange="" className="input" name="username" type="text" placeholder="LP-1992" required />
+                                                </div>
+                                            </div>
+                                            <div className="field is-grouped">
+                                                <div className="control">
+                                                    <button className="button is-link">Guardar cita</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </section>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="columns is-centered">

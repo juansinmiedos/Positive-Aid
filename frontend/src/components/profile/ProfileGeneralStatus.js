@@ -30,7 +30,6 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
     }
 
     return (
-        
         <>
             <section className="section">
                 <div>
@@ -49,6 +48,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                     <p>Status actual: <b>{user.status}</b></p>
                                     {statusChecker()}
                                     <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
+                                    <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p>
                                     <hr />
                                     <p><b>Tabla histórica de resultados</b></p>
                                     <table className="table">
@@ -66,7 +66,6 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                             {tableMaker()}
                                         </tbody>
                                     </table>
-                                    <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p>
                                     <button onClick={() => showLabsForm()} className="button is-danger">Añadir nuevos resultados</button>
 
                                     <div className={labsIsOpen ? "modal is-active" : "modal"}>

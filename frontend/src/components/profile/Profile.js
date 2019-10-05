@@ -6,7 +6,12 @@ import {Redirect} from 'react-router-dom'
 import ProfileGeneralStatus from './ProfileGeneralStatus';
 import ProfileGeneralMeds from './ProfileGeneralMeds';
 import ProfileGeneralDates from './ProfileGeneralDates';
+
+// SERVICES
 import AUTH_SERVICE from '../../services/auth';
+import LABS_SERVICE from '../../services/labs';
+import MEDICATION_SERVICE from '../../services/medication';
+import APPOINTMENT_SERVICE from '../../services/appointment';
 
 export default class Profile extends Component {
     state = {
@@ -33,11 +38,13 @@ export default class Profile extends Component {
             _id: ''}
         ],
         isOpen: false,
-        labsIsOpen: false
+        labsIsOpen: false,
+        medsIsOpen: false,
+        appointmentsIsOpen: false
     }
 
     promiseOfLabs = async() => {
-        const response = await AUTH_SERVICE.getLabs(this.state.user._id)
+        const response = await LABS_SERVICE.getLabs(this.state.user._id)
         const arrayOfLabs = response.data.allLabs
         this.setState({allLabs: arrayOfLabs})
     }
@@ -46,6 +53,7 @@ export default class Profile extends Component {
         this.promiseOfLabs()
     }
 
+    // INPUT HANDLERS ACOORDIDING TO DATA TYPE
     handleInput = (e) => {
         const { user, labs } = this.state;
         const key = e.target.name;
@@ -68,6 +76,7 @@ export default class Profile extends Component {
         this.setState({ user, labs });
     };
 
+     // SHOW AND HIDE MODALS LOGICS
     showEditForm = () => {
         if(this.state.isOpen === false){
             this.setState({
@@ -92,14 +101,36 @@ export default class Profile extends Component {
         }
     }
 
+    showMedsForm = () => {
+        if(this.state.medsIsOpen === false){
+            this.setState({
+                medsIsOpen: true
+            })
+        } else {
+            this.setState({
+                medsIsOpen: false
+            })
+        }
+    }
+
+    showAppointmentsForm = () => {
+        if(this.state.appointmentsIsOpen === false){
+            this.setState({
+                appointmentsIsOpen: true
+            })
+        } else {
+            this.setState({
+                appointmentsIsOpen: false
+            })
+        }
+    }
+
     submitEditForm = async(e) => {
         try{
             e.preventDefault()
-            const response = await AUTH_SERVICE.update(this.state.user)
-            console.log(response)
+            await AUTH_SERVICE.update(this.state.user)
             this.setState({user: this.state.user})
             this.props.history.push('/perfil')
-
         } catch(error){
             console.log(error);
         }
@@ -118,14 +149,9 @@ export default class Profile extends Component {
     submitLabsForm = async(e) => {
         try{
             e.preventDefault()
-            const response = await AUTH_SERVICE.addLabs(this.state.labs)
-            this.setState({
-                labs: this.state.labs
-            })
-            console.log(response.data)
-
+            await LABS_SERVICE.addLabs(this.state.labs)
+            this.setState({ labs: this.state.labs })
             this.props.history.push('/perfil')
-
         } catch(error){
             console.log(error);
         }
@@ -143,16 +169,21 @@ export default class Profile extends Component {
     
     render() {
         console.log(this.state.allLabs)
+
         if(JSON.parse(localStorage.getItem('user')) == null){
             return <Redirect to='/iniciar-sesion' />
         } else {
             return (
                 <>
                     <ProfileHero />
+
                     <ProfileHeader user={this.state.user} showEditForm={this.showEditForm} isOpen={this.state.isOpen} submitEditForm={this.submitEditForm} handleInput={this.handleInput}/>
+
                     <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} />
-                    <ProfileGeneralMeds />
-                    <ProfileGeneralDates />
+
+                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} />
+
+                    <ProfileGeneralDates user={this.state.user} showAppointmentsForm={this.showAppointmentsForm} appointmentsIsOpen={this.state.appointmentsIsOpen} />
                     <Footer />
                 </>
             )
