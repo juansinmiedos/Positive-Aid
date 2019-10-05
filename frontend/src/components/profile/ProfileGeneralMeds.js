@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
+export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMedsForm, handleInput, handleNumberInput}) {
     return (
         <>
             <section className="section">
@@ -21,14 +21,14 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
                                             <button onClick={() => showMedsForm()} className="delete" aria-label="close"></button>
                                         </header>
                                         <section className="modal-card-body">
-                                            <form onSubmit="">
+                                            <form onSubmit={submitMedsForm}>
                                                 <div className="field is-horizontal">
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <label className="label">Medicamento</label>
-                                                            <div class="control">
-                                                                <div class="select">
-                                                                    <select>
+                                                            <div className="control">
+                                                                <div className="select">
+                                                                    <select onChange={handleInput} name="med" >
                                                                         <option>Selecciona una opción</option>
                                                                         <option value="Biktarvy">Biktarvy</option>
                                                                         <option value="Triumeq">Triumeq</option>
@@ -55,13 +55,13 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <label className="label">Frecuencia</label>
-                                                            <div class="control">
-                                                                <div class="select">
-                                                                    <select>
+                                                            <div className="control">
+                                                                <div className="select">
+                                                                    <select onChange={handleNumberInput} name="frequency">
                                                                         <option>Selecciona una opción</option>
-                                                                        <option>Cada 8 horas</option>
-                                                                        <option>Cada 12 horas</option>
-                                                                        <option>Cada 24 horas</option>
+                                                                        <option value="8">Cada 8 horas</option>
+                                                                        <option value="12">Cada 12 horas</option>
+                                                                        <option value="24">Cada 24 horas</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -71,7 +71,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
                                                 <div className="field">
                                                     <label className="label">Hora de inicio</label>
                                                     <div className="control">
-                                                        <input onChange="" className="input" name="username" type="time" placeholder="LP-1992" required />
+                                                        <input onChange={handleInput} className="input" name="startHour" type="time" required />
                                                     </div>
                                                 </div>
                                                 <div className="field is-grouped">
@@ -81,9 +81,9 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
                                                 </div>
                                             </form>
                                         </section>
-                                    <footer class="modal-card-foot">
+                                    <footer className="modal-card-foot">
                                         <article className="message is-warning">
-                                            <div class="message-header">
+                                            <div className="message-header">
                                                 <p>Conoce tus medicamentos</p>
                                             </div>
                                             <div className="message-body">

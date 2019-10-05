@@ -55,11 +55,11 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                         <thead>
                                             <tr>
                                                 <th><abbr title="Date">Fecha</abbr></th>
-                                                <th><abbr title="Played">CD4</abbr></th>
-                                                <th><abbr title="Won">Carga viral</abbr></th>
-                                                <th><abbr title="Drawn">Triglicéridos</abbr></th>
-                                                <th><abbr title="Lost">Fn. Hepática</abbr></th>
-                                                <th><abbr title="Goals for">Fn. Renal</abbr></th>
+                                                <th><abbr title="CD4">CD4</abbr></th>
+                                                <th><abbr title="cargaViral">Carga viral</abbr></th>
+                                                <th><abbr title="trigliceridos">Triglicéridos</abbr></th>
+                                                <th><abbr title="fnHepatica">Fn. Hepática</abbr></th>
+                                                <th><abbr title="fnRenal">Fn. Renal</abbr></th>
                                             </tr>
                                         </thead>
                                         <tbody>

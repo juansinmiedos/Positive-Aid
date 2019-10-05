@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProfileGeneralDates({showAppointmentsForm, appointmentsIsOpen}) {
+export default function ProfileGeneralDates({ showAppointmentsForm, appointmentsIsOpen, submitAppointmentsForm, handleInput, handleDateInput }) {
     return (
         <>
             <section className="section">
@@ -22,19 +22,20 @@ export default function ProfileGeneralDates({showAppointmentsForm, appointmentsI
                                     </header>
                                     <section className="modal-card-body">
 
-                                        <form onSubmit="">
+                                        <form onSubmit={submitAppointmentsForm} >
                                             <div className="field">
                                                 <label className="label">Tipo de cita</label>
                                             </div>
                                             <div className="field is-horizontal">
                                                 <div className="field-body">
                                                     <div className="field">
-                                                        <div class="control">
-                                                            <div class="select">
-                                                                <select>
+                                                        <div className="control">
+                                                            <div className="select">
+                                                                <select onChange={handleInput} name="typeOfAppointment">
                                                                     <option>Selecciona un tipo de cita</option>
-                                                                    <option>Cita de revisión médica</option>
-                                                                    <option>Cita de análisis</option>
+                                                                    <option value="revision" >Cita de revisión médica</option>
+                                                                    <option value="analisis" >Cita de análisis</option>
+                                                                    <option value="otro" >Otro</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -44,19 +45,19 @@ export default function ProfileGeneralDates({showAppointmentsForm, appointmentsI
                                             <div className="field">
                                                 <label className="label">¿Con quién?</label>
                                                 <div className="control">
-                                                    <input onChange="" className="input" name="username" type="text" placeholder="LP-1992" required />
+                                                    <input onChange={handleInput} className="input" name="withWhom" type="text" placeholder="Dr. Luis Martínez" required />
                                                 </div>
                                             </div>
                                             <div className="field">
                                                 <label className="label">¿Cuándo?</label>
                                                 <div className="control">
-                                                    <input onChange="" className="input" name="username" type="date" placeholder="LP-1992" required />
+                                                    <input onChange={handleDateInput} className="input" name="date" type="date" required />
                                                 </div>
                                             </div>
                                             <div className="field">
                                                 <label className="label">¿Dónde?</label>
                                                 <div className="control">
-                                                    <input onChange="" className="input" name="username" type="text" placeholder="LP-1992" required />
+                                                    <input onChange={handleInput} className="input" name="place" type="text" placeholder="Clínica Condesa" required />
                                                 </div>
                                             </div>
                                             <div className="field is-grouped">

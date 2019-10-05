@@ -25,6 +25,19 @@ export default class Profile extends Component {
             fnRenal: '',
             user: JSON.parse(localStorage.getItem('user'))
         },
+        meds: {
+            med: '',
+            frequency: '',
+            startHour: '',
+            user: JSON.parse(localStorage.getItem('user'))
+        },
+        appointments: {
+            place: '',
+            typeOfAppointment: '',
+            withWhom: '',
+            date: '',
+            user: JSON.parse(localStorage.getItem('user'))
+        },
         allLabs: [
             {cargaViral: '',
             cd4: '',
@@ -37,12 +50,15 @@ export default class Profile extends Component {
             user: '',
             _id: ''}
         ],
+        allMeds: [],
+        allAppointments: [],
         isOpen: false,
         labsIsOpen: false,
         medsIsOpen: false,
         appointmentsIsOpen: false
     }
 
+    // PROMISES
     promiseOfLabs = async() => {
         const response = await LABS_SERVICE.getLabs(this.state.user._id)
         const arrayOfLabs = response.data.allLabs
@@ -55,25 +71,33 @@ export default class Profile extends Component {
 
     // INPUT HANDLERS ACOORDIDING TO DATA TYPE
     handleInput = (e) => {
-        const { user, labs } = this.state;
+        const { user, labs, meds, appointments } = this.state;
         const key = e.target.name;
         user[key] = e.target.value;
         labs[key] = e.target.value;
-        this.setState({ user, labs });
+        meds[key] = e.target.value;
+        appointments[key] = e.target.value;
+        this.setState({ user, labs, meds, appointments });
     };
 
     handleNumberInput = (e) => {
-        const { user, labs } = this.state;
+        const { user, labs, meds, appointments } = this.state;
         const key = e.target.name;
+        user[key] = Number(e.target.value);
         labs[key] = Number(e.target.value);
-        this.setState({ user, labs });
+        meds[key] = Number(e.target.value);
+        appointments[key] = Number(e.target.value);
+        this.setState({ user, labs, meds, appointments });
     };
 
     handleDateInput = (e) => {
-        const { user, labs } = this.state;
+        const { user, labs, meds, appointments } = this.state;
         const key = e.target.name;
+        user[key] = new Date(e.target.value);
         labs[key] = new Date(e.target.value);
-        this.setState({ user, labs });
+        meds[key] = new Date(e.target.value);
+        appointments[key] = new Date(e.target.value);
+        this.setState({ user, labs, meds, appointments });
     };
 
      // SHOW AND HIDE MODALS LOGICS
@@ -166,9 +190,50 @@ export default class Profile extends Component {
             })
         }
     }
+
+    submitMedsForm = async(e) => {
+        try{
+            e.preventDefault()
+            await MEDICATION_SERVICE.addMedication(this.state.meds)
+            this.setState({ meds: this.state.meds })
+            this.props.history.push('/perfil')
+        } catch(error){
+            console.log(error)
+        }
+
+        if(this.state.medsIsOpen === false){
+            this.setState({
+                medsIsOpen: true
+            })
+        } else {
+            this.setState({
+                medsIsOpen: false
+            })
+        }
+    }
+
+    submitAppointmentsForm = async(e) => {
+        try{
+            e.preventDefault()
+            await APPOINTMENT_SERVICE.addAppointment(this.state.appointments)
+            this.setState({ appointments: this.state.appointments })
+            this.props.history.push('/perfil')
+        } catch(error){
+            console.log(error)
+        }
+
+        if(this.state.appointmentsIsOpen === false){
+            this.setState({
+                appointmentsIsOpen: true
+            })
+        } else {
+            this.setState({
+                appointmentsIsOpen: false
+            })
+        }
+    }
     
     render() {
-        console.log(this.state.allLabs)
 
         if(JSON.parse(localStorage.getItem('user')) == null){
             return <Redirect to='/iniciar-sesion' />
@@ -181,9 +246,9 @@ export default class Profile extends Component {
 
                     <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} />
 
-                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} />
+                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} />
 
-                    <ProfileGeneralDates user={this.state.user} showAppointmentsForm={this.showAppointmentsForm} appointmentsIsOpen={this.state.appointmentsIsOpen} />
+                    <ProfileGeneralDates user={this.state.user} showAppointmentsForm={this.showAppointmentsForm} appointmentsIsOpen={this.state.appointmentsIsOpen} submitAppointmentsForm={this.submitAppointmentsForm} handleInput={this.handleInput} handleDateInput={this.handleDateInput} />
                     <Footer />
                 </>
             )
