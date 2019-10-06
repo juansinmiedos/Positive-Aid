@@ -24,6 +24,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                     <td>{x.trigliceridos}</td>
                     <td>{x.fnHepatica}</td>
                     <td>{x.fnRenal}</td>
+                    <td><button className="button">Borrar</button><button className="button">Actualizar</button></td>
                 </tr>
             )
         }))
@@ -60,6 +61,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                                 <th><abbr title="trigliceridos">Triglicéridos</abbr></th>
                                                 <th><abbr title="fnHepatica">Fn. Hepática</abbr></th>
                                                 <th><abbr title="fnRenal">Fn. Renal</abbr></th>
+                                                <th><abbr>&nbsp;</abbr></th>
                                             </tr>
                                         </thead>
                                         <tbody>

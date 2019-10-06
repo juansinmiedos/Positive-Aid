@@ -12,8 +12,6 @@ exports.toAddAppointment = async(req, res) => {
             typeOfAppointment: req.body.typeOfAppointment,
             withWhom: req.body.withWhom
         }
-
-        console.log(objectaux)
         
         let appointment = await Appointment.create({...objectaux})
         res.status(201).json({appointment})
@@ -22,7 +20,14 @@ exports.toAddAppointment = async(req, res) => {
     }
 }
 
-exports.toGetAppointment = (req, res) => {
+exports.toGetAppointment = async(req, res) => {
+    try{
+        console.log(req.user._id)
+        let allAppointments = await Appointment.find({user: req.user._id})
+        res.status(200).json({allAppointments})
+    } catch(err){
+        res.status(500).json({err})
+    }
 }
 
 exports.toUpdateAppointment = (req, res) => {

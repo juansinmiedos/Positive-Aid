@@ -1,6 +1,35 @@
 import React from 'react'
 
-export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMedsForm, handleInput, handleNumberInput}) {
+export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMedsForm, handleInput, handleNumberInput, allMeds, medicinesInfo}) {
+
+    //COMO HAGO PARA TRAER LA INFO EN TIEMPO REAL DESDE LA BASE DE DATOS?
+    const nameMatcher = (name) => {
+        // console.log(name)
+        // console.log(medicinesInfo[0].commonName)
+        for(let i=0; i < medicinesInfo.lenght; i++){
+            if (name === medicinesInfo[i].commonName){
+                return <p className="subtitle is-size-5">{medicinesInfo[i]}</p>
+            }
+        }
+    }
+
+    const boxMaker = () => {
+        return(allMeds.map((x) => {
+            return(
+                <div className="column is-half" key={x.med}>
+                    <div className="box">
+                        <h1 className="title is-size-5">{x.med}</h1>
+                        <p className="subtitle is-size-5">{nameMatcher(x.med)}</p>
+                        <p className="subtitle is-size-5">Recordatorio: Cada {x.frequency} horas</p>
+                        <button className="button is-danger">Quitar del esquema</button>
+                        <button className="button">Ver detalle</button>
+                        <button className="button">Modificar frecuencia</button>
+                    </div>
+                </div>
+            )
+        })
+    )}
+
     return (
         <>
             <section className="section">
@@ -104,35 +133,10 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                     <div className="columns is-centered">
                         <div className="column is-three-quarters">
                             <div className="column is-full">
-                                <div className="columns">
-                                    <div className="column is-one-quarter">
-                                        <img src="./meds.jpg" alt="meds" />
-                                    </div>
-                                    <div className="column is-three-quarters">
-                                        <div className="box">
-                                            <h1 className="title is-size-5">Nombre comercial</h1>
-                                            <p className="subtitle is-size-5">Nombre de fórmula</p>
-                                            <p className="subtitle is-size-5">Tomar cada 8 horas</p>
-                                            <button className="button is-danger">Quitar del esquema</button>
-                                        </div>
-                                    </div>
+                                <div className="columns is-multiline">
+                                    {boxMaker()}
                                 </div>
                             </div>
-                            <div className="column is-full">
-                                <div className="columns">
-                                    <div className="column is-one-quarter">
-                                        <img src="./meds.jpg" alt="meds" />
-                                    </div>
-                                    <div className="column is-three-quarters">
-                                        <div className="box">
-                                            <h1 className="title is-size-5">Nombre comercial</h1>
-                                            <p className="is-size-5">Nombre de fórmula<br /><b>Tomar cada 8 horas</b></p>
-                                            <button className="button is-danger">Quitar del esquema</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>

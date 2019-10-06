@@ -9,6 +9,7 @@ import ProfileGeneralDates from './ProfileGeneralDates';
 
 // SERVICES
 import AUTH_SERVICE from '../../services/auth';
+import PUBLIC_SERVICE from '../../services/public';
 import LABS_SERVICE from '../../services/labs';
 import MEDICATION_SERVICE from '../../services/medication';
 import APPOINTMENT_SERVICE from '../../services/appointment';
@@ -50,8 +51,28 @@ export default class Profile extends Component {
             user: '',
             _id: ''}
         ],
-        allMeds: [],
-        allAppointments: [],
+        allMeds: [
+            {med: '',
+            frequency: '',
+            startHour: '',
+            user: '',
+            _id: ''}
+        ],
+        allAppointments: [
+            {place:'',
+            typeOfAppointment: '',
+            withWhom: '',
+            date: '',
+            user: '',
+            _id: ''}
+        ],
+        medicinesInfo: [
+            {name: '',
+            commonName: '',
+            description: '',
+            typeOfMed: '',
+            statusOfRec: ''}
+        ],
         isOpen: false,
         labsIsOpen: false,
         medsIsOpen: false,
@@ -65,8 +86,29 @@ export default class Profile extends Component {
         this.setState({allLabs: arrayOfLabs})
     }
 
+    promiseOfMeds = async() => {
+        const response = await MEDICATION_SERVICE.getMedication(this.state.user._id)
+        const arrayOfMeds = response.data.allMeds
+        this.setState({allMeds: arrayOfMeds})
+    }
+
+    promiseOfAppointments = async() => {
+        const response = await APPOINTMENT_SERVICE.getAppointment(this.state.user._id)
+        const arrayOfAppointments = response.data.allAppointments
+        this.setState({allAppointments: arrayOfAppointments})
+    }
+
+    promiseOfMedicineInfo = async() => {
+        const response = await PUBLIC_SERVICE.medicines()
+        const arrayOfMedicines = response.data.medicines
+        this.setState({medicinesInfo: arrayOfMedicines})
+    }
+
     componentDidMount(){
         this.promiseOfLabs()
+        this.promiseOfMeds()
+        this.promiseOfAppointments()
+        this.promiseOfMedicineInfo()
     }
 
     // INPUT HANDLERS ACOORDIDING TO DATA TYPE
@@ -149,6 +191,7 @@ export default class Profile extends Component {
         }
     }
 
+    // FORMS SUBMITS
     submitEditForm = async(e) => {
         try{
             e.preventDefault()
@@ -232,6 +275,8 @@ export default class Profile extends Component {
             })
         }
     }
+
+    //DELETERS
     
     render() {
 
@@ -246,9 +291,9 @@ export default class Profile extends Component {
 
                     <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} />
 
-                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} />
+                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allMeds={this.state.allMeds} medicinesInfo={this.state.medicinesInfo} />
 
-                    <ProfileGeneralDates user={this.state.user} showAppointmentsForm={this.showAppointmentsForm} appointmentsIsOpen={this.state.appointmentsIsOpen} submitAppointmentsForm={this.submitAppointmentsForm} handleInput={this.handleInput} handleDateInput={this.handleDateInput} />
+                    <ProfileGeneralDates user={this.state.user} showAppointmentsForm={this.showAppointmentsForm} appointmentsIsOpen={this.state.appointmentsIsOpen} submitAppointmentsForm={this.submitAppointmentsForm} handleInput={this.handleInput} handleDateInput={this.handleDateInput} allAppointments={this.state.allAppointments} />
                     <Footer />
                 </>
             )

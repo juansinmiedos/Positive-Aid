@@ -11,7 +11,13 @@ exports.toAddMedication = async(req, res) => {
     }
 }
 
-exports.toGetMedication = (req, res) => {
+exports.toGetMedication = async(req, res) => {
+    try{
+        let allMeds = await Medication.find({user: req.user._id})
+        res.status(200).json({allMeds})
+    } catch(err){
+        res.status(500).json({err})
+    }
 }
 
 exports.toUpdateMedication = (req, res) => {

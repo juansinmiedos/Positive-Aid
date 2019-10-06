@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProfileGeneralDates({ showAppointmentsForm, appointmentsIsOpen, submitAppointmentsForm, handleInput, handleDateInput }) {
+export default function ProfileGeneralDates({ showAppointmentsForm, appointmentsIsOpen, submitAppointmentsForm, handleInput, handleDateInput, allAppointments }) {
     return (
         <>
             <section className="section">
