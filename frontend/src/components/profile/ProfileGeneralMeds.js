@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMedsForm, handleInput, handleNumberInput, allMeds, medicinesInfo, deleteMeds}) {
+export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMedsForm, handleInput, handleNumberInput, allMeds, medicinesInfo, deleteMeds, meds}) {
 
     //COMO HAGO PARA TRAER LA INFO EN TIEMPO REAL DESDE LA BASE DE DATOS?
     const nameMatcher = (name) => {
-        console.log(name)
-        console.log(medicinesInfo[0].commonName)
+        // console.log(name)
+        // console.log(medicinesInfo[0].commonName)
         for(let i=0; i < medicinesInfo.lenght; i++){
             if (name === medicinesInfo[i].commonName){
                 return <p className="subtitle is-size-5">{medicinesInfo[i]}</p>
@@ -29,6 +29,48 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
             )
         }))
     }
+
+    const specificMedicineInfo = () => {
+            const aux = medicinesInfo.map((x) => {
+                if(meds.med === x.commonName)
+                    return  <article className="message is-warning" key={x.name} >
+                                <div className="message-header">
+                                    <p>Conoce tus medicamentos</p>
+                                </div>
+                                <div className="message-body">
+                                    Estas tomando: <b>{x.commonName}</b><br />
+                                    Nombre de fórmula: <b>{x.name}</b><br />
+                                    Tipo: <b>{x.typeOfMed}</b><br />
+                                    Status (según Sec. de Salud): <b>{x.statusOfRec}</b><br />
+                                    <br />
+                                    <b>Descripción general</b><br />
+                                    {x.description}
+                                </div>
+                            </article>
+            })
+
+            return aux
+        
+    }
+
+    // const specificMedicineInfo = () => {
+    //     return(
+            // <article className="message is-warning">
+            //     <div className="message-header">
+            //         <p>Conoce tus medicamentos</p>
+            //     </div>
+            //     <div className="message-body">
+            //         Estas tomando: <b>Nombre común</b><br />
+            //         Nombre de fórmula: <b>Nombre de fórmula</b><br />
+            //         Tipo: <b>Coformulado o no coformulado</b><br />
+            //         Status (según Sec. de Salud): <b>Preferente</b><br />
+            //         <br />
+            //         <b>Descripción general</b><br />
+            //         BIC es un inhibidor de integrasa de segunda generación, con mayor barrera genética a la resistencia; mostró ser, como tercer componente, no inferior al DTG. No recomendado en personas que usen rifampicina o rifabutina ni en embarazadas. <br /><br />Consulte aquí la última versión de la "Guía de Manejo Antirretroviral" para mayor información.
+            //     </div>
+            // </article>
+    //     )
+    // }
 
     return (
         <>
@@ -111,20 +153,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                                             </form>
                                         </section>
                                     <footer className="modal-card-foot">
-                                        <article className="message is-warning">
-                                            <div className="message-header">
-                                                <p>Conoce tus medicamentos</p>
-                                            </div>
-                                            <div className="message-body">
-                                                Estas tomando: <b>Nombre común</b><br />
-                                                Nombre de fórmula: <b>Nombre de fórmula</b><br />
-                                                Tipo: <b>Coformulado o no coformulado</b><br />
-                                                Status (según Sec. de Salud): <b>Preferente</b><br />
-                                                <br />
-                                                <b>Descripción general</b><br />
-                                                BIC es un inhibidor de integrasa de segunda generación, con mayor barrera genética a la resistencia; mostró ser, como tercer componente, no inferior al DTG. No recomendado en personas que usen rifampicina o rifabutina ni en embarazadas. <br /><br />Consulte aquí la última versión de la "Guía de Manejo Antirretroviral" para mayor información.
-                                            </div>
-                                        </article>
+                                        {specificMedicineInfo()}
                                     </footer>
                                 </div>
                             </div>

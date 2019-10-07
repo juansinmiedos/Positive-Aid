@@ -37,22 +37,23 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                     <div className="columns is-centered">
                         <div className="column is-three-quarters">
                         <hr />
-                            <div className="columns">
-                                <div className="column is-half">
-                                    <figure className="image">
-                                        <img src="./chart-example.png" alt="chart" />
-                                    </figure>
-                                </div>
-                                <div className="column is-half">
+                            <div className="columns is-multiline">
+                                <div className="column is-full">
                                     <h1 className="subtitle">Resumen</h1>
                                     <h1 className="title">Tu estado general</h1>
                                     <p>Status actual: <b>{user.status}</b></p>
                                     {statusChecker()}
                                     <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
                                     <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p>
-                                    <hr />
-                                    <p><b>Tabla histórica de resultados</b></p>
-                                    <table className="table">
+                                </div>
+                                <div className="column is-full">
+                                    <figure className="image">
+                                        <img src="./chart-example.png" alt="chart" />
+                                    </figure>
+                                </div>
+                                <div className="column is-full">
+                                    <h1 className="title"><b>Tabla histórica de resultados</b></h1>
+                                    <table className="table is-fullwidth">
                                         <thead>
                                             <tr>
                                                 <th><abbr title="Date">Fecha</abbr></th>

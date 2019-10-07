@@ -121,6 +121,7 @@ export default class Profile extends Component {
         meds[key] = e.target.value;
         appointments[key] = e.target.value;
         this.setState({ user, labs, meds, appointments });
+        
     };
 
     handleNumberInput = (e) => {
@@ -317,7 +318,7 @@ export default class Profile extends Component {
 
                     <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} deleteLabs={this.deleteLabs} />
 
-                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allMeds={this.state.allMeds} medicinesInfo={this.state.medicinesInfo} deleteMeds={this.deleteMeds} />
+                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allMeds={this.state.allMeds} medicinesInfo={this.state.medicinesInfo} deleteMeds={this.deleteMeds} meds={this.state.meds} />
 
                     <ProfileGeneralDates user={this.state.user} showAppointmentsForm={this.showAppointmentsForm} appointmentsIsOpen={this.state.appointmentsIsOpen} submitAppointmentsForm={this.submitAppointmentsForm} handleInput={this.handleInput} handleDateInput={this.handleDateInput} allAppointments={this.state.allAppointments} deleteAppointments={this.deleteAppointments} />
                     <Footer />
