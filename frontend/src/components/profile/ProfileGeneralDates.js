@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProfileGeneralDates({ showAppointmentsForm, appointmentsIsOpen, submitAppointmentsForm, handleInput, handleDateInput, allAppointments }) {
+export default function ProfileGeneralDates({ showAppointmentsForm, appointmentsIsOpen, submitAppointmentsForm, handleInput, handleDateInput, allAppointments, deleteAppointments }) {
 
     const tileMaker = () => {
         return(allAppointments.map((x) => {
@@ -18,6 +18,7 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                                 <p>Tipo de cita: <b>{x.typeOfAppointment}</b></p>
                                 <p>Dónde: <b>{x.place}</b></p>
                                 <p>Cuándo: <b>{x.date}</b></p>
+                                <button onClick={() => deleteAppointments(x._id)} className="button">Borrar cita</button>
                             </article>
                         </div>
                     </div>

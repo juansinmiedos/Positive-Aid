@@ -36,19 +36,6 @@ exports.toGetLabs = async(req, res) => {
 exports.toUpdateLabs = (req, res) => {
 }
 
-// exports.toDeleteLabs = (req, res) => {
-//     console.log(req)
-//     Labs.findByIdAndDelete()
-//     .then ((response) => {
-//         console.log(response)
-//         // let deletedLab = await Labs.findByIdAndDelete()
-//         // res.status(201).json({deletedLab})
-//     }) 
-//     .catch((err) => {
-//         res.status(500).json({err})
-//     })
-// }
-
 exports.toDeleteLabs = async(req, res) => {
     try{
         let deletedLab = await Labs.findByIdAndDelete(req.body.labsid)

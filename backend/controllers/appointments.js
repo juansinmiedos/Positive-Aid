@@ -33,5 +33,11 @@ exports.toGetAppointment = async(req, res) => {
 exports.toUpdateAppointment = (req, res) => {
 }
 
-exports.toDeleteAppointment = (req, res) => {
+exports.toDeleteAppointment = async(req, res) => {
+    try{
+        let deletedAppointment = await Appointment.findByIdAndDelete(req.body.appointmentid)
+        res.status(201).json({deletedAppointment})
+    } catch(err){
+        res.status(500).json({err})
+    }
 }

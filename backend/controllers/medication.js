@@ -23,5 +23,11 @@ exports.toGetMedication = async(req, res) => {
 exports.toUpdateMedication = (req, res) => {
 }
 
-exports.toDeleteMedication = (req, res) => {
+exports.toDeleteMedication = async(req, res) => {
+    try{
+        let deletedMedication = await Medication.findByIdAndDelete(req.body.medicationid)
+        res.status(201).json({deletedMedication})
+    } catch(err){
+        res.status(500).json({err})
+    }
 }

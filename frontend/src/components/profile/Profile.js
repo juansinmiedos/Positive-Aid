@@ -284,6 +284,26 @@ export default class Profile extends Component {
             console.log(error)
         }
     }
+
+    deleteMeds = async(e) => {
+        try{
+            await MEDICATION_SERVICE.deleteMedication(e)
+            this.componentDidMount()
+            this.props.history.push('/perfil')
+        } catch(error){
+            console.log(error)
+        }
+    }
+
+    deleteAppointments = async(e) => {
+        try{
+            await APPOINTMENT_SERVICE.deleteAppointment(e)
+            this.componentDidMount()
+            this.props.history.push('/perfil')
+        } catch(error){
+            console.log(error)
+        }
+    }
     
     render() {
         if(JSON.parse(localStorage.getItem('user')) == null){
@@ -297,9 +317,9 @@ export default class Profile extends Component {
 
                     <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} deleteLabs={this.deleteLabs} />
 
-                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allMeds={this.state.allMeds} medicinesInfo={this.state.medicinesInfo} />
+                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allMeds={this.state.allMeds} medicinesInfo={this.state.medicinesInfo} deleteMeds={this.deleteMeds} />
 
-                    <ProfileGeneralDates user={this.state.user} showAppointmentsForm={this.showAppointmentsForm} appointmentsIsOpen={this.state.appointmentsIsOpen} submitAppointmentsForm={this.submitAppointmentsForm} handleInput={this.handleInput} handleDateInput={this.handleDateInput} allAppointments={this.state.allAppointments} />
+                    <ProfileGeneralDates user={this.state.user} showAppointmentsForm={this.showAppointmentsForm} appointmentsIsOpen={this.state.appointmentsIsOpen} submitAppointmentsForm={this.submitAppointmentsForm} handleInput={this.handleInput} handleDateInput={this.handleDateInput} allAppointments={this.state.allAppointments} deleteAppointments={this.deleteAppointments} />
                     <Footer />
                 </>
             )

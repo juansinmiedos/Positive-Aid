@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMedsForm, handleInput, handleNumberInput, allMeds, medicinesInfo}) {
+export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMedsForm, handleInput, handleNumberInput, allMeds, medicinesInfo, deleteMeds}) {
 
     //COMO HAGO PARA TRAER LA INFO EN TIEMPO REAL DESDE LA BASE DE DATOS?
     const nameMatcher = (name) => {
-        // console.log(name)
-        // console.log(medicinesInfo[0].commonName)
+        console.log(name)
+        console.log(medicinesInfo[0].commonName)
         for(let i=0; i < medicinesInfo.lenght; i++){
             if (name === medicinesInfo[i].commonName){
                 return <p className="subtitle is-size-5">{medicinesInfo[i]}</p>
@@ -21,7 +21,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                         <h1 className="title is-size-5">{x.med}</h1>
                         <p className="subtitle is-size-5">{nameMatcher(x.med)}</p>
                         <p className="subtitle is-size-5">Recordatorio: Cada {x.frequency} horas</p>
-                        <button className="button is-danger">Quitar del esquema</button>
+                        <button onClick={() => deleteMeds(x._id)} className="button is-danger">Quitar del esquema</button>
                         <button className="button">Ver detalle</button>
                         <button className="button">Modificar frecuencia</button>
                     </div>
