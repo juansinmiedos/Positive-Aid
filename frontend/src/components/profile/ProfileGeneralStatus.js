@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, submitLabsForm, handleNumberInput, handleDateInput, allLabs}) {
+export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, submitLabsForm, handleNumberInput, handleDateInput, allLabs, deleteLabs}) {
     const statusChecker = () => {
         if(user.status === 'SIDA'){
             return(
@@ -17,14 +17,14 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
     const tableMaker = () => {
         return (allLabs.map((x) => {
             return(
-                <tr key={x.date}>
+                <tr key={x._id}>
                     <th>{x.date}</th>
                     <td>{x.cd4}</td>
                     <td>{x.cargaViral}</td>
                     <td>{x.trigliceridos}</td>
                     <td>{x.fnHepatica}</td>
                     <td>{x.fnRenal}</td>
-                    <td><button className="button">Borrar</button><button className="button">Actualizar</button></td>
+                    <td><button onClick={() => deleteLabs(x._id)} className="button">Borrar</button><button className="button">Actualizar</button></td>
                 </tr>
             )
         }))

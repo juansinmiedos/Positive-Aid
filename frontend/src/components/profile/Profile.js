@@ -96,6 +96,7 @@ export default class Profile extends Component {
         const response = await APPOINTMENT_SERVICE.getAppointment(this.state.user._id)
         const arrayOfAppointments = response.data.allAppointments
         this.setState({allAppointments: arrayOfAppointments})
+        
     }
 
     promiseOfMedicineInfo = async() => {
@@ -197,6 +198,7 @@ export default class Profile extends Component {
             e.preventDefault()
             await AUTH_SERVICE.update(this.state.user)
             this.setState({user: this.state.user})
+            this.componentDidMount()
             this.props.history.push('/perfil')
         } catch(error){
             console.log(error);
@@ -218,20 +220,14 @@ export default class Profile extends Component {
             e.preventDefault()
             await LABS_SERVICE.addLabs(this.state.labs)
             this.setState({ labs: this.state.labs })
+            this.componentDidMount()
             this.props.history.push('/perfil')
+            
         } catch(error){
             console.log(error);
         }
 
-        if(this.state.labsIsOpen === false){
-            this.setState({
-                labsIsOpen: true
-            })
-        } else {
-            this.setState({
-                labsIsOpen: false
-            })
-        }
+        this.showLabsForm()
     }
 
     submitMedsForm = async(e) => {
@@ -239,6 +235,7 @@ export default class Profile extends Component {
             e.preventDefault()
             await MEDICATION_SERVICE.addMedication(this.state.meds)
             this.setState({ meds: this.state.meds })
+            this.componentDidMount()
             this.props.history.push('/perfil')
         } catch(error){
             console.log(error)
@@ -260,6 +257,7 @@ export default class Profile extends Component {
             e.preventDefault()
             await APPOINTMENT_SERVICE.addAppointment(this.state.appointments)
             this.setState({ appointments: this.state.appointments })
+            this.componentDidMount()
             this.props.history.push('/perfil')
         } catch(error){
             console.log(error)
@@ -277,9 +275,17 @@ export default class Profile extends Component {
     }
 
     //DELETERS
+    deleteLabs = async(e) => {
+        try{
+            await LABS_SERVICE.deleteLabs(e)
+            this.componentDidMount()
+            this.props.history.push('/perfil')
+        } catch(error){
+            console.log(error)
+        }
+    }
     
     render() {
-
         if(JSON.parse(localStorage.getItem('user')) == null){
             return <Redirect to='/iniciar-sesion' />
         } else {
@@ -289,7 +295,7 @@ export default class Profile extends Component {
 
                     <ProfileHeader user={this.state.user} showEditForm={this.showEditForm} isOpen={this.state.isOpen} submitEditForm={this.submitEditForm} handleInput={this.handleInput}/>
 
-                    <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} />
+                    <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} deleteLabs={this.deleteLabs} />
 
                     <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allMeds={this.state.allMeds} medicinesInfo={this.state.medicinesInfo} />
 

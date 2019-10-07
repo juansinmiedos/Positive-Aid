@@ -24,8 +24,10 @@ exports.toAddLabs = async(req, res) => {
 
 exports.toGetLabs = async(req, res) => {
     try{
+        console.log(req.user._id);
+        
         let allLabs = await Labs.find({user: req.user._id})
-        res.status(201).json({allLabs})
+        res.status(200).json({allLabs})
     } catch(err){
         res.status(500).json({err})
     }
@@ -34,5 +36,24 @@ exports.toGetLabs = async(req, res) => {
 exports.toUpdateLabs = (req, res) => {
 }
 
-exports.toDeleteLabs = (req, res) => {
+// exports.toDeleteLabs = (req, res) => {
+//     console.log(req)
+//     Labs.findByIdAndDelete()
+//     .then ((response) => {
+//         console.log(response)
+//         // let deletedLab = await Labs.findByIdAndDelete()
+//         // res.status(201).json({deletedLab})
+//     }) 
+//     .catch((err) => {
+//         res.status(500).json({err})
+//     })
+// }
+
+exports.toDeleteLabs = async(req, res) => {
+    try{
+        let deletedLab = await Labs.findByIdAndDelete(req.body.labsid)
+        res.status(201).json({deletedLab})
+    } catch(err){
+        res.status(500).json({err})
+    }
 }

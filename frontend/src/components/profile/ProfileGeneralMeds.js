@@ -16,7 +16,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
     const boxMaker = () => {
         return(allMeds.map((x) => {
             return(
-                <div className="column is-half" key={x.med}>
+                <div className="column is-half" key={x._id}>
                     <div className="box">
                         <h1 className="title is-size-5">{x.med}</h1>
                         <p className="subtitle is-size-5">{nameMatcher(x.med)}</p>
@@ -27,8 +27,8 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                     </div>
                 </div>
             )
-        })
-    )}
+        }))
+    }
 
     return (
         <>

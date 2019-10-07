@@ -1,6 +1,31 @@
 import React from 'react'
 
 export default function ProfileGeneralDates({ showAppointmentsForm, appointmentsIsOpen, submitAppointmentsForm, handleInput, handleDateInput, allAppointments }) {
+
+    const tileMaker = () => {
+        return(allAppointments.map((x) => {
+            return(
+                <div className="tile is-vertical is-4 cardd" key={x._id}>
+                    <div className="tile">
+                        <div className="tile is-parent is-vertical">
+                            <div>
+                                <figure className="image">
+                                    <img src="./calendar.jpg" alt="calendar" />
+                                </figure>
+                            </div>
+                            <article className="tile is-child notification is-light">
+                                <p className="title">{x.withWhom}</p>
+                                <p>Tipo de cita: <b>{x.typeOfAppointment}</b></p>
+                                <p>Dónde: <b>{x.place}</b></p>
+                                <p>Cuándo: <b>{x.date}</b></p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            )
+        }))
+    }
+
     return (
         <>
             <section className="section">
@@ -74,91 +99,7 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                     <div className="columns is-centered">
                         <div className="column is-three-quarters">
                             <div className="tile is-ancestor scrolling-wrapper-flexbox">
-                                <div className="tile is-vertical is-3 cardd">
-                                    <div className="tile">
-                                        <div className="tile is-parent is-vertical">
-                                            <div>
-                                                <figure className="image">
-                                                    <img src="./calendar.jpg" alt="calendar" />
-                                                </figure>
-                                            </div>
-                                            <article className="tile is-child notification is-light">
-                                                <p className="title">Cita análisis</p>
-                                                <p>Tipo de cita: <b>Análisis</b></p>
-                                                <p>Dónde: <b>Laboratorios Hernández</b></p>
-                                                <p>Cuándo: <b>12/10/2019</b></p>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="tile is-vertical is-3 cardd">
-                                    <div className="tile">
-                                        <div className="tile is-parent is-vertical">
-                                            <div>
-                                                <figure className="image">
-                                                    <img src="./calendar.jpg" alt="calendar" />
-                                                </figure>
-                                            </div>
-                                            <article className="tile is-child notification is-light">
-                                                <p className="title">Cita Dr. Juan Manuel</p>
-                                                <p>Tipo de cita: <b>Revisión</b></p>
-                                                <p>Dónde: <b>Clínica Condesa</b></p>
-                                                <p>Cuándo: <b>15/10/2019</b></p>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="tile is-vertical is-3 cardd">
-                                    <div className="tile">
-                                        <div className="tile is-parent is-vertical">
-                                            <div>
-                                                <figure className="image">
-                                                    <img src="./calendar.jpg" alt="calendar" />
-                                                </figure>
-                                            </div>
-                                            <article className="tile is-child notification is-light">
-                                                <p className="title">Cita Dr. Gerardo Espino</p>
-                                                <p>Tipo de cita: <b>Especialista</b></p>
-                                                <p>Dónde: <b>Clínica Faro</b></p>
-                                                <p>Cuándo: <b>20/10/2019</b></p>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="tile is-vertical is-3 cardd">
-                                    <div className="tile">
-                                        <div className="tile is-parent is-vertical">
-                                            <div>
-                                                <figure className="image">
-                                                    <img src="./calendar.jpg" alt="calendar" />
-                                                </figure>
-                                            </div>
-                                            <article className="tile is-child notification is-light">
-                                                <p className="title">Cita Dr. Juan Manuel</p>
-                                                <p>Tipo de cita: <b>Revisión</b></p>
-                                                <p>Dónde: <b>Clínica Condesa</b></p>
-                                                <p>Cuándo: <b>31/10/2019</b></p>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="tile is-vertical is-3 cardd">
-                                    <div className="tile">
-                                        <div className="tile is-parent is-vertical">
-                                            <div>
-                                                <figure className="image">
-                                                    <img src="./calendar.jpg" alt="calendar" />
-                                                </figure>
-                                            </div>
-                                            <article className="tile is-child notification is-light">
-                                                <p className="title">Cita Dr. Juan Manuel</p>
-                                                <p>Tipo de cita: <b>Revisión</b></p>
-                                                <p>Dónde: <b>Clínica Condesa</b></p>
-                                                <p>Cuándo: <b>15/10/2019</b></p>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
+                                {tileMaker()}
                             </div>
                         </div>
                     </div>
