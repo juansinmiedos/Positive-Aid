@@ -7,7 +7,7 @@ export default function HomeHero() {
         const sessionaux = JSON.parse(localStorage.getItem('user'))
         if(sessionaux == null){
             return(
-                <Link to="/crear-cuenta"><button className="button is-link">Crear una cuenta</button></Link>
+                <Link to="/crear-cuenta"><button className="button button-white">Crear una cuenta</button></Link>
             )
         }
     }
@@ -21,17 +21,6 @@ export default function HomeHero() {
                         <h2 className="subtitle is-size-4">Una plataforma para ayudarte a vivir mejor.</h2>
                         {sessionChecker()}
                     </div>
-                </div>
-                <div className="hero-foot">
-                    {/* <nav class="tabs is-boxed is-fullwidth">
-                        <div class="container">
-                            <ul>
-                            <li class="is-active"><a>Overview</a></li>
-                            <li><a>Modifiers</a></li>
-                            <li><a>Grid</a></li>
-                            </ul>
-                        </div>
-                    </nav> */}
                 </div>
             </section>
 

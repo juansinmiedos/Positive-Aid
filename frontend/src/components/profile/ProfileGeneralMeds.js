@@ -21,9 +21,9 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                         <h1 className="title is-size-5">{x.med}</h1>
                         <p className="subtitle is-size-5">{nameMatcher(x.med)}</p>
                         <p className="subtitle is-size-5">Recordatorio: Cada {x.frequency} horas</p>
-                        <button onClick={() => deleteMeds(x._id)} className="button is-danger">Quitar del esquema</button>
-                        <button className="button">Ver detalle</button>
-                        <button className="button">Modificar frecuencia</button>
+                        <button onClick={() => deleteMeds(x._id)} className="button button-red-paddingless">Quitar del esquema</button>
+                        <button className="button button-white-paddingless">Ver detalle</button>
+                        <button className="button button-white-paddingless">Modificar frecuencia</button>
                     </div>
                 </div>
             )
@@ -59,10 +59,12 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                     <div className="columns is-centered">
                         <div className="column is-three-quarters">
                             <hr />
-                            <p className="subtitle">Medicación</p>
-                            <h1 className="title">Tu esquema actual</h1>
-                            <p>Has manejado este esquema desde: <b>25/02/2019</b></p>
-                            <button onClick={() => showMedsForm()} className="button is-danger">Modificar esquema de medicación</button>
+                            <div className="box box-title">
+                                <p className="subtitle">Medicación</p>
+                                <h1 className="title">Tu esquema actual</h1>
+                                <p>Has manejado este esquema desde: <b>25/02/2019</b></p>
+                                <button onClick={() => showMedsForm()} className="button button-white">Modificar esquema de medicación</button>
+                            </div>
 
                             <div className={medsIsOpen ? "modal is-active" : "modal"}>
                                 <div className="modal-background"></div>
@@ -127,7 +129,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                                                 </div>
                                                 <div className="field is-grouped">
                                                     <div className="control">
-                                                        <button className="button is-link">Agregar al esquema</button>
+                                                        <button className="button button-red">Agregar al esquema</button>
                                                     </div>
                                                 </div>
                                             </form>

@@ -3,7 +3,7 @@ import React from 'react'
 export default function ProfileHeader({user, showEditForm, isOpen, submitEditForm, handleInput} ) {
     return (
         <>
-            <section className="section">
+            <section className="section box-title profile-header">
                 <div>
                     <div className="columns is-centered">
                     <div className="column is-three-quarters">
@@ -15,7 +15,7 @@ export default function ProfileHeader({user, showEditForm, isOpen, submitEditFor
                                 <h1 className="subtitle">{user.name} {user.lastname}</h1>
                                 <h1 className="title">@{user.username}</h1>
                                 <p className="subtitle">Status actual: {user.status}</p>
-                                <button onClick={() => showEditForm()} className="button is-danger">Editar perfil</button>
+                                <button onClick={() => showEditForm()} className="button button-white">Editar perfil</button>
 
                                 <div className={isOpen ? "modal is-active" : "modal"} >
                                     <div className="modal-background"></div>
@@ -63,7 +63,7 @@ export default function ProfileHeader({user, showEditForm, isOpen, submitEditFor
                                                 </div>
                                                 <div className="field is-grouped">
                                                     <div className="control">
-                                                        <button className="button is-link">Editar perfil</button>
+                                                        <button className="button button-red">Editar perfil</button>
                                                     </div>
                                                 </div>
                                             </form>

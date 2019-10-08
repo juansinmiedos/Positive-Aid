@@ -99,13 +99,13 @@ export default class Signup extends Component {
                                                     <div className="control">
                                                         <label className="checkbox">
                                                             <input type="checkbox" required />
-                                                            Acepto los <Link to="/">Términos de uso de la plataforma</Link>
+                                                            Acepto los Términos de uso de la plataforma
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div className="field is-grouped">
                                                     <div className="control">
-                                                        <button className="button is-link">Crear cuenta</button>
+                                                        <button className="button button-red-paddingless">Crear cuenta</button>
                                                     </div>
                                                     <div className="control">
                                                         <Link to="/"><button className="button is-text">Volver a inicio</button></Link>

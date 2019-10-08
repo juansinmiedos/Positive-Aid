@@ -312,7 +312,6 @@ export default class Profile extends Component {
         } else {
             return (
                 <>
-                    <ProfileHero />
 
                     <ProfileHeader user={this.state.user} showEditForm={this.showEditForm} isOpen={this.state.isOpen} submitEditForm={this.submitEditForm} handleInput={this.handleInput}/>
 

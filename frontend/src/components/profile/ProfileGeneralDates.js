@@ -5,23 +5,12 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
     const tileMaker = () => {
         return(allAppointments.map((x) => {
             return(
-                <div className="tile is-vertical is-4 cardd" key={x._id}>
-                    <div className="tile">
-                        <div className="tile is-parent is-vertical">
-                            <div>
-                                <figure className="image">
-                                    <img src="./calendar.jpg" alt="calendar" />
-                                </figure>
-                            </div>
-                            <article className="tile is-child notification is-light">
-                                <p className="title">{x.withWhom}</p>
-                                <p>Tipo de cita: <b>{x.typeOfAppointment}</b></p>
-                                <p>Dónde: <b>{x.place}</b></p>
-                                <p>Cuándo: <b>{x.date}</b></p>
-                                <button onClick={() => deleteAppointments(x._id)} className="button">Borrar cita</button>
-                            </article>
-                        </div>
-                    </div>
+                <div className="box tilelike" key={x._id}>
+                    <p className="title">{x.withWhom}</p>
+                    <p>Tipo de cita: <b>{x.typeOfAppointment}</b></p>
+                    <p>Dónde: <b>{x.place}</b></p>
+                    <p>Cuándo: <b>{x.date}</b></p>
+                    <button onClick={() => deleteAppointments(x._id)} className="button button-red">Borrar cita</button>
                 </div>
             )
         }))
@@ -34,11 +23,12 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                     <div className="columns is-centered">
                         <div className="column is-three-quarters">
                             <hr />
-                            <p className="subtitle">Calendario</p>
-                            <h1 className="title">Tus citas</h1>
-                            <p>Agenda tus citas y revisiones para mantenerte en buen estado.</p>
-                            <button onClick={() => showAppointmentsForm()} className="button is-danger">Agendar nueva cita</button>
-
+                            <div className="box box-title">
+                                <p className="subtitle">Calendario</p>
+                                <h1 className="title">Tus citas</h1>
+                                <p>Agenda tus citas y revisiones para mantenerte en buen estado.</p>
+                                <button onClick={() => showAppointmentsForm()} className="button button-white">Agendar nueva cita</button>
+                            </div>
                             <div className={appointmentsIsOpen ? "modal is-active" : "modal"}>
                                 <div className="modal-background"></div>
                                 <div className="modal-card">
@@ -88,7 +78,7 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                                             </div>
                                             <div className="field is-grouped">
                                                 <div className="control">
-                                                    <button className="button is-link">Guardar cita</button>
+                                                    <button className="button button-red">Guardar cita</button>
                                                 </div>
                                             </div>
                                         </form>
