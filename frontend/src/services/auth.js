@@ -15,6 +15,9 @@ const AUTH_SERVICE = {
   },
   update: async (user) => {
     return await SERVICE.put('/update', user);
+  },
+  confirm: async(confirmationcode) => {
+    return await SERVICE.get(`/confirm/${confirmationcode}`)
   }
 };
 

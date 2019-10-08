@@ -78,7 +78,8 @@ export default class Navbar extends Component {
         } else {
             return(
                 <div className="buttons">
-                    <button onClick={this.toLogout} className="button button-white-paddingless">Cerrar sesión</button>
+                    <Link to="/perfil"><button className="button button-white-paddingless">Ir a perfil</button></Link>
+                    <button onClick={this.toLogout} className="button button-red-paddingless">Cerrar sesión</button>
                 </div>
             )
         }

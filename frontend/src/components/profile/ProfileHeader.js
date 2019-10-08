@@ -12,9 +12,9 @@ export default function ProfileHeader({user, showEditForm, isOpen, submitEditFor
                                     <img src={user.profilePhoto} alt="placeholder"/>
                             </div>
                             <div className="column is-three-quarters">
-                                <h1 className="subtitle">{user.name} {user.lastname}</h1>
-                                <h1 className="title">@{user.username}</h1>
-                                <p className="subtitle">Status actual: {user.status}</p>
+                                <h1 className="subtitle profile-header-text">{user.name} {user.lastname}</h1>
+                                <h1 className="title profile-header-text">@{user.username}</h1>
+                                <p className="subtitle profile-header-text">Status actual: {user.status}</p>
                                 <button onClick={() => showEditForm()} className="button button-white">Editar perfil</button>
 
                                 <div className={isOpen ? "modal is-active" : "modal"} >

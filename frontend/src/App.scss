@@ -38,7 +38,7 @@ body {
 }
 
 a {
-    color: #AC2C2E;
+    color: #fff;
 }
 
 p {
@@ -72,6 +72,10 @@ p {
 .profile-header {
     border-radius: 5%;
     padding-top: 100px;
+}
+
+.profile-header-text {
+    color: white;
 }
 
 .footer {
