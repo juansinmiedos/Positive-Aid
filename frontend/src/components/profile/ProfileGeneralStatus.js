@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {VictoryChart, VictoryGroup, VictoryLine, VictoryTooltip, VictoryVoronoiContainer, VictoryScatter, VictoryTheme} from 'victory'
 
 export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, submitLabsForm, handleNumberInput, handleDateInput, allLabs, deleteLabs}) {
     const statusChecker = () => {
@@ -30,6 +31,46 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
         }))
     }
 
+    const cd4DataOrganizer = () => {
+        const arrayaux = []
+        allLabs.map((x) => {
+            arrayaux.push({x: new Date (x.date), y: x.cd4})
+        })
+        return arrayaux
+    }
+
+    const cargaViralDataOrganizer = () => {
+        const arrayaux = []
+        allLabs.map((x) => {
+            arrayaux.push({x: new Date (x.date), y: x.cargaViral})
+        })
+        return arrayaux
+    }
+
+    const trigliceridosDataOrganizer = () => {
+        const arrayaux = []
+        allLabs.map((x) => {
+            arrayaux.push({x: new Date (x.date), y: x.trigliceridos})
+        })
+        return arrayaux
+    }
+
+    const fnHepaticaDataOrganizer = () => {
+        const arrayaux = []
+        allLabs.map((x) => {
+            arrayaux.push({x: new Date (x.date), y: x.fnHepatica})
+        })
+        return arrayaux
+    }
+
+    const fnRenalDataOrganizer = () => {
+        const arrayaux = []
+        allLabs.map((x) => {
+            arrayaux.push({x: new Date (x.date), y: x.fnRenal})
+        })
+        return arrayaux
+    }
+
     return (
         <>
             <section className="section">
@@ -46,11 +87,33 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                     <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
                                     <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p>
                                 </div>
+                                {allLabs[0].cd4 && <div className="column is-full">
+                                    <VictoryChart theme={VictoryTheme.material} style={{ fontSize: 4 }} width={400} height={180} containerComponent={<VictoryVoronoiContainer/>}>
+                                        <VictoryGroup style={{data:{ strokeWidth: 1, fillOpacity: 1}}}>
+                                            <VictoryLine interpolation={"linear"} labels={({ datum }) => `CD4: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={cd4DataOrganizer()} />
+                                            <VictoryScatter data={cd4DataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+
+                                            <VictoryLine interpolation={"linear"} labels={({ datum }) => `Carga viral: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={cargaViralDataOrganizer()} />
+                                            <VictoryScatter data={cargaViralDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+
+                                            <VictoryLine interpolation={"linear"} labels={({ datum }) => `Triglicéridos: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={trigliceridosDataOrganizer()} />
+                                            <VictoryScatter data={trigliceridosDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+
+                                            <VictoryLine interpolation={"linear"} labels={({ datum }) => `Fn. Hepática: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={trigliceridosDataOrganizer()} />
+                                            <VictoryScatter data={trigliceridosDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+
+                                            <VictoryLine interpolation={"linear"} labels={({ datum }) => `Fn. Renal: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={fnRenalDataOrganizer()} />
+                                            <VictoryScatter data={fnRenalDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+                                            
+                                        </VictoryGroup>
+                                    </VictoryChart>
+                                </div>}
+                                {/*                                 
                                 <div className="column is-full">
                                     <figure className="image">
                                         <img src="./chart-example.png" alt="chart" />
                                     </figure>
-                                </div>
+                                </div> */}
                                 <div className="column is-full">
                                     <h1 className="title"><b>Tabla histórica de resultados</b></h1>
                                     <table className="table is-fullwidth">
@@ -138,3 +201,29 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
         </>
     )
 }
+
+
+// {allLabs[0].cd4 && <div className="column is-full">
+//                                     <VictoryChart width={500} height={300}>
+//                                         <VictoryGroup style={{data: {strokeWidth: 3, fillOpacity: 0.5}}}>
+//                                             {allLabs.map((lab, i) => {
+//                                                 return <VictoryArea key={i} style={{data: {fill: "cyan", stroke: "cyan"}}}
+//                                                      data={[
+//                                                          { x: i, y: lab.cd4 }
+//                                                      ]} />
+//                                             })}
+//                                         </VictoryGroup>
+//                                     </VictoryChart>
+//                                 </div>}
+
+// {allLabs[0].cd4 && <div className="column is-full">
+//                                     <VictoryChart domainPadding={10} theme={VictoryTheme.material} height={200}>
+//                                         <VictoryAxis tickValues={{allLabs}} />
+//                                         <VictoryAxis dependentAxis />
+//                                         <VictoryStack colorScale={"warm"}>
+//                                             {allLabs.map((lab, i) => (
+//                                                 <VictoryBar key={i} data={[{ x: i+1, y: lab.cd4 }]} />
+//                                             ))}
+//                                         </VictoryStack>
+//                                     </VictoryChart>
+//                                 </div>}
