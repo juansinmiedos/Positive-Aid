@@ -34,7 +34,7 @@ Estas son las principales funciones que la aplicación realizar al momento de es
 
 Estas son algunas de las funcionalidades que quería incluir para esta presentación, pero que por cuestión de tiempo no pudieron realizarse.
 
-- Creé una API para mostrar un mapa en el que aparecieran todos los 76 CAPACITS a nivel nacional. [Pueden ver la API aquí](http://localhost:3000/api/capacits)
+- Creé dos APIs, una de medicamentos aprobados por la Secretaria de Salud y otra para mostrar un mapa en el que aparecieran todos los 76 CAPACITS a nivel nacional, esta última no se pudo utilizar para usar en conjunto con Mapbox. [Pueden ver la API aquí](https://sleepy-oasis-49486.herokuapp.com/api/capacits)
 
 - Páginas públicas a las que se pueda acceder sin crear una cuenta de usuario, para que quienes no se sienten seguros de compartir su identidad puedan informarse.
 
@@ -80,4 +80,4 @@ Contraseña: 1
 
 ¡El cuidado y seguimiento es calidad de vida!
 
-[Ir a (+)aid ](https://thawing-refuge-57086.herokuapp.com/)
+[Ir a (+)aid ](https://positiveaid.netlify.com/)
