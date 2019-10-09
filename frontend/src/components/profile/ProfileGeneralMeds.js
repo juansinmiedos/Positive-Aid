@@ -4,8 +4,6 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
 
     //COMO HAGO PARA TRAER LA INFO EN TIEMPO REAL DESDE LA BASE DE DATOS?
     const nameMatcher = (name) => {
-        // console.log(name)
-        // console.log(medicinesInfo[0].commonName)
         for(let i=0; i < medicinesInfo.lenght; i++){
             if (name === medicinesInfo[i].commonName){
                 return <p className="subtitle is-size-5">{medicinesInfo[i]}</p>
@@ -22,8 +20,8 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                         <p className="subtitle is-size-5">{nameMatcher(x.med)}</p>
                         <p className="subtitle is-size-5">Recordatorio: Cada {x.frequency} horas</p>
                         <button onClick={() => deleteMeds(x._id)} className="button button-red-paddingless">Quitar del esquema</button>
-                        <button className="button button-white-paddingless">Ver detalle</button>
-                        <button className="button button-white-paddingless">Modificar frecuencia</button>
+                        {/* <button className="button button-white-paddingless">Ver detalle</button>
+                        <button className="button button-white-paddingless">Modificar frecuencia</button> */}
                     </div>
                 </div>
             )
@@ -33,7 +31,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
     const specificMedicineInfo = () => {
             const aux = medicinesInfo.map((x) => {
                 if(meds.med === x.commonName)
-                    return  <article className="message is-warning" key={x.name} >
+                    return  <article className="message is-danger" key={x.name} >
                                 <div className="message-header">
                                     <p>Conoce tus medicamentos: <b>{x.commonName}</b></p>
                                 </div>
@@ -47,7 +45,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                                     {x.description}
                                 </div>
                             </article>
-                return console.log('')
+                    return console.log('')
             })
             return aux
     }
@@ -62,7 +60,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                             <div className="box box-title">
                                 <p className="subtitle">Medicación</p>
                                 <h1 className="title">Tu esquema actual</h1>
-                                <p>Has manejado este esquema desde: <b>25/02/2019</b></p>
+                                {/* <p>Has manejado este esquema desde: <b>25/02/2019</b></p> */}
                                 <button onClick={() => showMedsForm()} className="button button-white">Modificar esquema de medicación</button>
                             </div>
 

@@ -75,7 +75,7 @@ export default class Profile extends Component {
         isOpen: false,
         labsIsOpen: false,
         medsIsOpen: false,
-        appointmentsIsOpen: false
+        appointmentsIsOpen: false,
     }
 
     // PROMISES
@@ -311,7 +311,6 @@ export default class Profile extends Component {
         } else {
             return (
                 <>
-
                     <ProfileHeader user={this.state.user} showEditForm={this.showEditForm} isOpen={this.state.isOpen} submitEditForm={this.submitEditForm} handleInput={this.handleInput}/>
 
                     <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} deleteLabs={this.deleteLabs} />

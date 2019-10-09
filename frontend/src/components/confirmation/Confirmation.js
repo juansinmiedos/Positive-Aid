@@ -5,7 +5,6 @@ import {Link, Redirect} from 'react-router-dom'
 export default class Confirmation extends Component {
 
     promiseOfConfirmation = async() => {
-        console.log(this.props.match.params.id)
         await AUTH_SERVICE.confirm(this.props.match.params.id)
     }
 

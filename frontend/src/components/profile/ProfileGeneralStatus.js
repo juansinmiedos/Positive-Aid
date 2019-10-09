@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import {VictoryChart, VictoryGroup, VictoryLine, VictoryTooltip, VictoryVoronoiContainer, VictoryScatter, VictoryTheme} from 'victory'
 
 export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, submitLabsForm, handleNumberInput, handleDateInput, allLabs, deleteLabs}) {
@@ -25,7 +25,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                     <td>{x.trigliceridos}</td>
                     <td>{x.fnHepatica}</td>
                     <td>{x.fnRenal}</td>
-                    <td><button onClick={() => deleteLabs(x._id)} className="button">Borrar</button><button className="button">Actualizar</button></td>
+                    <td><button onClick={() => deleteLabs(x._id)} className="button button-red-paddingless">Borrar</button></td>
                 </tr>
             )
         }))
@@ -33,7 +33,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
 
     const cd4DataOrganizer = () => {
         const arrayaux = []
-        allLabs.map((x) => {
+        allLabs.forEach((x) => {
             arrayaux.push({x: new Date (x.date), y: x.cd4})
         })
         return arrayaux
@@ -41,7 +41,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
 
     const cargaViralDataOrganizer = () => {
         const arrayaux = []
-        allLabs.map((x) => {
+        allLabs.forEach((x) => {
             arrayaux.push({x: new Date (x.date), y: x.cargaViral})
         })
         return arrayaux
@@ -49,7 +49,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
 
     const trigliceridosDataOrganizer = () => {
         const arrayaux = []
-        allLabs.map((x) => {
+        allLabs.forEach((x) => {
             arrayaux.push({x: new Date (x.date), y: x.trigliceridos})
         })
         return arrayaux
@@ -57,7 +57,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
 
     const fnHepaticaDataOrganizer = () => {
         const arrayaux = []
-        allLabs.map((x) => {
+        allLabs.forEach((x) => {
             arrayaux.push({x: new Date (x.date), y: x.fnHepatica})
         })
         return arrayaux
@@ -65,7 +65,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
 
     const fnRenalDataOrganizer = () => {
         const arrayaux = []
-        allLabs.map((x) => {
+        allLabs.forEach((x) => {
             arrayaux.push({x: new Date (x.date), y: x.fnRenal})
         })
         return arrayaux
@@ -85,9 +85,8 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                         <h1 className="title">Tu estado general</h1>
                                         <p>Status actual: <b>{user.status}</b></p>
                                         {statusChecker()}
-                                        <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
-                                        <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p>
-                                        <button className="button is-inline button-white-paddingless">Agendar ahora</button>
+                                        {/* <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
+                                        <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p> */}
                                     </div>
                                 </div>
                                 {allLabs[0].cd4 && <div className="column is-full">
@@ -102,8 +101,8 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                             <VictoryLine interpolation={"linear"} labels={({ datum }) => `Triglicéridos: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={trigliceridosDataOrganizer()} />
                                             <VictoryScatter data={trigliceridosDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
 
-                                            <VictoryLine interpolation={"linear"} labels={({ datum }) => `Fn. Hepática: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={trigliceridosDataOrganizer()} />
-                                            <VictoryScatter data={trigliceridosDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+                                            <VictoryLine interpolation={"linear"} labels={({ datum }) => `Fn. Hepática: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={fnHepaticaDataOrganizer()} />
+                                            <VictoryScatter data={fnHepaticaDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
 
                                             <VictoryLine interpolation={"linear"} labels={({ datum }) => `Fn. Renal: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={fnRenalDataOrganizer()} />
                                             <VictoryScatter data={fnRenalDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
@@ -111,12 +110,6 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                         </VictoryGroup>
                                     </VictoryChart>
                                 </div>}
-                                {/*                                 
-                                <div className="column is-full">
-                                    <figure className="image">
-                                        <img src="./chart-example.png" alt="chart" />
-                                    </figure>
-                                </div> */}
                                 <div className="column is-full">
                                 <div className="box">
                                     <h1 className="title"><b>Tabla histórica de resultados</b></h1>
@@ -206,29 +199,3 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
         </>
     )
 }
-
-
-// {allLabs[0].cd4 && <div className="column is-full">
-//                                     <VictoryChart width={500} height={300}>
-//                                         <VictoryGroup style={{data: {strokeWidth: 3, fillOpacity: 0.5}}}>
-//                                             {allLabs.map((lab, i) => {
-//                                                 return <VictoryArea key={i} style={{data: {fill: "cyan", stroke: "cyan"}}}
-//                                                      data={[
-//                                                          { x: i, y: lab.cd4 }
-//                                                      ]} />
-//                                             })}
-//                                         </VictoryGroup>
-//                                     </VictoryChart>
-//                                 </div>}
-
-// {allLabs[0].cd4 && <div className="column is-full">
-//                                     <VictoryChart domainPadding={10} theme={VictoryTheme.material} height={200}>
-//                                         <VictoryAxis tickValues={{allLabs}} />
-//                                         <VictoryAxis dependentAxis />
-//                                         <VictoryStack colorScale={"warm"}>
-//                                             {allLabs.map((lab, i) => (
-//                                                 <VictoryBar key={i} data={[{ x: i+1, y: lab.cd4 }]} />
-//                                             ))}
-//                                         </VictoryStack>
-//                                     </VictoryChart>
-//                                 </div>}

@@ -22,7 +22,6 @@ exports.toAddAppointment = async(req, res) => {
 
 exports.toGetAppointment = async(req, res) => {
     try{
-        console.log(req.user._id)
         let allAppointments = await Appointment.find({user: req.user._id})
         res.status(200).json({allAppointments})
     } catch(err){

@@ -24,8 +24,6 @@ exports.toAddLabs = async(req, res) => {
 
 exports.toGetLabs = async(req, res) => {
     try{
-        console.log(req.user._id);
-        
         let allLabs = await Labs.find({user: req.user._id})
         res.status(200).json({allLabs})
     } catch(err){

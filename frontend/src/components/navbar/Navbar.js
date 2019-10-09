@@ -103,7 +103,7 @@ export default class Navbar extends Component {
     
                     <div id="navbarBasicExample" className="navbar-menu">
                         <div className="navbar-start">
-                            <Link to="/" className="navbar-item">Inicio</Link>
+                            {/* <Link to="/" className="navbar-item">Inicio</Link>
                             <Link to="/" className="navbar-item">¿Qué es +aid?</Link>
                             <Link to="/" className="navbar-item">Seguridad</Link>
                                     
@@ -118,7 +118,7 @@ export default class Navbar extends Component {
                                     <hr className="navbar-divider" />
                                     <Link to="/" className="navbar-item">Reportar discriminación</Link>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="navbar-end">
                             <div className="navbar-item">

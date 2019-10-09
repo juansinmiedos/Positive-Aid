@@ -43,7 +43,7 @@ export default function ProfileHeader({user, showEditForm, isOpen, submitEditFor
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="field">
+                                                {/* <div className="field">
                                                     <label className="label">Avatar</label>
                                                     <div className="control has-icons-left has-icons-right">
                                                         <input onChange={handleInput} className="input" name="username" type="text" placeholder="LP-1992" required value={user.username} />
@@ -51,7 +51,7 @@ export default function ProfileHeader({user, showEditForm, isOpen, submitEditFor
                                                             <i className="fas fa-user"></i>
                                                         </span>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 <div className="field is-hidden">
                                                     <label className="label">ID</label>
                                                     <div className="control has-icons-left has-icons-right">
