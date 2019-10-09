@@ -1,9 +1,6 @@
 import axios from 'axios';
-let baseURL = 'https://sleepy-oasis-49486.herokuapp.com/api';
-
-// process.env.NODE_ENV === 'production'
-//   ? (baseURL = 'https://sleepy-oasis-49486.herokuapp.com')
-//   : (baseURL = 'http://localhost:3000');
+let baseURL = 'https://positiveaid.herokuapp.com/api';
+// let baseURL = 'http://localhost:3000/api';
 
 const SERVICE = axios.create({ withCredentials: true, baseURL });
 

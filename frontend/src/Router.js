@@ -14,7 +14,7 @@ const Router = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/perfil" component={Profile} />
       <Route exact path="/crear-cuenta" component={Signup} />
-      <Route exact path="/confirmar-cuenta/:id" component={Confirmation} />
+      <Route path="/confirmar-cuenta/:id" component={Confirmation} />
       <Route exact path="/iniciar-sesion" component={Login} />
     </Switch>
   </BrowserRouter>

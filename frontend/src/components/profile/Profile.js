@@ -222,6 +222,8 @@ export default class Profile extends Component {
             this.setState({ labs: this.state.labs })
             this.componentDidMount()
             this.props.history.push('/perfil')
+
+            // this.UpdateHealthStatus()
             
         } catch(error){
             console.log(error);
@@ -304,7 +306,25 @@ export default class Profile extends Component {
             console.log(error)
         }
     }
-    
+
+    //STATUS UPDATER
+    // UpdateHealthStatus = async() => {
+    //     if(this.state.allLabs[this.state.allLabs.length - 1].cargaViral >= 10){
+
+    //         const newStatus = (() => this.state.user.status = 'SIDA')
+
+    //         await AUTH_SERVICE.update(this.state.user)
+    //         this.setState(prevState => {
+    //             return {
+    //                 ...prevState,
+    //                 status: newStatus
+    //             }
+    //         })
+    //         this.componentDidMount()
+    //         this.props.history.push('/perfil')
+    //     } 
+    // }
+
     render() {
         if(JSON.parse(localStorage.getItem('user')) == null){
             return <Redirect to='/iniciar-sesion' />
