@@ -2,14 +2,32 @@ const Medication = require('../models/Medication')
 const nodemailer = require('nodemailer')
 const passport = require('passport')
 
-exports.toAddMedication = (req, res) => {
+exports.toAddMedication = async(req, res) => {
+    try{
+        let medication = await Medication.create({...req.body})
+        res.status(201).json({medication})
+    } catch(err){
+        res.status(500).json({err})
+    }
 }
 
-exports.toGetMedication = (req, res) => {
+exports.toGetMedication = async(req, res) => {
+    try{
+        let allMeds = await Medication.find({user: req.user._id})
+        res.status(200).json({allMeds})
+    } catch(err){
+        res.status(500).json({err})
+    }
 }
 
 exports.toUpdateMedication = (req, res) => {
 }
 
-exports.toDeleteMedication = (req, res) => {
+exports.toDeleteMedication = async(req, res) => {
+    try{
+        let deletedMedication = await Medication.findByIdAndDelete(req.body.medicationid)
+        res.status(201).json({deletedMedication})
+    } catch(err){
+        res.status(500).json({err})
+    }
 }

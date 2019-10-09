@@ -12,6 +12,7 @@ $brown: #757763;
 $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 $red : #AC2C2E;
+$white: #ffffff;
 
 // Update Bulma's global variables
 $family-sans-serif: 'Assistant', sans-serif;
@@ -32,6 +33,14 @@ $fullhd-enabled: false;
 // Import only what you need from Bulma
 @import '../node_modules/bulma';
 
+body {
+    background-color: #fafafa;
+}
+
+a {
+    color: #fff;
+}
+
 p {
     font-size: 20px;
     font-weight: 500;
@@ -43,10 +52,89 @@ p {
     overflow-x: auto;
 }
 
-.cardd {
+.tilelike {
     flex: 0 0 auto;
+    margin: 0 15px;
+    height: 100%;
 }
 
-.heigh75{
-    min-height: 75vh;
+.hero {
+    border-radius: 5%;
+    background: rgb(107,28,29);
+    background: linear-gradient(90deg, rgba(107,28,29,1) 0%, rgba(171,44,47,1) 31%, rgba(247,64,67,1) 100%);
+}
+
+.navbar {
+    background: rgb(107,28,29);
+    background: linear-gradient(90deg, rgba(107,28,29,1) 0%, rgba(171,44,47,1) 31%, rgba(247,64,67,1) 100%);
+}
+
+.profile-header {
+    border-radius: 5%;
+    padding-top: 100px;
+}
+
+.profile-header-text {
+    color: white;
+}
+
+.footer {
+    color:white;
+    background: rgb(107,28,29);
+    background: linear-gradient(90deg, rgba(107,28,29,1) 0%, rgba(171,44,47,1) 31%, rgba(247,64,67,1) 100%);
+}
+
+.box {
+    -webkit-box-shadow: 24px 25px 35px -28px rgba(0,0,0,0.75);
+    -moz-box-shadow: 24px 25px 35px -28px rgba(0,0,0,0.75);
+    box-shadow: 24px 25px 35px -28px rgba(0,0,0,0.75);
+}
+
+.red-box {
+    background-color: rgba(107,28,29,1);
+    -webkit-box-shadow: 24px 25px 35px -28px rgba(255,255,255,0.75);
+    -moz-box-shadow: 24px 25px 35px -28px rgba(255,255,255,0.75);
+    box-shadow: 24px 25px 35px -28px rgba(255,255,255,0.75);
+}
+
+.box-title {
+    color: white;
+    background: rgb(107,28,29);
+    background: linear-gradient(90deg, rgba(107,28,29,1) 0%, rgba(171,44,47,1) 31%, rgba(247,64,67,1) 100%);
+}
+
+.box-title > .title, .box-title > .subtitle {
+    color: white;
+}
+
+.button-red {
+    color: white;
+    background: #AC2C2E;
+    font-weight: 700;
+    margin: 15px 0;
+}
+
+.button-red-paddingless {
+    color: white;
+    background: #AC2C2E;
+    font-weight: 700;
+    margin: 0 5px;
+}
+
+.button-white {
+    color: rgb(107,28,29);
+    background: white;
+    font-weight: 700;
+    margin: 15px 0;
+}
+
+.button-white-paddingless {
+    color: rgb(107,28,29);
+    background: white;
+    font-weight: 700;
+    margin: 0 5px;
+}
+
+img {
+    border-radius: 5%;
 }

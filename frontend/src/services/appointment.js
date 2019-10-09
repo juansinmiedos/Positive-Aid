@@ -15,8 +15,8 @@ const APPOINTMENT_SERVICE = {
   updateAppointment: async (appointment) => {
     return await SERVICE.put('/appointment', appointment)
   },
-  deleteAppointment: async (appointment) => {
-    return await SERVICE.delete('/appointment', appointment)
+  deleteAppointment: async (appointmentid) => {
+    return await SERVICE.delete('/appointment', {data : {appointmentid}})
   }
 };
 

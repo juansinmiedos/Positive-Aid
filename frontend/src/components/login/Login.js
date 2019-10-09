@@ -66,7 +66,7 @@ export default class Login extends Component {
                                                 </div>
                                                 <div className="field is-grouped">
                                                     <div className="control">
-                                                        <button className="button is-link">Iniciar sesión</button>
+                                                        <button className="button button-red-paddingless">Iniciar sesión</button>
                                                     </div>
                                                     <div className="control">
                                                         <Link to="/"><button className="button is-text">Volver a inicio</button></Link>

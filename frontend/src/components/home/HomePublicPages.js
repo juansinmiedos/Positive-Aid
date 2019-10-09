@@ -3,7 +3,7 @@ import React from 'react'
 export default function HomePublicPages() {
     return (
         <>
-            <section className="section heigh75">
+            <section className="section">
                 <div className="columns is-centered">
                     <div className="column is-three-quarters">
                         <div className="columns is-vcentered">

@@ -68,7 +68,7 @@ export default class Navbar extends Component {
                                     </div>
                                 </div>
                                 <div className="control">
-                                        <button className="button is-link">Iniciar sesión</button>
+                                        <button className="button button-white-paddingless">Iniciar sesión</button>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,8 @@ export default class Navbar extends Component {
         } else {
             return(
                 <div className="buttons">
-                    <button onClick={this.toLogout} className="button is-link">Cerrar sesión</button>
+                    <Link to="/perfil"><button className="button button-white-paddingless">Ir a perfil</button></Link>
+                    <button onClick={this.toLogout} className="button button-red-paddingless">Cerrar sesión</button>
                 </div>
             )
         }
@@ -102,7 +103,7 @@ export default class Navbar extends Component {
     
                     <div id="navbarBasicExample" className="navbar-menu">
                         <div className="navbar-start">
-                            <Link to="/" className="navbar-item">Inicio</Link>
+                            {/* <Link to="/" className="navbar-item">Inicio</Link>
                             <Link to="/" className="navbar-item">¿Qué es +aid?</Link>
                             <Link to="/" className="navbar-item">Seguridad</Link>
                                     
@@ -117,7 +118,7 @@ export default class Navbar extends Component {
                                     <hr className="navbar-divider" />
                                     <Link to="/" className="navbar-item">Reportar discriminación</Link>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="navbar-end">
                             <div className="navbar-item">

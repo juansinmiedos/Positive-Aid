@@ -4,7 +4,7 @@ const User = require('../models/User')
 const passport = require('../config/passport')
 const isAuth = require('../middlewares/isAuth')
 // REQUIRE CONTROLLERS
-const {toLogin, toLogout, toProfile, toSignup, toUpdate} = require('../controllers/index')
+const {toLogin, toLogout, toProfile, toSignup, toUpdate, toConfirm} = require('../controllers/index')
 const {toAddLabs, toDeleteLabs, toGetLabs, toUpdateLabs} = require('../controllers/labs')
 const {toAddAppointment, toDeleteAppointment, toGetAppointment, toUpdateAppointment} = require('../controllers/appointments')
 const {toAddMedication, toDeleteMedication, toGetMedication, toUpdateMedication} = require('../controllers/medication')
@@ -18,6 +18,7 @@ router.post('/login', passport.authenticate('local'), toLogin)
 router.get('/logout', toLogout)
 router.get('/profile', isAuth, toProfile)
 router.put('/update', toUpdate)
+router.get('/confirm/:id', toConfirm)
 
 // LABS ROUTES
 router.post('/labs', toAddLabs)

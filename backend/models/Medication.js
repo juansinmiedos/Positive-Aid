@@ -2,12 +2,9 @@ const {Schema, model} = require('mongoose')
 
 const medicationSchema = new Schema(
     {
-        med: {
-            type: String,
-            enum: ['yet to be defined']
-        },
+        med: String,
         frequency: Number,
-        startHour: Number,
+        startHour: String,
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User'

@@ -15,8 +15,8 @@ const MEDICATION_SERVICE = {
   updateMedication: async (medication) => {
     return await SERVICE.put('/medication', medication)
   },
-  deleteMedication: async (medication) => {
-    return await SERVICE.delete('/medication', medication)
+  deleteMedication: async (medicationid) => {
+    return await SERVICE.delete('/medication', {data : {medicationid}})
   }
 };
 

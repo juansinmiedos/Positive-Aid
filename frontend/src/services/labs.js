@@ -15,8 +15,8 @@ const LABS_SERVICE = {
   updateLabs: async (labs) => {
     return await SERVICE.put('/labs', labs)
   },
-  deleteLabs: async (labs) => {
-    return await SERVICE.delete('/labs', labs)
+  deleteLabs: async (labsid) => {
+    return await SERVICE.delete('/labs', {data : {labsid}})
   }
 };
 

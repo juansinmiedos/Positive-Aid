@@ -1,6 +1,55 @@
 import React from 'react'
 
-export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
+export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMedsForm, handleInput, handleNumberInput, allMeds, medicinesInfo, deleteMeds, meds}) {
+
+    //COMO HAGO PARA TRAER LA INFO EN TIEMPO REAL DESDE LA BASE DE DATOS?
+    const nameMatcher = (name) => {
+        for(let i=0; i < medicinesInfo.lenght; i++){
+            if (name === medicinesInfo[i].commonName){
+                return <p className="subtitle is-size-5">{medicinesInfo[i]}</p>
+            }
+        }
+    }
+
+    const boxMaker = () => {
+        return(allMeds.map((x) => {
+            return(
+                <div className="column is-half" key={x._id}>
+                    <div className="box">
+                        <h1 className="title is-size-5">{x.med}</h1>
+                        <p className="subtitle is-size-5">{nameMatcher(x.med)}</p>
+                        <p className="subtitle is-size-5">Recordatorio: Cada {x.frequency} horas</p>
+                        <button onClick={() => deleteMeds(x._id)} className="button button-red-paddingless">Quitar del esquema</button>
+                        {/* <button className="button button-white-paddingless">Ver detalle</button>
+                        <button className="button button-white-paddingless">Modificar frecuencia</button> */}
+                    </div>
+                </div>
+            )
+        }))
+    }
+
+    const specificMedicineInfo = () => {
+            const aux = medicinesInfo.map((x) => {
+                if(meds.med === x.commonName)
+                    return  <article className="message is-danger" key={x.name} >
+                                <div className="message-header">
+                                    <p>Conoce tus medicamentos: <b>{x.commonName}</b></p>
+                                </div>
+                                <div className="message-body">
+                                    Estas tomando: <b>{x.commonName}</b><br />
+                                    Nombre de fórmula: <b>{x.name}</b><br />
+                                    Tipo: <b>{x.typeOfMed}</b><br />
+                                    Status (según Sec. de Salud): <b>{x.statusOfRec}</b><br />
+                                    <br />
+                                    <b>Descripción general</b><br />
+                                    {x.description}
+                                </div>
+                            </article>
+                    return console.log('')
+            })
+            return aux
+    }
+
     return (
         <>
             <section className="section">
@@ -8,10 +57,12 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
                     <div className="columns is-centered">
                         <div className="column is-three-quarters">
                             <hr />
-                            <p className="subtitle">Medicación</p>
-                            <h1 className="title">Tu esquema actual</h1>
-                            <p>Has manejado este esquema desde: <b>25/02/2019</b></p>
-                            <button onClick={() => showMedsForm()} className="button is-danger">Modificar esquema de medicación</button>
+                            <div className="box box-title">
+                                <p className="subtitle">Medicación</p>
+                                <h1 className="title">Tu esquema actual</h1>
+                                {/* <p>Has manejado este esquema desde: <b>25/02/2019</b></p> */}
+                                <button onClick={() => showMedsForm()} className="button button-white">Modificar esquema de medicación</button>
+                            </div>
 
                             <div className={medsIsOpen ? "modal is-active" : "modal"}>
                                 <div className="modal-background"></div>
@@ -21,14 +72,14 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
                                             <button onClick={() => showMedsForm()} className="delete" aria-label="close"></button>
                                         </header>
                                         <section className="modal-card-body">
-                                            <form onSubmit="">
+                                            <form onSubmit={submitMedsForm}>
                                                 <div className="field is-horizontal">
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <label className="label">Medicamento</label>
-                                                            <div class="control">
-                                                                <div class="select">
-                                                                    <select>
+                                                            <div className="control">
+                                                                <div className="select">
+                                                                    <select onChange={handleInput} name="med" >
                                                                         <option>Selecciona una opción</option>
                                                                         <option value="Biktarvy">Biktarvy</option>
                                                                         <option value="Triumeq">Triumeq</option>
@@ -55,13 +106,13 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <label className="label">Frecuencia</label>
-                                                            <div class="control">
-                                                                <div class="select">
-                                                                    <select>
+                                                            <div className="control">
+                                                                <div className="select">
+                                                                    <select onChange={handleNumberInput} name="frequency">
                                                                         <option>Selecciona una opción</option>
-                                                                        <option>Cada 8 horas</option>
-                                                                        <option>Cada 12 horas</option>
-                                                                        <option>Cada 24 horas</option>
+                                                                        <option value="8">Cada 8 horas</option>
+                                                                        <option value="12">Cada 12 horas</option>
+                                                                        <option value="24">Cada 24 horas</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -71,31 +122,18 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
                                                 <div className="field">
                                                     <label className="label">Hora de inicio</label>
                                                     <div className="control">
-                                                        <input onChange="" className="input" name="username" type="time" placeholder="LP-1992" required />
+                                                        <input onChange={handleInput} className="input" name="startHour" type="time" required />
                                                     </div>
                                                 </div>
                                                 <div className="field is-grouped">
                                                     <div className="control">
-                                                        <button className="button is-link">Agregar al esquema</button>
+                                                        <button className="button button-red">Agregar al esquema</button>
                                                     </div>
                                                 </div>
                                             </form>
                                         </section>
-                                    <footer class="modal-card-foot">
-                                        <article className="message is-warning">
-                                            <div class="message-header">
-                                                <p>Conoce tus medicamentos</p>
-                                            </div>
-                                            <div className="message-body">
-                                                Estas tomando: <b>Nombre común</b><br />
-                                                Nombre de fórmula: <b>Nombre de fórmula</b><br />
-                                                Tipo: <b>Coformulado o no coformulado</b><br />
-                                                Status (según Sec. de Salud): <b>Preferente</b><br />
-                                                <br />
-                                                <b>Descripción general</b><br />
-                                                BIC es un inhibidor de integrasa de segunda generación, con mayor barrera genética a la resistencia; mostró ser, como tercer componente, no inferior al DTG. No recomendado en personas que usen rifampicina o rifabutina ni en embarazadas. <br /><br />Consulte aquí la última versión de la "Guía de Manejo Antirretroviral" para mayor información.
-                                            </div>
-                                        </article>
+                                    <footer className="modal-card-foot">
+                                        {specificMedicineInfo()}
                                     </footer>
                                 </div>
                             </div>
@@ -104,35 +142,10 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen}) {
                     <div className="columns is-centered">
                         <div className="column is-three-quarters">
                             <div className="column is-full">
-                                <div className="columns">
-                                    <div className="column is-one-quarter">
-                                        <img src="./meds.jpg" alt="meds" />
-                                    </div>
-                                    <div className="column is-three-quarters">
-                                        <div className="box">
-                                            <h1 className="title is-size-5">Nombre comercial</h1>
-                                            <p className="subtitle is-size-5">Nombre de fórmula</p>
-                                            <p className="subtitle is-size-5">Tomar cada 8 horas</p>
-                                            <button className="button is-danger">Quitar del esquema</button>
-                                        </div>
-                                    </div>
+                                <div className="columns is-multiline">
+                                    {boxMaker()}
                                 </div>
                             </div>
-                            <div className="column is-full">
-                                <div className="columns">
-                                    <div className="column is-one-quarter">
-                                        <img src="./meds.jpg" alt="meds" />
-                                    </div>
-                                    <div className="column is-three-quarters">
-                                        <div className="box">
-                                            <h1 className="title is-size-5">Nombre comercial</h1>
-                                            <p className="is-size-5">Nombre de fórmula<br /><b>Tomar cada 8 horas</b></p>
-                                            <button className="button is-danger">Quitar del esquema</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
