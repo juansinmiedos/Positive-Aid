@@ -8,6 +8,24 @@
 
 #
 
+## Funcionalidades de la aplicación
+
+Estas son las principales funciones que la aplicación realizar al momento de esta presentación:
+
+- Creación de cuentas de usuario.
+
+- Acceso a la plataforma después de verificar la cuenta de correo electrónico.
+
+- Acceso a la plataforma con username/avatar, sin necesidad de incluir nombres para proteger la intimidad del usuario.
+
+- Registro de resultados de laboratorio y muestra de tabla histórica para observar evolución y desarrollo.
+
+- Configuración de esquema de medicación.
+
+- Creación de citas y recordatorios.
+
+#
+
 ![(+)aid confirmación](https://res.cloudinary.com/juansinmiedos/image/upload/v1570592279/maxtfzga3eaibtdqciv7.png)
 
 ![(+)aid pop-up medicamentos](https://res.cloudinary.com/juansinmiedos/image/upload/v1570592054/pluws5fu0nukiia6c9w7.png)
@@ -36,6 +54,8 @@ Los alcances que este proyecto tiene extensos:
 
 - Implementar medidas de seguridad que ayuden a blindar la información que los usuarios depositan en la plataforma.
 
+- Mejoración de la experiencia de usuario.
+
 - Opción de agregar más métricas de resultados para ofrecer recomendaciones más personalizadas
 
 - Red social: Un espacio compartido en el que las personas puedan interactuar, compartir sus experiencias y ayudar a las personas que se sienten solas o deprimidas.
@@ -46,9 +66,9 @@ Los alcances que este proyecto tiene extensos:
 
 - Reviews de medicamentos: Precios, lugares donde se pueden conseguir en caso de emergencia, etc.
 
-###Todas estas recomendaciones e ideas surgen de la conversación con activistas, médicos, trabajadores sociales y personas que viven con VIH.
-
 #
+
+### Todas estas recomendaciones e ideas surgen de la conversación con activistas, médicos, trabajadores sociales y personas que viven con VIH.
 
 ## Para acceder en esta demo es necesario acceder con esta cuenta
 
