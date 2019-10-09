@@ -55,7 +55,7 @@ export default class Navbar extends Component {
                                     <div className="control has-icons-left">
                                         <input className="input" onChange={this.handleInput} name="username" type="text" placeholder="Avatar" />
                                         <span className="icon is-small is-left">
-                                            <i className="fas fa-user"></i>
+                                            <i className="fa fa-user"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@ export default class Navbar extends Component {
                                     <div className="control has-icons-left">
                                         <input className="input" onChange={this.handleInput} name="password" type="password" placeholder="Contraseña" />
                                         <span className="icon is-small is-left">
-                                            <i className="fas fa-lock"></i>
+                                            <i className="fa fa-lock"></i>
                                         </span>
                                     </div>
                                 </div>

@@ -25,7 +25,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                     <td>{x.trigliceridos}</td>
                     <td>{x.fnHepatica}</td>
                     <td>{x.fnRenal}</td>
-                    <td><button onClick={() => deleteLabs(x._id)} className="button button-red-paddingless">Borrar</button></td>
+                    <td><button onClick={() => deleteLabs(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i></button></td>
                 </tr>
             )
         }))

@@ -71,7 +71,7 @@ export default class Signup extends Component {
                                                     <div className="control has-icons-left has-icons-right">
                                                         <input onChange={this.handleInput} className="input" name="username" type="text" placeholder="LP-1992" required />
                                                         <span className="icon is-small is-left">
-                                                            <i className="fas fa-user"></i>
+                                                            <i className="fa fa-user"></i>
                                                         </span>
                                                     </div>
                                                     <p className="help">Con este nombre accederás a tu perfil privado.</p>
@@ -81,7 +81,7 @@ export default class Signup extends Component {
                                                     <div className="control has-icons-left has-icons-right">
                                                         <input onChange={this.handleInput} className="input" name="email" type="email" placeholder="lp_1992@correo.com" required />
                                                         <span className="icon is-small is-left">
-                                                            <i className="fas fa-envelope"></i>
+                                                            <i className="fa fa-envelope"></i>
                                                         </span>
                                                     </div>
                                                     <p className="help">En este correo recibirás tus recordatorios y notificaciones.</p>
@@ -91,7 +91,7 @@ export default class Signup extends Component {
                                                     <p className="control has-icons-left">
                                                         <input onChange={this.handleInput} className="input" name="password" type="password" placeholder="Contraseña" required />
                                                         <span className="icon is-small is-left">
-                                                            <i className="fas fa-lock"></i>
+                                                            <i className="fa fa-lock"></i>
                                                         </span>
                                                     </p>
                                                 </div>

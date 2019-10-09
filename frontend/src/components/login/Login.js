@@ -51,7 +51,7 @@ export default class Login extends Component {
                                                     <div className="control has-icons-left has-icons-right">
                                                         <input className="input" onChange={this.handleInput} name="username" type="text" placeholder="LP-1992" />
                                                         <span className="icon is-small is-left">
-                                                            <i className="fas fa-user"></i>
+                                                            <i className="fa fa-user"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -60,7 +60,7 @@ export default class Login extends Component {
                                                     <p className="control has-icons-left">
                                                         <input className="input" onChange={this.handleInput} name="password" type="password" placeholder="Contraseña" />
                                                         <span className="icon is-small is-left">
-                                                            <i className="fas fa-lock"></i>
+                                                            <i className="fa fa-lock"></i>
                                                         </span>
                                                     </p>
                                                 </div>

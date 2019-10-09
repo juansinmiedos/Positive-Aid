@@ -13,7 +13,7 @@ export default function ProfileHeader({user, showEditForm, isOpen, submitEditFor
                             </div>
                             <div className="column is-three-quarters">
                                 <h1 className="subtitle profile-header-text">{user.name} {user.lastname}</h1>
-                                <h1 className="title profile-header-text">@{user.username}</h1>
+                                <h1 className="title profile-header-text"><i className="fa fa-user"></i>  {user.username}</h1>
                                 <p className="subtitle profile-header-text">Status actual: {user.status}</p>
                                 <button onClick={() => showEditForm()} className="button button-white">Editar perfil</button>
 
