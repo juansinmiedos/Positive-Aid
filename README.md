@@ -72,12 +72,12 @@ Los alcances que este proyecto tiene extensos:
 
 ## Para acceder en esta demo es necesario acceder con esta cuenta
 
-Usuario: juansinmiedos
+**Usuario**: juansinmiedos
 
-Contraseña: 1
+**Contraseña**: 1
 
 #
 
-¡El cuidado y seguimiento es calidad de vida!
+## ¡El cuidado y seguimiento es calidad de vida!
 
 [Ir a (+)aid ](https://positiveaid.netlify.com/)
