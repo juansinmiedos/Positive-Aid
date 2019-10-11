@@ -1,5 +1,5 @@
 import React from 'react'
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {VictoryChart, VictoryGroup, VictoryLine, VictoryTooltip, VictoryVoronoiContainer, VictoryScatter, VictoryTheme} from 'victory'
 
 export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, submitLabsForm, handleNumberInput, handleDateInput, allLabs, deleteLabs}) {
@@ -25,7 +25,10 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                     <td>{x.trigliceridos}</td>
                     <td>{x.fnHepatica}</td>
                     <td>{x.fnRenal}</td>
-                    <td><button onClick={() => deleteLabs(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i></button></td>
+                    <td>
+                        <button onClick={() => deleteLabs(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i></button>
+                        <button className="button button-red-paddingless"><i className="fa fa-edit"></i></button>
+                    </td>
                 </tr>
             )
         }))
@@ -85,8 +88,8 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                         <h1 className="title">Tu estado general</h1>
                                         <p>Status actual: <b>{user.status}</b></p>
                                         {statusChecker()}
-                                        {/* <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
-                                        <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p> */}
+                                        <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
+                                        <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p>
                                     </div>
                                 </div>
                                 {allLabs[0].cd4 && <div className="column is-full">
@@ -145,37 +148,37 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                                     <div className="field">
                                                         <label className="label">Fecha de la muestra</label>
                                                         <div className="control">
-                                                            <input onChange={handleDateInput} className="input" name="date" type="date" placeholder="LP-1992" required />
+                                                            <input onChange={handleDateInput} className="input" name="date" type="date" placeholder="100" required />
                                                         </div>
                                                     </div>
                                                     <div className="field">
                                                         <label className="label">Conteo de cd4</label>
                                                         <div className="control">
-                                                            <input onChange={handleNumberInput} className="input" name="cd4" type="number" placeholder="LP-1992" required />
+                                                            <input onChange={handleNumberInput} className="input" name="cd4" type="number" placeholder="100" required />
                                                         </div>
                                                     </div>
                                                     <div className="field">
                                                         <label className="label">Carga viral</label>
                                                         <div className="control">
-                                                            <input onChange={handleNumberInput} className="input" name="cargaViral" type="number" placeholder="LP-1992" required />
+                                                            <input onChange={handleNumberInput} className="input" name="cargaViral" type="number" placeholder="100" required />
                                                         </div>
                                                     </div>
                                                     <div className="field">
                                                         <label className="label">Triglicéridos</label>
                                                         <div className="control">
-                                                            <input onChange={handleNumberInput} className="input" name="trigliceridos" type="number" placeholder="LP-1992" required />
+                                                            <input onChange={handleNumberInput} className="input" name="trigliceridos" type="number" placeholder="100" required />
                                                         </div>
                                                     </div>
                                                     <div className="field">
                                                         <label className="label">Fn. hepática</label>
                                                         <div className="control">
-                                                            <input onChange={handleNumberInput} className="input" name="fnHepatica" type="number" placeholder="LP-1992" required />
+                                                            <input onChange={handleNumberInput} className="input" name="fnHepatica" type="number" placeholder="100" required />
                                                         </div>
                                                     </div>
                                                     <div className="field">
                                                         <label className="label">Fn. renal</label>
                                                         <div className="control">
-                                                            <input onChange={handleNumberInput} className="input" name="fnRenal" type="number" placeholder="LP-1992" required />
+                                                            <input onChange={handleNumberInput} className="input" name="fnRenal" type="number" placeholder="100" required />
                                                         </div>
                                                     </div>
                                                     <div className="field is-grouped">
@@ -188,6 +191,32 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
 
                                             </section>
                                         </div>
+                                    </div>
+
+                                    {/* NOTIFICACIÓN */}
+                                    <div class="notification is-danger">
+                                        <button class="delete"></button>
+                                        <p className="subtitle">Nuevos resultados de laboratorio agregados.<br />Fecha de análisis: <b>14/oct</b></p>
+                                    </div>
+
+                                    <div class="notification is-danger">
+                                        <button class="delete"></button>
+                                        <p className="subtitle">Se han editado los resultados del <b>14/oct</b></p>
+                                    </div>
+
+                                    <div class="notification is-danger">
+                                        <button class="delete"></button>
+                                        <p className="subtitle">Se han eliminado los resultados del <b>14/oct</b></p>
+                                    </div>
+
+                                    <div class="notification is-success">
+                                        <button class="delete"></button>
+                                        <p className="subtitle"><b>¡Felicidades!</b><br />De acuerdo a tus resultados del <b>14/oct</b> tu status es ahora <b>Indetecable</b>.<br/ >Corrobora esta información con tu médico de cabecera.</p>
+                                    </div>
+
+                                    <div class="notification is-warning">
+                                        <button class="delete"></button>
+                                        <p className="subtitle"><b>Atención</b><br />De acuerdo a tus resultados del <b>14/oct</b> has entrado en fase de <b>SIDA</b><br /><b>Agenda una cita inmediatamente con tu médico de cabecera.</b></p>
                                     </div>
 
                                 </div>

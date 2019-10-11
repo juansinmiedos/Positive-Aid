@@ -47,7 +47,7 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                                                     <div className="field">
                                                         <div className="control">
                                                             <div className="select">
-                                                                <select onChange={handleInput} name="typeOfAppointment">
+                                                                <select onChange={handleInput} name="typeOfAppointment" required>
                                                                     <option>Selecciona un tipo de cita</option>
                                                                     <option value="revision" >Cita de revisión médica</option>
                                                                     <option value="analisis" >Cita de análisis</option>
@@ -85,6 +85,23 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                                     </section>
                                 </div>
                             </div>
+                            
+                            {/* NOTIFICACIÓN */}
+                            <div class="notification is-danger">
+                                <button class="delete"></button>
+                                <p className="subtitle">Nueva cita agendada:<br /><b>Análisis</b> con <b>Dr. Diego</b> el <b>14/oct</b> en <b>Hospital de Hierro</b></p>
+                            </div>
+
+                            <div class="notification is-danger">
+                                <button class="delete"></button>
+                                <p className="subtitle">Se ha <u>modificado</u> una cita:<br /><b>Análisis</b> con <b>Dr. Diego</b> el <b>14/oct</b> en <b>Hospital de Hierro</b></p>
+                            </div>
+
+                            <div class="notification is-danger">
+                                <button class="delete"></button>
+                                <p className="subtitle">Se ha <u>eliminado</u> una cita:<br /><b>Análisis</b> con <b>Dr. Diego</b> el <b>14/oct</b> en <b>Hospital de Hierro </b> <u>Deshacer</u> </p>
+                            </div>
+
                         </div>
                     </div>
                     <div className="columns is-centered">

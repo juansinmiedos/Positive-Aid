@@ -13,6 +13,8 @@ $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 $red : #AC2C2E;
 $white: #ffffff;
+$green: #22610B;
+$yellow: #F6A242;
 
 // Update Bulma's global variables
 $family-sans-serif: 'Assistant', sans-serif;
@@ -20,6 +22,8 @@ $grey-dark: $brown;
 $grey-light: $beige-light;
 $primary: $purple;
 $danger: $red;
+$success: $green;
+$warning: $yellow;
 $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
@@ -138,3 +142,17 @@ p {
 img {
     border-radius: 5%;
 }
+
+.card {
+    width: 55ch;
+    height: 80ch;
+    background: grey;
+    border-radius: 5%;
+    background-image: url(https://images.unsplash.com/photo-1542080681-b52d382432af?ixlib=rb-1.2.1&w=1000&q=80);
+    background-size: cover;
+    background-position: center center;
+    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.5s;
+    will-change: transform;
+    border: 1px solid #AC2C2E;
+  }

@@ -20,8 +20,8 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                         <p className="subtitle is-size-5">{nameMatcher(x.med)}</p>
                         <p className="subtitle is-size-5">Recordatorio: Cada {x.frequency} horas</p>
                         <button onClick={() => deleteMeds(x._id)} className="button button-red-paddingless">Quitar del esquema</button>
-                        {/* <button className="button button-white-paddingless">Ver detalle</button>
-                        <button className="button button-white-paddingless">Modificar frecuencia</button> */}
+                        <button className="button button-white-paddingless">Ver detalle</button>
+                        <button className="button button-white-paddingless">Modificar frecuencia</button>
                     </div>
                 </div>
             )
@@ -132,11 +132,29 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                                                 </div>
                                             </form>
                                         </section>
+                                        
                                     <footer className="modal-card-foot">
                                         {specificMedicineInfo()}
                                     </footer>
                                 </div>
                             </div>
+                        
+                            {/* NOTIFICACIÓN */}
+                            <div class="notification is-danger">
+                                <button class="delete"></button>
+                                <p className="subtitle">Se ha modificado el esquema.<br /><b>Medicamento</b> se ha agregado, con un recordatorio cada <b>12 horas</b></p>
+                            </div>
+
+                            <div class="notification is-danger">
+                                <button class="delete"></button>
+                                <p className="subtitle">Se ha modificado el esquema.<br /> Frecuencia de <b>Medicamento</b> actualizada, nuevo recordatorio cada <b>12 horas</b></p>
+                            </div>
+
+                            <div class="notification is-danger">
+                                <button class="delete"></button>
+                                <p className="subtitle">Se ha modificado el esquema.<br /><b>Medicamento</b> se ha eliminado. <u>Deshacer</u></p>
+                            </div>
+
                         </div>
                     </div>
                     <div className="columns is-centered">
