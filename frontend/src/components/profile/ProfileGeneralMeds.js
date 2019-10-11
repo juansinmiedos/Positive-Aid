@@ -19,9 +19,9 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                         <h1 className="title is-size-5">{x.med}</h1>
                         <p className="subtitle is-size-5">{nameMatcher(x.med)}</p>
                         <p className="subtitle is-size-5">Recordatorio: Cada {x.frequency} horas</p>
-                        <button onClick={() => deleteMeds(x._id)} className="button button-red-paddingless">Quitar del esquema</button>
-                        <button className="button button-white-paddingless">Ver detalle</button>
-                        <button className="button button-white-paddingless">Modificar frecuencia</button>
+                        <button onClick={() => deleteMeds(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i>&nbsp;Quitar del esquema</button>
+                        <button className="button button-red-paddingless"><i className="fa fa-info-circle"></i>&nbsp;Ver detalle</button>
+                        <button className="button button-red-paddingless"><i className="fa fa-edit"></i>&nbsp;Modificar frecuencia</button>
                     </div>
                 </div>
             )
@@ -152,7 +152,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
 
                             <div class="notification is-danger">
                                 <button class="delete"></button>
-                                <p className="subtitle">Se ha modificado el esquema.<br /><b>Medicamento</b> se ha eliminado. <u>Deshacer</u></p>
+                                <p className="subtitle">Se ha modificado el esquema.<br /><b>Medicamento</b> se ha eliminado.</p>
                             </div>
 
                         </div>

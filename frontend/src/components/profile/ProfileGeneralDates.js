@@ -10,7 +10,8 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                     <p>Tipo de cita: <b>{x.typeOfAppointment}</b></p>
                     <p>Dónde: <b>{x.place}</b></p>
                     <p>Cuándo: <b>{x.date}</b></p>
-                    <button onClick={() => deleteAppointments(x._id)} className="button button-red">Borrar cita</button>
+                    <button onClick={() => deleteAppointments(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i>&nbsp;Borrar</button>
+                    <button onClick={() => deleteAppointments(x._id)} className="button button-red-paddingless"><i className="fa fa-edit"></i>&nbsp;Editar</button>
                 </div>
             )
         }))
@@ -83,6 +84,7 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                                             </div>
                                         </form>
                                     </section>
+                                    <footer className="modal-card-foot"></footer>
                                 </div>
                             </div>
                             
@@ -99,7 +101,7 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
 
                             <div class="notification is-danger">
                                 <button class="delete"></button>
-                                <p className="subtitle">Se ha <u>eliminado</u> una cita:<br /><b>Análisis</b> con <b>Dr. Diego</b> el <b>14/oct</b> en <b>Hospital de Hierro </b> <u>Deshacer</u> </p>
+                                <p className="subtitle">Se ha <u>eliminado</u> una cita:<br /><b>Análisis</b> con <b>Dr. Diego</b> el <b>14/oct</b> en <b>Hospital de Hierro </b></p>
                             </div>
 
                         </div>

@@ -132,7 +132,7 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                             {tableMaker()}
                                         </tbody>
                                     </table>
-                                    <button onClick={() => showLabsForm()} className="button is-danger">Añadir nuevos resultados</button>
+                                    <button onClick={() => showLabsForm()} className="button button-red-paddingless">+ Añadir nuevos resultados</button>
                                 </div>
 
                                     <div className={labsIsOpen ? "modal is-active" : "modal"}>
@@ -187,9 +187,8 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                                         </div>
                                                     </div>
                                                 </form>
-                                            
-
                                             </section>
+                                            <footer className="modal-card-foot"></footer>
                                         </div>
                                     </div>
 
