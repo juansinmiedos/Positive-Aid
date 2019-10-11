@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMedsForm, handleInput, handleNumberInput, allMeds, medicinesInfo, deleteMeds, meds}) {
+export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMedsForm, handleInput, handleNumberInput, allMeds, medicinesInfo, deleteMeds, meds, showMedsDelete, confirmationMedsDeleteIsOpen, currentMedOfDeletion}) {
 
     //COMO HAGO PARA TRAER LA INFO EN TIEMPO REAL DESDE LA BASE DE DATOS?
     const nameMatcher = (name) => {
@@ -19,7 +19,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                         <h1 className="title is-size-5">{x.med}</h1>
                         <p className="subtitle is-size-5">{nameMatcher(x.med)}</p>
                         <p className="subtitle is-size-5">Recordatorio: Cada {x.frequency} horas</p>
-                        <button onClick={() => deleteMeds(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i>&nbsp;Quitar del esquema</button>
+                        <button onClick={() => showMedsDelete(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i>&nbsp;Quitar del esquema</button>
                         {/* <button className="button button-red-paddingless"><i className="fa fa-info-circle"></i>&nbsp;Ver detalle</button> */}
                         {/* <button className="button button-red-paddingless"><i className="fa fa-edit"></i>&nbsp;Modificar frecuencia</button> */}
                     </div>
@@ -47,7 +47,7 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                             </article>
                     return console.log('')
             })
-            return aux
+        return aux
     }
 
     return (
@@ -132,10 +132,25 @@ export default function ProfileGeneralMeds({showMedsForm, medsIsOpen, submitMeds
                                                 </div>
                                             </form>
                                         </section>
-                                        
                                     <footer className="modal-card-foot">
                                         {specificMedicineInfo()}
                                     </footer>
+                                </div>
+                            </div>
+
+                            {/* CONFIRMATION MODAL */}
+                            <div className={confirmationMedsDeleteIsOpen ? "modal is-active" : "modal"}>
+                                <div className="modal-background"></div>
+                                <div className="modal-card">
+                                    <header className="modal-card-head">
+                                        <p className="modal-card-title"><b>Eliminar medicamento</b></p>
+                                    </header>
+                                    <section className="modal-card-body has-text-centered">
+                                        <p>¿Estás seguro de que quieres quitar este medicamento del esquema?</p>
+                                        <button onClick={() => deleteMeds(currentMedOfDeletion)} className="button button-red"><i className="fa fa-trash"></i>&nbsp;Si, quitar</button>
+                                        <button onClick={() => showMedsDelete()} className="button button-red"><i className="fa fa-undo"></i>&nbsp;No, regresar</button>
+                                    </section>
+                                    <footer className="modal-card-foot"></footer>
                                 </div>
                             </div>
                         

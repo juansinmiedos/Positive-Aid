@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-export default function ProfileGeneralDates({ showAppointmentsForm, appointmentsIsOpen, submitAppointmentsForm, handleInput, handleDateInput, allAppointments, deleteAppointments }) {
+export default function ProfileGeneralDates({ showAppointmentsForm, appointmentsIsOpen, submitAppointmentsForm, handleInput, handleDateInput, allAppointments, deleteAppointments, showAppointmentsDelete, confirmationAppointmentsDeleteIsOpen, currentAppointmentOfDeletion }) {
 
     const tileMaker = () => {
         return(allAppointments.map((x) => {
@@ -11,7 +11,9 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                     <p>Tipo de cita: <b>{x.typeOfAppointment}</b></p>
                     <p>Dónde: <b>{x.place}</b></p>
                     <p>Cuándo: <b>{moment(x.date).locale('es').format('ll')}</b></p>
-                    <button onClick={() => deleteAppointments(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i>&nbsp;Borrar</button>
+                    <button onClick={() => showAppointmentsDelete(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i>&nbsp;Borrar</button>
+
+                    {/* <button onClick={() => showAppointmentsDelete(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i>&nbsp;Borrar</button> */}
                     {/* <button onClick={() => deleteAppointments(x._id)} className="button button-red-paddingless"><i className="fa fa-edit"></i>&nbsp;Editar</button> */}
                 </div>
             )
@@ -89,6 +91,22 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                                 </div>
                             </div>
                             
+                            {/* CONFIRMATION MODAL */}
+                            <div className={confirmationAppointmentsDeleteIsOpen ? "modal is-active" : "modal"}>
+                                <div className="modal-background"></div>
+                                <div className="modal-card">
+                                    <header className="modal-card-head">
+                                        <p className="modal-card-title"><b>Eliminar cita</b></p>
+                                    </header>
+                                    <section className="modal-card-body has-text-centered">
+                                        <p>¿Estás seguro de que quieres cancelar esta cita?</p>
+                                        <button onClick={() => deleteAppointments(currentAppointmentOfDeletion)} className="button button-red"><i className="fa fa-trash"></i>&nbsp;Si, cancelar</button>
+                                        <button onClick={() => showAppointmentsDelete()} className="button button-red"><i className="fa fa-undo"></i>&nbsp;No, regresar</button>
+                                    </section>
+                                    <footer className="modal-card-foot"></footer>
+                                </div>
+                            </div>
+
                             {/* NOTIFICACIÓN */}
                             {/* <div className="notification is-danger">
                                 <button className="delete"></button>

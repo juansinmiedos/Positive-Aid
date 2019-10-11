@@ -79,6 +79,10 @@ export default class Profile extends Component {
         appointmentsIsOpen: false,
         confirmationLabsDeleteIsOpen: false,
         currentLabOfDeletion: '',
+        confirmationMedsDeleteIsOpen: false,
+        currentMedOfDeletion: '',
+        confirmationAppointmentsDeleteIsOpen: false,
+        currentAppointmentOfDeletion: '',
     }
 
     // PROMISES
@@ -234,14 +238,27 @@ export default class Profile extends Component {
             this.setState({ labs: this.state.labs })
             this.componentDidMount()
             this.props.history.push('/perfil')
-            
+
             Swal.fire({
                 position: 'top-end',
-                className: "notification is-danger",
                 title: 'Nuevos resultados de laboratorio agregados.',
                 showConfirmButton: false,
                 timer: 2000
             })
+
+            // if(this.state.allLabs[this.state.allLabs.length - 1].cargaViral >= 10){
+            //     console.log('entra al if')
+            //     this.setState(prevState => {
+            //         return {
+            //             ...prevState,
+            //             status: 'SIDA'
+            //         }
+            //     })
+                
+            //     this.componentDidMount()
+            //     this.props.history.push('/perfil')
+            // }
+
             
         } catch(error){
             console.log(error);
@@ -260,7 +277,6 @@ export default class Profile extends Component {
 
             Swal.fire({
                 position: 'top-end',
-                className: "notification is-danger",
                 title: 'Esquema actualizado',
                 showConfirmButton: false,
                 timer: 2000
@@ -291,7 +307,6 @@ export default class Profile extends Component {
 
             Swal.fire({
                 position: 'top-end',
-                className: "notification is-danger",
                 title: 'Nueva cita creada.',
                 showConfirmButton: false,
                 timer: 2000
@@ -328,6 +343,34 @@ export default class Profile extends Component {
         }
     }
 
+    showMedsDelete = async(id) => {
+        if(this.state.confirmationMedsDeleteIsOpen === false){
+            await this.setState({
+                confirmationMedsDeleteIsOpen: true,
+                currentMedOfDeletion: id,
+            })
+        } else {
+            this.setState({
+                confirmationMedsDeleteIsOpen: false,
+                currentMedOfDeletion: '',
+            })
+        }
+    }
+
+    showAppointmentsDelete = async(id) => {
+        if(this.state.confirmationAppointmentsDeleteIsOpen === false){
+            await this.setState({
+                confirmationAppointmentsDeleteIsOpen: true,
+                currentAppointmentOfDeletion: id,
+            })
+        } else {
+            this.setState({
+                confirmationAppointmentsDeleteIsOpen: false,
+                currentAppointmentOfDeletion: '',
+            })
+        }
+    }
+
     //DELETERS
     deleteLabs = async(e) => {
         try{
@@ -357,6 +400,16 @@ export default class Profile extends Component {
         } catch(error){
             console.log(error)
         }
+
+        if(this.state.confirmationMedsDeleteIsOpen === false){
+            this.setState({
+                confirmationMedsDeleteIsOpen: true
+            })
+        } else {
+            this.setState({
+                confirmationMedsDeleteIsOpen: false
+            })
+        }
     }
 
     deleteAppointments = async(e) => {
@@ -367,10 +420,20 @@ export default class Profile extends Component {
         } catch(error){
             console.log(error)
         }
+
+        if(this.state.confirmationAppointmentsDeleteIsOpen === false){
+            this.setState({
+                confirmationAppointmentsDeleteIsOpen: true
+            })
+        } else {
+            this.setState({
+                confirmationAppointmentsDeleteIsOpen: false
+            })
+        }
     }
 
     //STATUS UPDATER
-    // UpdateHealthStatus = async() => {
+    // updateHealthStatus = async() => {
     //     if(this.state.allLabs[this.state.allLabs.length - 1].cargaViral >= 10){
 
     //         const newStatus = (() => this.state.user.status = 'SIDA')
@@ -397,9 +460,9 @@ export default class Profile extends Component {
 
                     <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} deleteLabs={this.deleteLabs} showLabsDelete={this.showLabsDelete} confirmationLabsDeleteIsOpen={this.state.confirmationLabsDeleteIsOpen} currentLabOfDeletion={this.state.currentLabOfDeletion} />
 
-                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allMeds={this.state.allMeds} medicinesInfo={this.state.medicinesInfo} deleteMeds={this.deleteMeds} meds={this.state.meds} />
+                    <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allMeds={this.state.allMeds} medicinesInfo={this.state.medicinesInfo} deleteMeds={this.deleteMeds} meds={this.state.meds} showMedsDelete={this.showMedsDelete} confirmationMedsDeleteIsOpen={this.state.confirmationMedsDeleteIsOpen} currentMedOfDeletion={this.state.currentMedOfDeletion}/>
 
-                    <ProfileGeneralDates user={this.state.user} showAppointmentsForm={this.showAppointmentsForm} appointmentsIsOpen={this.state.appointmentsIsOpen} submitAppointmentsForm={this.submitAppointmentsForm} handleInput={this.handleInput} handleDateInput={this.handleDateInput} allAppointments={this.state.allAppointments} deleteAppointments={this.deleteAppointments} />
+                    <ProfileGeneralDates user={this.state.user} showAppointmentsForm={this.showAppointmentsForm} appointmentsIsOpen={this.state.appointmentsIsOpen} submitAppointmentsForm={this.submitAppointmentsForm} handleInput={this.handleInput} handleDateInput={this.handleDateInput} allAppointments={this.state.allAppointments} deleteAppointments={this.deleteAppointments} showAppointmentsDelete={this.showAppointmentsDelete} confirmationAppointmentsDeleteIsOpen={this.state.confirmationAppointmentsDeleteIsOpen} currentAppointmentOfDeletion={this.state.currentAppointmentOfDeletion} />
                     <Footer />
                 </>
             )
