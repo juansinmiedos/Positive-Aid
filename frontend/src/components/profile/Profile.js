@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Footer from '../footer/Footer';
 import ProfileHeader from './ProfileHeader';
 import {Redirect} from 'react-router-dom'
+import Swal from 'sweetalert2'
 import ProfileGeneralStatus from './ProfileGeneralStatus';
 import ProfileGeneralMeds from './ProfileGeneralMeds';
 import ProfileGeneralDates from './ProfileGeneralDates';
@@ -76,6 +77,8 @@ export default class Profile extends Component {
         labsIsOpen: false,
         medsIsOpen: false,
         appointmentsIsOpen: false,
+        confirmationLabsDeleteIsOpen: false,
+        currentLabOfDeletion: '',
     }
 
     // PROMISES
@@ -143,7 +146,7 @@ export default class Profile extends Component {
         this.setState({ user, labs, meds, appointments });
     };
 
-     // SHOW AND HIDE MODALS LOGICS
+     // SHOW AND HIDE FORM MODALS LOGICS
     showEditForm = () => {
         if(this.state.isOpen === false){
             this.setState({
@@ -200,6 +203,15 @@ export default class Profile extends Component {
             this.setState({user: this.state.user})
             this.componentDidMount()
             this.props.history.push('/perfil')
+
+            Swal.fire({
+                position: 'top-end',
+                className: "notification is-danger",
+                title: 'Perfil actualizado.',
+                showConfirmButton: false,
+                timer: 2000
+            })
+
         } catch(error){
             console.log(error);
         }
@@ -222,8 +234,14 @@ export default class Profile extends Component {
             this.setState({ labs: this.state.labs })
             this.componentDidMount()
             this.props.history.push('/perfil')
-
-            // this.UpdateHealthStatus()
+            
+            Swal.fire({
+                position: 'top-end',
+                className: "notification is-danger",
+                title: 'Nuevos resultados de laboratorio agregados.',
+                showConfirmButton: false,
+                timer: 2000
+            })
             
         } catch(error){
             console.log(error);
@@ -239,6 +257,15 @@ export default class Profile extends Component {
             this.setState({ meds: this.state.meds })
             this.componentDidMount()
             this.props.history.push('/perfil')
+
+            Swal.fire({
+                position: 'top-end',
+                className: "notification is-danger",
+                title: 'Esquema actualizado',
+                showConfirmButton: false,
+                timer: 2000
+            })
+
         } catch(error){
             console.log(error)
         }
@@ -261,6 +288,15 @@ export default class Profile extends Component {
             this.setState({ appointments: this.state.appointments })
             this.componentDidMount()
             this.props.history.push('/perfil')
+
+            Swal.fire({
+                position: 'top-end',
+                className: "notification is-danger",
+                title: 'Nueva cita creada.',
+                showConfirmButton: false,
+                timer: 2000
+            })
+
         } catch(error){
             console.log(error)
         }
@@ -276,6 +312,22 @@ export default class Profile extends Component {
         }
     }
 
+    // SHOW AND HIDE CONFIRMATION MODALS LOGICS
+
+    showLabsDelete = async(id) => {
+        if(this.state.confirmationLabsDeleteIsOpen === false){
+            await this.setState({
+                confirmationLabsDeleteIsOpen: true,
+                currentLabOfDeletion: id,
+            })
+        } else {
+            this.setState({
+                confirmationLabsDeleteIsOpen: false,
+                currentLabOfDeletion: '',
+            })
+        }
+    }
+
     //DELETERS
     deleteLabs = async(e) => {
         try{
@@ -284,6 +336,16 @@ export default class Profile extends Component {
             this.props.history.push('/perfil')
         } catch(error){
             console.log(error)
+        }
+
+        if(this.state.confirmationLabsDeleteIsOpen === false){
+            this.setState({
+                confirmationLabsDeleteIsOpen: true
+            })
+        } else {
+            this.setState({
+                confirmationLabsDeleteIsOpen: false
+            })
         }
     }
 
@@ -333,7 +395,7 @@ export default class Profile extends Component {
                 <>
                     <ProfileHeader user={this.state.user} showEditForm={this.showEditForm} isOpen={this.state.isOpen} submitEditForm={this.submitEditForm} handleInput={this.handleInput}/>
 
-                    <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} deleteLabs={this.deleteLabs} />
+                    <ProfileGeneralStatus user={this.state.user} showLabsForm={this.showLabsForm} labsIsOpen={this.state.labsIsOpen} submitLabsForm={this.submitLabsForm} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allLabs={this.state.allLabs} deleteLabs={this.deleteLabs} showLabsDelete={this.showLabsDelete} confirmationLabsDeleteIsOpen={this.state.confirmationLabsDeleteIsOpen} currentLabOfDeletion={this.state.currentLabOfDeletion} />
 
                     <ProfileGeneralMeds user={this.state.user} showMedsForm={this.showMedsForm} medsIsOpen={this.state.medsIsOpen} submitMedsForm={this.submitMedsForm} handleInput={this.handleInput} handleNumberInput={this.handleNumberInput} handleDateInput={this.handleDateInput} allMeds={this.state.allMeds} medicinesInfo={this.state.medicinesInfo} deleteMeds={this.deleteMeds} meds={this.state.meds} />
 

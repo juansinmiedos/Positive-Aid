@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 
 export default function ProfileGeneralDates({ showAppointmentsForm, appointmentsIsOpen, submitAppointmentsForm, handleInput, handleDateInput, allAppointments, deleteAppointments }) {
 
@@ -9,9 +10,9 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                     <p className="title">{x.withWhom}</p>
                     <p>Tipo de cita: <b>{x.typeOfAppointment}</b></p>
                     <p>Dónde: <b>{x.place}</b></p>
-                    <p>Cuándo: <b>{x.date}</b></p>
+                    <p>Cuándo: <b>{moment(x.date).locale('es').format('ll')}</b></p>
                     <button onClick={() => deleteAppointments(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i>&nbsp;Borrar</button>
-                    <button onClick={() => deleteAppointments(x._id)} className="button button-red-paddingless"><i className="fa fa-edit"></i>&nbsp;Editar</button>
+                    {/* <button onClick={() => deleteAppointments(x._id)} className="button button-red-paddingless"><i className="fa fa-edit"></i>&nbsp;Editar</button> */}
                 </div>
             )
         }))
@@ -89,20 +90,20 @@ export default function ProfileGeneralDates({ showAppointmentsForm, appointments
                             </div>
                             
                             {/* NOTIFICACIÓN */}
-                            <div class="notification is-danger">
-                                <button class="delete"></button>
+                            {/* <div className="notification is-danger">
+                                <button className="delete"></button>
                                 <p className="subtitle">Nueva cita agendada:<br /><b>Análisis</b> con <b>Dr. Diego</b> el <b>14/oct</b> en <b>Hospital de Hierro</b></p>
                             </div>
 
-                            <div class="notification is-danger">
-                                <button class="delete"></button>
+                            <div className="notification is-danger">
+                                <button className="delete"></button>
                                 <p className="subtitle">Se ha <u>modificado</u> una cita:<br /><b>Análisis</b> con <b>Dr. Diego</b> el <b>14/oct</b> en <b>Hospital de Hierro</b></p>
                             </div>
 
-                            <div class="notification is-danger">
-                                <button class="delete"></button>
+                            <div className="notification is-danger">
+                                <button className="delete"></button>
                                 <p className="subtitle">Se ha <u>eliminado</u> una cita:<br /><b>Análisis</b> con <b>Dr. Diego</b> el <b>14/oct</b> en <b>Hospital de Hierro </b></p>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>

@@ -1,8 +1,9 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import {VictoryChart, VictoryGroup, VictoryLine, VictoryTooltip, VictoryVoronoiContainer, VictoryScatter, VictoryTheme} from 'victory'
+import moment from 'moment'
 
-export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, submitLabsForm, handleNumberInput, handleDateInput, allLabs, deleteLabs}) {
+export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, submitLabsForm, handleNumberInput, handleDateInput, allLabs, deleteLabs, showLabsDelete, confirmationLabsDeleteIsOpen, currentLabOfDeletion}) {
     const statusChecker = () => {
         if(user.status === 'SIDA'){
             return(
@@ -19,15 +20,15 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
         return (allLabs.map((x) => {
             return(
                 <tr key={x._id}>
-                    <th>{x.date}</th>
+                    <th>{moment(x.date).format('ll')}</th>
                     <td>{x.cd4}</td>
                     <td>{x.cargaViral}</td>
                     <td>{x.trigliceridos}</td>
                     <td>{x.fnHepatica}</td>
                     <td>{x.fnRenal}</td>
                     <td>
-                        <button onClick={() => deleteLabs(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i></button>
-                        <button className="button button-red-paddingless"><i className="fa fa-edit"></i></button>
+                        <button onClick={() => showLabsDelete(x._id)} className="button button-red-paddingless"><i className="fa fa-trash"></i></button>
+                        {/* <button className="button button-red-paddingless"><i className="fa fa-edit"></i></button> */}
                     </td>
                 </tr>
             )
@@ -88,8 +89,8 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                         <h1 className="title">Tu estado general</h1>
                                         <p>Status actual: <b>{user.status}</b></p>
                                         {statusChecker()}
-                                        <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
-                                        <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p>
+                                        {/* <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
+                                        <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p> */}
                                     </div>
                                 </div>
                                 {allLabs[0].cd4 && <div className="column is-full">
@@ -192,31 +193,47 @@ export default function ProfileGeneralStatus({user, showLabsForm, labsIsOpen, su
                                         </div>
                                     </div>
 
+                                    {/* CONFIRMATION MODAL */}
+                                    <div className={confirmationLabsDeleteIsOpen ? "modal is-active" : "modal"}>
+                                        <div className="modal-background"></div>
+                                        <div className="modal-card">
+                                            <header className="modal-card-head">
+                                                <p className="modal-card-title"><b>Eliminar resultados</b></p>
+                                            </header>
+                                            <section className="modal-card-body has-text-centered">
+                                                <p>¿Estás seguro de que quieres eliminar estos resultados?</p>
+                                                <button onClick={() => deleteLabs(currentLabOfDeletion)} className="button button-red"><i className="fa fa-trash"></i>&nbsp;Si, eliminar</button>
+                                                <button onClick={() => showLabsDelete()} className="button button-red"><i className="fa fa-undo"></i>&nbsp;No, regresar</button>
+                                            </section>
+                                            <footer className="modal-card-foot"></footer>
+                                        </div>
+                                    </div>
+
                                     {/* NOTIFICACIÓN */}
-                                    <div class="notification is-danger">
-                                        <button class="delete"></button>
+                                    {/* <div className="notification is-danger">
+                                        <button className="delete"></button>
                                         <p className="subtitle">Nuevos resultados de laboratorio agregados.<br />Fecha de análisis: <b>14/oct</b></p>
                                     </div>
 
-                                    <div class="notification is-danger">
-                                        <button class="delete"></button>
+                                    <div className="notification is-danger">
+                                        <button className="delete"></button>
                                         <p className="subtitle">Se han editado los resultados del <b>14/oct</b></p>
                                     </div>
 
-                                    <div class="notification is-danger">
-                                        <button class="delete"></button>
+                                    <div className="notification is-danger">
+                                        <button className="delete"></button>
                                         <p className="subtitle">Se han eliminado los resultados del <b>14/oct</b></p>
                                     </div>
 
-                                    <div class="notification is-success">
-                                        <button class="delete"></button>
-                                        <p className="subtitle"><b>¡Felicidades!</b><br />De acuerdo a tus resultados del <b>14/oct</b> tu status es ahora <b>Indetecable</b>.<br/ >Corrobora esta información con tu médico de cabecera.</p>
+                                    <div className="notification is-success">
+                                        <button className="delete"></button>
+                                        <p className="subtitle"><b>¡Felicidades!</b><br />De acuerdo a tus resultados del <b>14/oct</b> tu status es ahora <b>Indetecable</b>.<br />Corrobora esta información con tu médico de cabecera.</p>
                                     </div>
 
-                                    <div class="notification is-warning">
-                                        <button class="delete"></button>
+                                    <div className="notification is-warning">
+                                        <button className="delete"></button>
                                         <p className="subtitle"><b>Atención</b><br />De acuerdo a tus resultados del <b>14/oct</b> has entrado en fase de <b>SIDA</b><br /><b>Agenda una cita inmediatamente con tu médico de cabecera.</b></p>
-                                    </div>
+                                    </div> */}
 
                                 </div>
                             </div>
