@@ -247,8 +247,8 @@ export default class Profile extends Component {
             })
 
             // if(this.state.allLabs[this.state.allLabs.length - 1].cargaViral >= 10){
-            //     console.log('entra al if')
-            //     this.setState(prevState => {
+            //     console.log(this.state.allLabs)
+            //     this.user.status.setState(prevState => {
             //         return {
             //             ...prevState,
             //             status: 'SIDA'
@@ -381,6 +381,13 @@ export default class Profile extends Component {
             console.log(error)
         }
 
+        Swal.fire({
+            position: 'top-end',
+            title: 'Resultados de laboratorio eliminados',
+            showConfirmButton: false,
+            timer: 2000
+        })
+
         if(this.state.confirmationLabsDeleteIsOpen === false){
             this.setState({
                 confirmationLabsDeleteIsOpen: true
@@ -401,6 +408,13 @@ export default class Profile extends Component {
             console.log(error)
         }
 
+        Swal.fire({
+            position: 'top-end',
+            title: 'Medicamento retirado del esquema',
+            showConfirmButton: false,
+            timer: 2000
+        })
+
         if(this.state.confirmationMedsDeleteIsOpen === false){
             this.setState({
                 confirmationMedsDeleteIsOpen: true
@@ -420,6 +434,13 @@ export default class Profile extends Component {
         } catch(error){
             console.log(error)
         }
+
+        Swal.fire({
+            position: 'top-end',
+            title: 'Cita cancelada',
+            showConfirmButton: false,
+            timer: 2000
+        })
 
         if(this.state.confirmationAppointmentsDeleteIsOpen === false){
             this.setState({
