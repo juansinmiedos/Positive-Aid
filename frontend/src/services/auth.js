@@ -1,6 +1,6 @@
 import axios from 'axios';
-let baseURL = 'https://positiveaid.herokuapp.com/api';
-// let baseURL = 'http://localhost:3000/api';
+// let baseURL = 'https://positiveaid.herokuapp.com/api';
+let baseURL = 'http://localhost:3000/api';
 
 const SERVICE = axios.create({ withCredentials: true, baseURL });
 
