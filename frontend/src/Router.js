@@ -6,6 +6,7 @@ import Signup from './components/signup/Signup';
 import Login from './components/login/Login';
 import Navbar from './components/navbar/Navbar';
 import Confirmation from './components/confirmation/Confirmation';
+import AwaitConfirmation from './components/awaitConfirmation/AwaitConfirmation';
 
 const Router = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const Router = () => (
       <Route exact path="/perfil" component={Profile} />
       <Route exact path="/crear-cuenta" component={Signup} />
       <Route path="/confirmar-cuenta/:id" component={Confirmation} />
+      <Route path="/confirmacion-pendiente" component={AwaitConfirmation} />
       <Route exact path="/iniciar-sesion" component={Login} />
     </Switch>
   </BrowserRouter>

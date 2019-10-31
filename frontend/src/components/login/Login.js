@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import AUTH_SERVICE from '../../services/auth';
 import {Link, Redirect} from 'react-router-dom'
+import { MyContext } from '../../context';
 
-export default class Login extends Component {
+class Login extends Component {
     state = {
         user: {
             username: '',
@@ -18,6 +19,10 @@ export default class Login extends Component {
         this.setState({ user });
     };
 
+    logUser = (loggedUser) => {
+        this.setState({ loggedUser })
+    }
+
     onSubmit = async(e) => {
         try{
             e.preventDefault();
@@ -25,6 +30,9 @@ export default class Login extends Component {
 
             const strUser = JSON.stringify(response.data.user)
             localStorage.setItem('user', strUser)
+
+            
+
             this.props.history.push('/perfil');
         } catch(err){
             console.log(err);
@@ -91,3 +99,7 @@ export default class Login extends Component {
         }
     }
 }
+
+Login.contextType = MyContext;
+
+export default Login
