@@ -1,32 +1,16 @@
 import React, { Component, createContext } from 'react'
 
+// SERVICES
+import PUBLIC_SERVICE from '../services/public';
+import LABS_SERVICE from '../services/labs';
+import MEDICATION_SERVICE from '../services/medication';
+import APPOINTMENT_SERVICE from '../services/appointment';
+
 export const MyContext = createContext();
 
 export default class Provider extends Component {
     state = {
-        user: JSON.parse(localStorage.getItem('user')),
-        labs: {
-            date: '',
-            cd4: '',
-            cargaViral: '',
-            trigliceridos: '',
-            fnHepatica: '',
-            fnRenal: '',
-            user: JSON.parse(localStorage.getItem('user'))
-        },
-        meds: {
-            med: '',
-            frequency: '',
-            startHour: '',
-            user: JSON.parse(localStorage.getItem('user'))
-        },
-        appointments: {
-            place: '',
-            typeOfAppointment: '',
-            withWhom: '',
-            date: '',
-            user: JSON.parse(localStorage.getItem('user'))
-        },
+        user: {},
         allLabs: [
             {cargaViral: '',
             cd4: '',
@@ -61,22 +45,43 @@ export default class Provider extends Component {
             typeOfMed: '',
             statusOfRec: ''}
         ],
-        isOpen: false,
-        labsIsOpen: false,
-        medsIsOpen: false,
-        appointmentsIsOpen: false,
-        confirmationLabsDeleteIsOpen: false,
-        currentLabOfDeletion: '',
-        confirmationMedsDeleteIsOpen: false,
-        currentMedOfDeletion: '',
-        confirmationAppointmentsDeleteIsOpen: false,
-        currentAppointmentOfDeletion: '',
+        loggedChecker: null
+    }
+
+    logUser = (loggedUser) => {        
+        this.setState(prevState => { 
+            return {
+                ...prevState,
+                user: loggedUser,
+                loggedChecker: 'yes'
+            } 
+        })
+    }
+
+    // PROMISES
+    allPromises = async() => {
+        const labsResponse = await LABS_SERVICE.getLabs(this.state.user._id)
+        const medsResponse = await MEDICATION_SERVICE.getMedication(this.state.user._id)
+        const appointmentsResponse = await APPOINTMENT_SERVICE.getAppointment(this.state.user._id)
+        const medicineInfoResponse = await PUBLIC_SERVICE.medicines()
+
+        const arrayOfLabs = labsResponse.data.allLabs
+        const arrayOfMeds = medsResponse.data.allMeds
+        const arrayOfAppointments = appointmentsResponse.data.allAppointments
+        const arrayOfMedicines = medicineInfoResponse.data.medicines
+
+        this.setState({
+            allLabs: arrayOfLabs,
+            allMeds: arrayOfMeds,
+            allAppointments: arrayOfAppointments,
+            medicinesInfo: arrayOfMedicines
+        })
     }
 
     render() {
-        const {state} = this;
+        const {state, logUser, allPromises} = this;
         return (
-            <MyContext.Provider value={{state}}>
+            <MyContext.Provider value={{state, logUser, allPromises}}>
                 {this.props.children}
             </MyContext.Provider>
         )

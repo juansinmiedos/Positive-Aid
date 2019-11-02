@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 export default function AwaitConfirmation() {
     if(JSON.parse(localStorage.getItem('user')) != null){

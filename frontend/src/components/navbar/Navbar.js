@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import AUTH_SERVICE from '../../services/auth';
+import { MyContext } from '../../context';
 
 export default class Navbar extends Component {
     state = {
-        user: {
-            username: '',
-            password: ''
-        },
+        user: {},
         response: {}
     }
 
@@ -22,9 +20,7 @@ export default class Navbar extends Component {
         try{
             e.preventDefault();
             const response = await AUTH_SERVICE.login(this.state.user)
-
-            const strUser = JSON.stringify(response.data.user)
-            localStorage.setItem('user', strUser)
+            this.context.logUser(response.data.user);
             this.props.history.push('/perfil');
         } catch(err){
             console.log(err);
@@ -44,7 +40,7 @@ export default class Navbar extends Component {
     };
 
     sessionChecker = () =>{
-        const sessionaux = JSON.parse(localStorage.getItem('user'))
+        const sessionaux = this.context.state.loggedChecker
         if(sessionaux == null){
             return(
                 <div className="buttons">
@@ -131,3 +127,5 @@ export default class Navbar extends Component {
         )
     }
 }
+
+Navbar.contextType = MyContext;
