@@ -20,7 +20,7 @@ export default class Navbar extends Component {
         try{
             e.preventDefault();
             const response = await AUTH_SERVICE.login(this.state.user)
-            this.context.logUser(response.data.user);
+            this.context.toLogIn(response.data.user);
             this.props.history.push('/perfil');
         } catch(err){
             console.log(err);
@@ -75,7 +75,7 @@ export default class Navbar extends Component {
             return(
                 <div className="buttons">
                     <Link to="/perfil"><button className="button button-white-paddingless">Ir a perfil</button></Link>
-                    <button onClick={this.toLogout} className="button button-red-paddingless">Cerrar sesión</button>
+                    <button onClick={this.context.toLogOut} className="button button-red-paddingless">Cerrar sesión</button>
                 </div>
             )
         }

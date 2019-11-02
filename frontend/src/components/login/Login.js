@@ -20,7 +20,7 @@ export default class Login extends Component {
         try{
             e.preventDefault();
             const response = await AUTH_SERVICE.login(this.state.user)
-            this.context.logUser(response.data.user);
+            this.context.toLogIn(response.data.user);
             this.props.history.push('/perfil');
         } catch(err){
             console.log(err);

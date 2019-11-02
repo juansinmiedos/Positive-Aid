@@ -51,7 +51,6 @@ export default class ProfileGeneralDates extends Component {
         try{
             e.preventDefault()
             await APPOINTMENT_SERVICE.addAppointment(this.state.appointments)
-            this.setState({ appointments: this.state.appointments })
             this.context.allPromises()
 
             Swal.fire({

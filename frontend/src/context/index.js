@@ -1,6 +1,7 @@
 import React, { Component, createContext } from 'react'
 
 // SERVICES
+import AUTH_SERVICE from '../services/auth';
 import PUBLIC_SERVICE from '../services/public';
 import LABS_SERVICE from '../services/labs';
 import MEDICATION_SERVICE from '../services/medication';
@@ -48,7 +49,7 @@ export default class Provider extends Component {
         loggedChecker: null
     }
 
-    logUser = (loggedUser) => {        
+    toLogIn = (loggedUser) => {        
         this.setState(prevState => { 
             return {
                 ...prevState,
@@ -58,6 +59,21 @@ export default class Provider extends Component {
         })
     }
 
+    toLogOut = async() => {
+        try{
+            await AUTH_SERVICE.logout()
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    user: {},
+                    loggedChecker: null
+                }
+            })
+        } catch(err){
+            console.log(err);
+        }
+    };
+
     // PROMISES
     allPromises = async() => {
         const labsResponse = await LABS_SERVICE.getLabs(this.state.user._id)
@@ -65,23 +81,48 @@ export default class Provider extends Component {
         const appointmentsResponse = await APPOINTMENT_SERVICE.getAppointment(this.state.user._id)
         const medicineInfoResponse = await PUBLIC_SERVICE.medicines()
 
-        const arrayOfLabs = labsResponse.data.allLabs
-        const arrayOfMeds = medsResponse.data.allMeds
-        const arrayOfAppointments = appointmentsResponse.data.allAppointments
-        const arrayOfMedicines = medicineInfoResponse.data.medicines
+        if(labsResponse.data.allLabs[0] !== undefined){
+            const arrayOfLabs = labsResponse.data.allLabs
+            const arrayOfMeds = medsResponse.data.allMeds
+            const arrayOfAppointments = appointmentsResponse.data.allAppointments
+            const arrayOfMedicines = medicineInfoResponse.data.medicines
 
-        this.setState({
-            allLabs: arrayOfLabs,
-            allMeds: arrayOfMeds,
-            allAppointments: arrayOfAppointments,
-            medicinesInfo: arrayOfMedicines
-        })
+            this.setState({
+                allLabs: arrayOfLabs,
+                allMeds: arrayOfMeds,
+                allAppointments: arrayOfAppointments,
+                medicinesInfo: arrayOfMedicines
+            })
+        } else {
+            const arrayOfMeds = medsResponse.data.allMeds
+            const arrayOfAppointments = appointmentsResponse.data.allAppointments
+            const arrayOfMedicines = medicineInfoResponse.data.medicines
+
+            this.setState({
+                allLabs: [
+                    {cargaViral: '',
+                    cd4: '',
+                    createdAt: '',
+                    date: '',
+                    fnHepatica: '',
+                    fnRenal: '',
+                    trigliceridos: '',
+                    updatedAt: '',
+                    user: '',
+                    _id: ''}
+                ],
+                allMeds: arrayOfMeds,
+                allAppointments: arrayOfAppointments,
+                medicinesInfo: arrayOfMedicines
+            })
+        }
+
     }
 
     render() {
-        const {state, logUser, allPromises} = this;
+        const {state, toLogIn, toLogOut, allPromises} = this;
         return (
-            <MyContext.Provider value={{state, logUser, allPromises}}>
+            <MyContext.Provider value={{state, toLogIn, toLogOut, allPromises}}>
                 {this.props.children}
             </MyContext.Provider>
         )

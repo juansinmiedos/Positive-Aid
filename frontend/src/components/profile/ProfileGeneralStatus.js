@@ -61,7 +61,6 @@ export default class ProfileGeneralStatus extends Component {
         try{
             e.preventDefault()
             await LABS_SERVICE.addLabs(this.state.labs)
-            this.setState({ labs: this.state.labs })
             this.context.allPromises()
 
             Swal.fire({

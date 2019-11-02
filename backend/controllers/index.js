@@ -490,7 +490,6 @@ exports.toConfirm = (req, res, next) => {
 }
 
 exports.toLogin = (req, res, next) => {
-    console.log('entra al controller tologin')
     passport.authenticate('local', (err, user) => {
         if (err) {
             return res.status(401).json({ err })

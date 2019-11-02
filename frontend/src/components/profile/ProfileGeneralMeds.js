@@ -56,7 +56,6 @@ export default class ProfileGeneralMeds extends Component  {
         try{
             e.preventDefault()
             await MEDICATION_SERVICE.addMedication(this.state.meds)
-            this.setState({ meds: this.state.meds })
             this.context.allPromises()
 
             Swal.fire({
