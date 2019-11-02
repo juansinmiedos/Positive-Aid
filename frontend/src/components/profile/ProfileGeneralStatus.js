@@ -131,6 +131,22 @@ export default class ProfileGeneralStatus extends Component {
         }
     }
 
+    //STATUS UPDATER
+    // updateHealthStatus = async() => {
+    //     if(this.context.state.allLabs[this.state.allLabs.length - 1].cargaViral >= 10){
+
+    //         const newStatus = (() => this.state.user.status = 'SIDA')
+
+    //         await AUTH_SERVICE.update(this.state.user)
+    //         this.setState(prevState => {
+    //             return {
+    //                 ...prevState,
+    //                 status: newStatus
+    //             }
+    //         })
+    //     } 
+    // }
+
     statusChecker = () => {
         if(this.context.state.user.status === 'SIDA'){
             return(
@@ -206,172 +222,168 @@ export default class ProfileGeneralStatus extends Component {
         return (
             <>
                 <section className="section">
-                    <MyContext.Consumer>
-                        {(context) => (
-                            <div>
-                                <div className="columns is-centered">
-                                    <div className="column is-three-quarters">
-                                    <hr />
-                                        <div className="columns is-multiline">
-                                            <div className="column is-full">
-                                                <div className="box box-title">
-                                                    <h1 className="subtitle">Resumen</h1>
-                                                    <h1 className="title">Tu estado general</h1>
-                                                    <p>Status actual: <b>{this.context.state.user.status}</b></p>
-                                                    {this.statusChecker()}
-                                                    {/* <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
-                                                    <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p> */}
-                                                </div>
-                                            </div>
-                                            {this.context.state.allLabs[0].cd4 && <div className="column is-full">
-                                                <VictoryChart theme={VictoryTheme.material} style={{ fontSize: 4 }} width={400} height={180} containerComponent={<VictoryVoronoiContainer/>}>
-                                                    <VictoryGroup style={{data:{ strokeWidth: 1, fillOpacity: 1}}}>
-                                                        <VictoryLine interpolation={"linear"} labels={({ datum }) => `CD4: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={this.cd4DataOrganizer()} />
-                                                        <VictoryScatter data={this.cd4DataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
-    
-                                                        <VictoryLine interpolation={"linear"} labels={({ datum }) => `Carga viral: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={this.cargaViralDataOrganizer()} />
-                                                        <VictoryScatter data={this.cargaViralDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
-    
-                                                        <VictoryLine interpolation={"linear"} labels={({ datum }) => `Triglicéridos: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={this.trigliceridosDataOrganizer()} />
-                                                        <VictoryScatter data={this.trigliceridosDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
-    
-                                                        <VictoryLine interpolation={"linear"} labels={({ datum }) => `Fn. Hepática: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={this.fnHepaticaDataOrganizer()} />
-                                                        <VictoryScatter data={this.fnHepaticaDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
-    
-                                                        <VictoryLine interpolation={"linear"} labels={({ datum }) => `Fn. Renal: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={this.fnRenalDataOrganizer()} />
-                                                        <VictoryScatter data={this.fnRenalDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
-                                                        
-                                                    </VictoryGroup>
-                                                </VictoryChart>
-                                            </div>}
-                                            <div className="column is-full">
-                                            <div className="box">
-                                                <h1 className="title"><b>Tabla histórica de resultados</b></h1>
-                                                <table className="table is-fullwidth">
-                                                    <thead>
-                                                        <tr>
-                                                            <th><abbr title="Date">Fecha</abbr></th>
-                                                            <th><abbr title="CD4">CD4</abbr></th>
-                                                            <th><abbr title="cargaViral">Carga viral</abbr></th>
-                                                            <th><abbr title="trigliceridos">Triglicéridos</abbr></th>
-                                                            <th><abbr title="fnHepatica">Fn. Hepática</abbr></th>
-                                                            <th><abbr title="fnRenal">Fn. Renal</abbr></th>
-                                                            <th><abbr>&nbsp;</abbr></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {this.tableMaker()}
-                                                    </tbody>
-                                                </table>
-                                                <button onClick={() => this.showLabsForm()} className="button button-red-paddingless">+ Añadir nuevos resultados</button>
-                                            </div>
-    
-                                                <div className={this.state.labsIsOpen ? "modal is-active" : "modal"}>
-                                                    <div className="modal-background"></div>
-                                                    <div className="modal-card">
-                                                        <header className="modal-card-head">
-                                                            <p className="modal-card-title"><b>Agregar resultados de análisis</b></p>
-                                                            <button onClick={() => this.showLabsForm()} className="delete" aria-label="close"></button>
-                                                        </header>
-                                                        <section className="modal-card-body">
-    
-                                                            <form onSubmit={this.submitLabsForm}>
-                                                                <div className="field">
-                                                                    <label className="label">Fecha de la muestra</label>
-                                                                    <div className="control">
-                                                                        <input onChange={this.handleDateInput} className="input" name="date" type="date" placeholder="100" required />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="field">
-                                                                    <label className="label">Conteo de cd4</label>
-                                                                    <div className="control">
-                                                                        <input onChange={this.handleNumberInput} className="input" name="cd4" type="number" placeholder="100" required />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="field">
-                                                                    <label className="label">Carga viral</label>
-                                                                    <div className="control">
-                                                                        <input onChange={this.handleNumberInput} className="input" name="cargaViral" type="number" placeholder="100" required />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="field">
-                                                                    <label className="label">Triglicéridos</label>
-                                                                    <div className="control">
-                                                                        <input onChange={this.handleNumberInput} className="input" name="trigliceridos" type="number" placeholder="100" required />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="field">
-                                                                    <label className="label">Fn. hepática</label>
-                                                                    <div className="control">
-                                                                        <input onChange={this.handleNumberInput} className="input" name="fnHepatica" type="number" placeholder="100" required />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="field">
-                                                                    <label className="label">Fn. renal</label>
-                                                                    <div className="control">
-                                                                        <input onChange={this.handleNumberInput} className="input" name="fnRenal" type="number" placeholder="100" required />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="field is-grouped">
-                                                                    <div className="control">
-                                                                        <button className="button button-red">Guardar resultados</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </section>
-                                                        <footer className="modal-card-foot"></footer>
-                                                    </div>
-                                                </div>
-    
-                                                {/* CONFIRMATION MODAL */}
-                                                <div className={this.state.confirmationLabsDeleteIsOpen ? "modal is-active" : "modal"}>
-                                                    <div className="modal-background"></div>
-                                                    <div className="modal-card">
-                                                        <header className="modal-card-head">
-                                                            <p className="modal-card-title"><b>Eliminar resultados</b></p>
-                                                        </header>
-                                                        <section className="modal-card-body has-text-centered">
-                                                            <p>¿Estás seguro de que quieres eliminar estos resultados?</p>
-                                                            <button onClick={() => this.deleteLabs(this.state.currentLabOfDeletion)} className="button button-red"><i className="fa fa-trash"></i>&nbsp;Si, eliminar</button>
-                                                            <button onClick={() => this.showLabsDelete()} className="button button-red"><i className="fa fa-undo"></i>&nbsp;No, regresar</button>
-                                                        </section>
-                                                        <footer className="modal-card-foot"></footer>
-                                                    </div>
-                                                </div>
-    
-                                                {/* NOTIFICACIÓN */}
-                                                {/* <div className="notification is-danger">
-                                                    <button className="delete"></button>
-                                                    <p className="subtitle">Nuevos resultados de laboratorio agregados.<br />Fecha de análisis: <b>14/oct</b></p>
-                                                </div>
-    
-                                                <div className="notification is-danger">
-                                                    <button className="delete"></button>
-                                                    <p className="subtitle">Se han editado los resultados del <b>14/oct</b></p>
-                                                </div>
-    
-                                                <div className="notification is-danger">
-                                                    <button className="delete"></button>
-                                                    <p className="subtitle">Se han eliminado los resultados del <b>14/oct</b></p>
-                                                </div>
-    
-                                                <div className="notification is-success">
-                                                    <button className="delete"></button>
-                                                    <p className="subtitle"><b>¡Felicidades!</b><br />De acuerdo a tus resultados del <b>14/oct</b> tu status es ahora <b>Indetecable</b>.<br />Corrobora esta información con tu médico de cabecera.</p>
-                                                </div>
-    
-                                                <div className="notification is-warning">
-                                                    <button className="delete"></button>
-                                                    <p className="subtitle"><b>Atención</b><br />De acuerdo a tus resultados del <b>14/oct</b> has entrado en fase de <b>SIDA</b><br /><b>Agenda una cita inmediatamente con tu médico de cabecera.</b></p>
-                                                </div> */}
-    
+                    <div>
+                        <div className="columns is-centered">
+                            <div className="column is-three-quarters">
+                            <hr />
+                                <div className="columns is-multiline">
+                                    <div className="column is-full">
+                                        <div className="box box-title">
+                                            <h1 className="subtitle">Resumen</h1>
+                                            <h1 className="title">Tu estado general</h1>
+                                            <p>Status actual: <b>{this.context.state.user.status}</b></p>
+                                            {this.statusChecker()}
+                                            {/* <p>Fecha de tu último análisis: <b>27/09/2019</b></p>
+                                            <p>Fecha de tu próximo análisis: <b>Sin agendar </b><Link to="/">Agendar ahora</Link></p> */}
+                                        </div>
+                                    </div>
+                                    {this.context.state.allLabs[0].cd4 && <div className="column is-full">
+                                        <VictoryChart theme={VictoryTheme.material} style={{ fontSize: 4 }} width={400} height={180} containerComponent={<VictoryVoronoiContainer/>}>
+                                            <VictoryGroup style={{data:{ strokeWidth: 1, fillOpacity: 1}}}>
+                                                <VictoryLine interpolation={"linear"} labels={({ datum }) => `CD4: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={this.cd4DataOrganizer()} />
+                                                <VictoryScatter data={this.cd4DataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+
+                                                <VictoryLine interpolation={"linear"} labels={({ datum }) => `Carga viral: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={this.cargaViralDataOrganizer()} />
+                                                <VictoryScatter data={this.cargaViralDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+
+                                                <VictoryLine interpolation={"linear"} labels={({ datum }) => `Triglicéridos: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={this.trigliceridosDataOrganizer()} />
+                                                <VictoryScatter data={this.trigliceridosDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+
+                                                <VictoryLine interpolation={"linear"} labels={({ datum }) => `Fn. Hepática: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={this.fnHepaticaDataOrganizer()} />
+                                                <VictoryScatter data={this.fnHepaticaDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+
+                                                <VictoryLine interpolation={"linear"} labels={({ datum }) => `Fn. Renal: ${datum.y}`} labelComponent={<VictoryTooltip style={{ fontSize: 4 }} />} style={{ data: { stroke: "#c43a31"} }} data={this.fnRenalDataOrganizer()} />
+                                                <VictoryScatter data={this.fnRenalDataOrganizer()} size={2} style={{ data: { fill: "#c43a31" } }} />
+                                                
+                                            </VictoryGroup>
+                                        </VictoryChart>
+                                    </div>}
+                                    <div className="column is-full">
+                                    <div className="box">
+                                        <h1 className="title"><b>Tabla histórica de resultados</b></h1>
+                                        <table className="table is-fullwidth">
+                                            <thead>
+                                                <tr>
+                                                    <th><abbr title="Date">Fecha</abbr></th>
+                                                    <th><abbr title="CD4">CD4</abbr></th>
+                                                    <th><abbr title="cargaViral">Carga viral</abbr></th>
+                                                    <th><abbr title="trigliceridos">Triglicéridos</abbr></th>
+                                                    <th><abbr title="fnHepatica">Fn. Hepática</abbr></th>
+                                                    <th><abbr title="fnRenal">Fn. Renal</abbr></th>
+                                                    <th><abbr>&nbsp;</abbr></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {this.tableMaker()}
+                                            </tbody>
+                                        </table>
+                                        <button onClick={() => this.showLabsForm()} className="button button-red-paddingless">+ Añadir nuevos resultados</button>
+                                    </div>
+
+                                        <div className={this.state.labsIsOpen ? "modal is-active" : "modal"}>
+                                            <div className="modal-background"></div>
+                                            <div className="modal-card">
+                                                <header className="modal-card-head">
+                                                    <p className="modal-card-title"><b>Agregar resultados de análisis</b></p>
+                                                    <button onClick={() => this.showLabsForm()} className="delete" aria-label="close"></button>
+                                                </header>
+                                                <section className="modal-card-body">
+
+                                                    <form onSubmit={this.submitLabsForm}>
+                                                        <div className="field">
+                                                            <label className="label">Fecha de la muestra</label>
+                                                            <div className="control">
+                                                                <input onChange={this.handleDateInput} className="input" name="date" type="date" placeholder="100" required />
+                                                            </div>
+                                                        </div>
+                                                        <div className="field">
+                                                            <label className="label">Conteo de cd4</label>
+                                                            <div className="control">
+                                                                <input onChange={this.handleNumberInput} className="input" name="cd4" type="number" placeholder="100" required />
+                                                            </div>
+                                                        </div>
+                                                        <div className="field">
+                                                            <label className="label">Carga viral</label>
+                                                            <div className="control">
+                                                                <input onChange={this.handleNumberInput} className="input" name="cargaViral" type="number" placeholder="100" required />
+                                                            </div>
+                                                        </div>
+                                                        <div className="field">
+                                                            <label className="label">Triglicéridos</label>
+                                                            <div className="control">
+                                                                <input onChange={this.handleNumberInput} className="input" name="trigliceridos" type="number" placeholder="100" required />
+                                                            </div>
+                                                        </div>
+                                                        <div className="field">
+                                                            <label className="label">Fn. hepática</label>
+                                                            <div className="control">
+                                                                <input onChange={this.handleNumberInput} className="input" name="fnHepatica" type="number" placeholder="100" required />
+                                                            </div>
+                                                        </div>
+                                                        <div className="field">
+                                                            <label className="label">Fn. renal</label>
+                                                            <div className="control">
+                                                                <input onChange={this.handleNumberInput} className="input" name="fnRenal" type="number" placeholder="100" required />
+                                                            </div>
+                                                        </div>
+                                                        <div className="field is-grouped">
+                                                            <div className="control">
+                                                                <button className="button button-red">Guardar resultados</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </section>
+                                                <footer className="modal-card-foot"></footer>
                                             </div>
                                         </div>
+
+                                        {/* CONFIRMATION MODAL */}
+                                        <div className={this.state.confirmationLabsDeleteIsOpen ? "modal is-active" : "modal"}>
+                                            <div className="modal-background"></div>
+                                            <div className="modal-card">
+                                                <header className="modal-card-head">
+                                                    <p className="modal-card-title"><b>Eliminar resultados</b></p>
+                                                </header>
+                                                <section className="modal-card-body has-text-centered">
+                                                    <p>¿Estás seguro de que quieres eliminar estos resultados?</p>
+                                                    <button onClick={() => this.deleteLabs(this.state.currentLabOfDeletion)} className="button button-red"><i className="fa fa-trash"></i>&nbsp;Si, eliminar</button>
+                                                    <button onClick={() => this.showLabsDelete()} className="button button-red"><i className="fa fa-undo"></i>&nbsp;No, regresar</button>
+                                                </section>
+                                                <footer className="modal-card-foot"></footer>
+                                            </div>
+                                        </div>
+
+                                        {/* NOTIFICACIÓN */}
+                                        {/* <div className="notification is-danger">
+                                            <button className="delete"></button>
+                                            <p className="subtitle">Nuevos resultados de laboratorio agregados.<br />Fecha de análisis: <b>14/oct</b></p>
+                                        </div>
+
+                                        <div className="notification is-danger">
+                                            <button className="delete"></button>
+                                            <p className="subtitle">Se han editado los resultados del <b>14/oct</b></p>
+                                        </div>
+
+                                        <div className="notification is-danger">
+                                            <button className="delete"></button>
+                                            <p className="subtitle">Se han eliminado los resultados del <b>14/oct</b></p>
+                                        </div>
+
+                                        <div className="notification is-success">
+                                            <button className="delete"></button>
+                                            <p className="subtitle"><b>¡Felicidades!</b><br />De acuerdo a tus resultados del <b>14/oct</b> tu status es ahora <b>Indetecable</b>.<br />Corrobora esta información con tu médico de cabecera.</p>
+                                        </div>
+
+                                        <div className="notification is-warning">
+                                            <button className="delete"></button>
+                                            <p className="subtitle"><b>Atención</b><br />De acuerdo a tus resultados del <b>14/oct</b> has entrado en fase de <b>SIDA</b><br /><b>Agenda una cita inmediatamente con tu médico de cabecera.</b></p>
+                                        </div> */}
+
                                     </div>
                                 </div>
                             </div>
-                        )}
-                    </MyContext.Consumer>
+                        </div>
+                    </div>
                 </section>
             </>
         )

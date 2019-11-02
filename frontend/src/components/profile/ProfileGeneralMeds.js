@@ -171,139 +171,135 @@ export default class ProfileGeneralMeds extends Component  {
         return (
             <>
                 <section className="section">
-                    <MyContext.Consumer>
-                        {(context) => (
-                            <div className="is-centered">
-                                <div className="columns is-centered">
-                                    <div className="column is-three-quarters">
-                                        <hr />
-                                        <div className="box box-title">
-                                            <p className="subtitle">Medicación</p>
-                                            <h1 className="title">Tu esquema actual</h1>
-                                            {/* <p>Has manejado este esquema desde: <b>25/02/2019</b></p> */}
-                                            <button onClick={() => this.showMedsForm()} className="button button-white">Modificar esquema de medicación</button>
-                                        </div>
-    
-                                        <div className={this.state.medsIsOpen ? "modal is-active" : "modal"}>
-                                            <div className="modal-background"></div>
-                                                <div className="modal-card">
-                                                    <header className="modal-card-head">
-                                                        <p className="modal-card-title"><b>Agregar medicación al esquema</b></p>
-                                                        <button onClick={() => this.showMedsForm()} className="delete" aria-label="close"></button>
-                                                    </header>
-                                                    <section className="modal-card-body">
-                                                        <form onSubmit={this.submitMedsForm}>
-                                                            <div className="field is-horizontal">
-                                                                <div className="field-body">
-                                                                    <div className="field">
-                                                                        <label className="label">Medicamento</label>
-                                                                        <div className="control">
-                                                                            <div className="select">
-                                                                                <select onChange={this.handleInput} name="med" >
-                                                                                    <option>Selecciona una opción</option>
-                                                                                    <option value="Biktarvy">Biktarvy</option>
-                                                                                    <option value="Triumeq">Triumeq</option>
-                                                                                    <option value="Tivicay">Tivicay</option>
-                                                                                    <option value="Lamivudina/Tenofovir, Mivutin">Lamivudina/Tenofovir o Mivutin</option>
-                                                                                    <option value="Cimduo">Cimduo</option>
-                                                                                    <option value="Descovy">Descovy</option>
-                                                                                    <option value="Delstrigo">Delstrigo</option>
-                                                                                    <option value="Symfi, Symfi Lo">Symfi, Symfi Lo</option>
-                                                                                    <option value="Genvoya">Genvoya</option>
-                                                                                    <option value="Atripla">Atripla</option>
-                                                                                    <option value="Pifeltro">Pifeltro</option>
-                                                                                    <option value="Stribild">Stribild</option>
-                                                                                    <option value="Prezcobix">Prezcobix</option>
-                                                                                    <option value="Isentress, Isentress HD">Isentress, Isentress HD</option>
-                                                                                    <option value="Sustiva">Sustiva</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="field is-horizontal">
-                                                                <div className="field-body">
-                                                                    <div className="field">
-                                                                        <label className="label">Frecuencia</label>
-                                                                        <div className="control">
-                                                                            <div className="select">
-                                                                                <select onChange={this.handleNumberInput} name="frequency">
-                                                                                    <option>Selecciona una opción</option>
-                                                                                    <option value="8">Cada 8 horas</option>
-                                                                                    <option value="12">Cada 12 horas</option>
-                                                                                    <option value="24">Cada 24 horas</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                    <div className="is-centered">
+                        <div className="columns is-centered">
+                            <div className="column is-three-quarters">
+                                <hr />
+                                <div className="box box-title">
+                                    <p className="subtitle">Medicación</p>
+                                    <h1 className="title">Tu esquema actual</h1>
+                                    {/* <p>Has manejado este esquema desde: <b>25/02/2019</b></p> */}
+                                    <button onClick={() => this.showMedsForm()} className="button button-white">Modificar esquema de medicación</button>
+                                </div>
+
+                                <div className={this.state.medsIsOpen ? "modal is-active" : "modal"}>
+                                    <div className="modal-background"></div>
+                                        <div className="modal-card">
+                                            <header className="modal-card-head">
+                                                <p className="modal-card-title"><b>Agregar medicación al esquema</b></p>
+                                                <button onClick={() => this.showMedsForm()} className="delete" aria-label="close"></button>
+                                            </header>
+                                            <section className="modal-card-body">
+                                                <form onSubmit={this.submitMedsForm}>
+                                                    <div className="field is-horizontal">
+                                                        <div className="field-body">
                                                             <div className="field">
-                                                                <label className="label">Hora de inicio</label>
+                                                                <label className="label">Medicamento</label>
                                                                 <div className="control">
-                                                                    <input onChange={this.handleInput} className="input" name="startHour" type="time" required />
+                                                                    <div className="select">
+                                                                        <select onChange={this.handleInput} name="med" >
+                                                                            <option>Selecciona una opción</option>
+                                                                            <option value="Biktarvy">Biktarvy</option>
+                                                                            <option value="Triumeq">Triumeq</option>
+                                                                            <option value="Tivicay">Tivicay</option>
+                                                                            <option value="Lamivudina/Tenofovir, Mivutin">Lamivudina/Tenofovir o Mivutin</option>
+                                                                            <option value="Cimduo">Cimduo</option>
+                                                                            <option value="Descovy">Descovy</option>
+                                                                            <option value="Delstrigo">Delstrigo</option>
+                                                                            <option value="Symfi, Symfi Lo">Symfi, Symfi Lo</option>
+                                                                            <option value="Genvoya">Genvoya</option>
+                                                                            <option value="Atripla">Atripla</option>
+                                                                            <option value="Pifeltro">Pifeltro</option>
+                                                                            <option value="Stribild">Stribild</option>
+                                                                            <option value="Prezcobix">Prezcobix</option>
+                                                                            <option value="Isentress, Isentress HD">Isentress, Isentress HD</option>
+                                                                            <option value="Sustiva">Sustiva</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div className="field is-grouped">
+                                                        </div>
+                                                    </div>
+                                                    <div className="field is-horizontal">
+                                                        <div className="field-body">
+                                                            <div className="field">
+                                                                <label className="label">Frecuencia</label>
                                                                 <div className="control">
-                                                                    <button className="button button-red">Agregar al esquema</button>
+                                                                    <div className="select">
+                                                                        <select onChange={this.handleNumberInput} name="frequency">
+                                                                            <option>Selecciona una opción</option>
+                                                                            <option value="8">Cada 8 horas</option>
+                                                                            <option value="12">Cada 12 horas</option>
+                                                                            <option value="24">Cada 24 horas</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </form>
-                                                    </section>
-                                                <footer className="modal-card-foot">
-                                                    {this.specificMedicineInfo()}
-                                                </footer>
-                                            </div>
-                                        </div>
-    
-                                        {/* CONFIRMATION MODAL */}
-                                        <div className={this.state.confirmationMedsDeleteIsOpen ? "modal is-active" : "modal"}>
-                                            <div className="modal-background"></div>
-                                            <div className="modal-card">
-                                                <header className="modal-card-head">
-                                                    <p className="modal-card-title"><b>Eliminar medicamento</b></p>
-                                                </header>
-                                                <section className="modal-card-body has-text-centered">
-                                                    <p>¿Estás seguro de que quieres quitar este medicamento del esquema?</p>
-                                                    <button onClick={() => this.deleteMeds(this.state.currentMedOfDeletion)} className="button button-red"><i className="fa fa-trash"></i>&nbsp;Si, quitar</button>
-                                                    <button onClick={() => this.showMedsDelete()} className="button button-red"><i className="fa fa-undo"></i>&nbsp;No, regresar</button>
-                                                </section>
-                                                <footer className="modal-card-foot"></footer>
-                                            </div>
-                                        </div>
-                                    
-                                        {/* NOTIFICACIÓN */}
-                                        {/* <div className="notification is-danger">
-                                            <button className="delete"></button>
-                                            <p className="subtitle">Se ha modificado el esquema.<br /><b>Medicamento</b> se ha agregado, con un recordatorio cada <b>12 horas</b></p>
-                                        </div>
-    
-                                        <div className="notification is-danger">
-                                            <button className="delete"></button>
-                                            <p className="subtitle">Se ha modificado el esquema.<br /> Frecuencia de <b>Medicamento</b> actualizada, nuevo recordatorio cada <b>12 horas</b></p>
-                                        </div>
-    
-                                        <div className="notification is-danger">
-                                            <button className="delete"></button>
-                                            <p className="subtitle">Se ha modificado el esquema.<br /><b>Medicamento</b> se ha eliminado.</p>
-                                        </div> */}
-    
+                                                        </div>
+                                                    </div>
+                                                    <div className="field">
+                                                        <label className="label">Hora de inicio</label>
+                                                        <div className="control">
+                                                            <input onChange={this.handleInput} className="input" name="startHour" type="time" required />
+                                                        </div>
+                                                    </div>
+                                                    <div className="field is-grouped">
+                                                        <div className="control">
+                                                            <button className="button button-red">Agregar al esquema</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </section>
+                                        <footer className="modal-card-foot">
+                                            {this.specificMedicineInfo()}
+                                        </footer>
                                     </div>
                                 </div>
-                                <div className="columns is-centered">
-                                    <div className="column is-three-quarters">
-                                        <div className="column is-full">
-                                            <div className="columns is-multiline">
-                                                {this.boxMaker()}
-                                            </div>
-                                        </div>
+
+                                {/* CONFIRMATION MODAL */}
+                                <div className={this.state.confirmationMedsDeleteIsOpen ? "modal is-active" : "modal"}>
+                                    <div className="modal-background"></div>
+                                    <div className="modal-card">
+                                        <header className="modal-card-head">
+                                            <p className="modal-card-title"><b>Eliminar medicamento</b></p>
+                                        </header>
+                                        <section className="modal-card-body has-text-centered">
+                                            <p>¿Estás seguro de que quieres quitar este medicamento del esquema?</p>
+                                            <button onClick={() => this.deleteMeds(this.state.currentMedOfDeletion)} className="button button-red"><i className="fa fa-trash"></i>&nbsp;Si, quitar</button>
+                                            <button onClick={() => this.showMedsDelete()} className="button button-red"><i className="fa fa-undo"></i>&nbsp;No, regresar</button>
+                                        </section>
+                                        <footer className="modal-card-foot"></footer>
+                                    </div>
+                                </div>
+                            
+                                {/* NOTIFICACIÓN */}
+                                {/* <div className="notification is-danger">
+                                    <button className="delete"></button>
+                                    <p className="subtitle">Se ha modificado el esquema.<br /><b>Medicamento</b> se ha agregado, con un recordatorio cada <b>12 horas</b></p>
+                                </div>
+
+                                <div className="notification is-danger">
+                                    <button className="delete"></button>
+                                    <p className="subtitle">Se ha modificado el esquema.<br /> Frecuencia de <b>Medicamento</b> actualizada, nuevo recordatorio cada <b>12 horas</b></p>
+                                </div>
+
+                                <div className="notification is-danger">
+                                    <button className="delete"></button>
+                                    <p className="subtitle">Se ha modificado el esquema.<br /><b>Medicamento</b> se ha eliminado.</p>
+                                </div> */}
+
+                            </div>
+                        </div>
+                        <div className="columns is-centered">
+                            <div className="column is-three-quarters">
+                                <div className="column is-full">
+                                    <div className="columns is-multiline">
+                                        {this.boxMaker()}
                                     </div>
                                 </div>
                             </div>
-                        )}
-                    </MyContext.Consumer>
+                        </div>
+                    </div>
                 </section>
             </>
         )

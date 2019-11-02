@@ -27,18 +27,6 @@ export default class Navbar extends Component {
         }
     };
 
-    toLogout = async() => {
-        try{
-            const response = await AUTH_SERVICE.logout()
-
-            console.log(response)
-            localStorage.removeItem('user')
-            this.props.history.push('/');
-        } catch(err){
-            console.log(err);
-        }
-    };
-
     sessionChecker = () =>{
         const sessionaux = this.context.state.loggedChecker
         if(sessionaux == null){
