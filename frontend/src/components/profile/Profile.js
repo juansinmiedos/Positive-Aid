@@ -12,6 +12,7 @@ export default class Profile extends Component {
 
     componentDidMount(){
         if (!this.context.state.loggedChecker) return this.props.history.push('/iniciar-sesion');
+        // this.context.updateHealthStatus()
         this.context.allPromises()
     }
 
@@ -22,7 +23,7 @@ export default class Profile extends Component {
     render() {
         if(this.context.state.loggedChecker == null){
             return <Redirect to='/iniciar-sesion' />
-        } else {
+        } else {            
             return (
                 <>
                     <ProfileHeader />

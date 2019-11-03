@@ -74,7 +74,36 @@ export default class Provider extends Component {
         }
     };
 
-    // PROMISES
+    // updateHealthStatus = async() => {
+    //     if(this.state.allLabs[this.state.allLabs.length - 1].cargaViral >= 10){
+
+    //         this.setState(prevState => {
+    //             return {
+    //                 ...prevState,
+    //                 user: {...prevState.user, status: 'SIDA'}
+    //             }
+    //         })
+    //         await AUTH_SERVICE.update(this.state.user)
+
+    //     } else if(this.state.allLabs[this.state.allLabs.length - 1].cargaViral < 3){
+    //         this.setState(prevState => {
+    //             return {
+    //                 ...prevState,
+    //                 user: {...prevState.user, status: 'Indetectable'}
+    //             }
+    //         })
+    //         await AUTH_SERVICE.update(this.state.user)
+    //     } else{
+    //         this.setState(prevState => {
+    //             return {
+    //                 ...prevState,
+    //                 user: {...prevState.user, status: 'Detectable'}
+    //             }
+    //         })
+    //         await AUTH_SERVICE.update(this.state.user)
+    //     }
+    // }
+    
     allPromises = async() => {
         const labsResponse = await LABS_SERVICE.getLabs(this.state.user._id)
         const medsResponse = await MEDICATION_SERVICE.getMedication(this.state.user._id)
@@ -120,9 +149,9 @@ export default class Provider extends Component {
     }
 
     render() {
-        const {state, toLogIn, toLogOut, allPromises} = this;
+        const {state, toLogIn, toLogOut, updateHealthStatus, allPromises} = this;
         return (
-            <MyContext.Provider value={{state, toLogIn, toLogOut, allPromises}}>
+            <MyContext.Provider value={{state, toLogIn, toLogOut, updateHealthStatus, allPromises}}>
                 {this.props.children}
             </MyContext.Provider>
         )

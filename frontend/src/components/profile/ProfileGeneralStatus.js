@@ -131,22 +131,6 @@ export default class ProfileGeneralStatus extends Component {
         }
     }
 
-    //STATUS UPDATER
-    // updateHealthStatus = async() => {
-    //     if(this.context.state.allLabs[this.state.allLabs.length - 1].cargaViral >= 10){
-
-    //         const newStatus = (() => this.state.user.status = 'SIDA')
-
-    //         await AUTH_SERVICE.update(this.state.user)
-    //         this.setState(prevState => {
-    //             return {
-    //                 ...prevState,
-    //                 status: newStatus
-    //             }
-    //         })
-    //     } 
-    // }
-
     statusChecker = () => {
         if(this.context.state.user.status === 'SIDA'){
             return(
