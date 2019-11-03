@@ -104,7 +104,7 @@ export default class Provider extends Component {
     //     }
     // }
     
-    allPromises = async() => {
+    profilePromises = async() => {
         const labsResponse = await LABS_SERVICE.getLabs(this.state.user._id)
         const medsResponse = await MEDICATION_SERVICE.getMedication(this.state.user._id)
         const appointmentsResponse = await APPOINTMENT_SERVICE.getAppointment(this.state.user._id)
@@ -149,9 +149,9 @@ export default class Provider extends Component {
     }
 
     render() {
-        const {state, toLogIn, toLogOut, updateHealthStatus, allPromises} = this;
+        const {state, toLogIn, toLogOut, updateHealthStatus, profilePromises} = this;
         return (
-            <MyContext.Provider value={{state, toLogIn, toLogOut, updateHealthStatus, allPromises}}>
+            <MyContext.Provider value={{state, toLogIn, toLogOut, updateHealthStatus, profilePromises}}>
                 {this.props.children}
             </MyContext.Provider>
         )

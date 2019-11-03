@@ -52,11 +52,18 @@ export default class ProfileGeneralMeds extends Component  {
         this.setState({ meds });
     };
 
+    handleMedicineInput = e => {
+        const { meds } = this.state;
+        const key = e.target.name;
+        meds[key] = Number(e.target.value);
+        this.setState({ meds });
+    }
+
     submitMedsForm = async(e) => {
         try{
             e.preventDefault()
             await MEDICATION_SERVICE.addMedication(this.state.meds)
-            this.context.allPromises()
+            this.context.profilePromises()
 
             Swal.fire({
                 position: 'top-end',
@@ -97,7 +104,7 @@ export default class ProfileGeneralMeds extends Component  {
     deleteMeds = async(e) => {
         try{
             await MEDICATION_SERVICE.deleteMedication(e)
-            this.context.allPromises()
+            this.context.profilePromises()
         } catch(error){
             console.log(error)
         }
@@ -162,7 +169,7 @@ export default class ProfileGeneralMeds extends Component  {
                                 {x.description}
                             </div>
                         </article>
-            }
+            } return console.log('')
         })
         return aux
     }

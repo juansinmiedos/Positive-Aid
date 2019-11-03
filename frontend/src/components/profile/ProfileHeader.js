@@ -72,6 +72,7 @@ export default class ProfileHeader extends Component {
                                     <div className="column is-three-quarters">
                                         <h1 className="subtitle profile-header-text">{this.context.state.user.name} {this.context.state.user.lastname}</h1>
                                         <h1 className="title profile-header-text"><i className="fa fa-user"></i>  {this.context.state.user.username}</h1>
+                                        <p className="subtitle profile-header-text">Fecha de diagnóstico: 27/01/2015</p>
                                         <p className="subtitle profile-header-text">Status actual: {this.context.state.user.status}</p>
                                         <button onClick={() => this.showEditForm()} className="button button-white"><i className="fa fa-edit"></i>&nbsp;Editar perfil</button>
 

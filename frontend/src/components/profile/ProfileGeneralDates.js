@@ -51,7 +51,7 @@ export default class ProfileGeneralDates extends Component {
         try{
             e.preventDefault()
             await APPOINTMENT_SERVICE.addAppointment(this.state.appointments)
-            this.context.allPromises()
+            this.context.profilePromises()
 
             Swal.fire({
                 position: 'top-end',
@@ -92,7 +92,7 @@ export default class ProfileGeneralDates extends Component {
     deleteAppointments = async(e) => {
         try{
             await APPOINTMENT_SERVICE.deleteAppointment(e)
-            this.context.allPromises()
+            this.context.profilePromises()
         } catch(error){
             console.log(error)
         }

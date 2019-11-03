@@ -61,7 +61,7 @@ export default class ProfileGeneralStatus extends Component {
         try{
             e.preventDefault()
             await LABS_SERVICE.addLabs(this.state.labs)
-            this.context.allPromises()
+            this.context.profilePromises()
 
             Swal.fire({
                 position: 'top-end',
@@ -108,7 +108,7 @@ export default class ProfileGeneralStatus extends Component {
     deleteLabs = async(e) => {
         try{
             await LABS_SERVICE.deleteLabs(e)
-            this.context.allPromises()
+            this.context.profilePromises()
         } catch(error){
             console.log(error)
         }
